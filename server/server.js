@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-Parser');
 var path = require('path');
 var app = express();
+var db = require('./db');
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client'));
