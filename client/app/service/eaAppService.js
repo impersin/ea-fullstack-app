@@ -6,7 +6,7 @@ angular.module('eaApp.Service', [])
           method: 'GET',
           url: 'api/record'
         }).then(function(res) {
-          console.log(res);
+          return res;
         });
       }
     };
