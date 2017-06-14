@@ -1,11 +1,14 @@
-<html>
+<html ng-app="eaApp">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>EA Full Stack App </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
 </head>
-<body>
-  <h1>Welcome to EA<h1>
+<body ng-view>
+    <script src="app/app.js"></script>
+    <script src="app/controllers/homeController.js"></script>
 </body>
 </html>
