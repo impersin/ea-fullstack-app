@@ -24,8 +24,22 @@ app.get('/api/record', function(req, res) {
 });    
 
 app.post('/api/record', function(req, res) {
-  console.log(req.body);
-  res.send(200);
+  var playerIdQuery = `SELECT id from players where name = "${req.body.playerName}"`; 
+  name = 'A', age = 19;
+  if (req.body.result === 'win') {
+    var win = 1;
+    var lose = 0;
+    db.query(playerIdQuery, function(err, results, fiedls) {
+      if (err) { throw err; }
+      var playerId = parseInt(results[0].id);
+      var temp = `INSERT INTO players (id, name, win, lose) VALUES(${playerId}, "${req.body.playerName}", ${win}, ${lose}) ON DUPLICATE KEY UPDATE win = win + 1`;   
+      db.query(temp, function(err, results, fiedls) {
+        if (err) { throw err; }
+        res.send(200);
+      });
+    });  
+  } else {
+  }
 });
 
 var PORT = process.env.PORT || 3000;
