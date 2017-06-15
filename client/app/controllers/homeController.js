@@ -5,4 +5,10 @@ angular.module('eaApp.Home', [])
   Factory.getAll().then(function(res) {
     $scope.matchResults = res.data;
   });
+  
+  $scope.sendRecord = function() {
+    Factory.addRecord($scope.matchInfo).then(function(res) {
+      console.log(res);
+    });
+  };
 });
