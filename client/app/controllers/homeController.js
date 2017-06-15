@@ -1,13 +1,14 @@
 angular.module('eaApp.Home', [])
 .controller('HomeController', function($scope, Factory) {
-  $scope.title = 'Welcom to EA Home Page';
+  $scope.title = 'Welcome to EA Home Page';
   $scope.matchInfo = {
     playerName: '',
     location: '',
     duration: 0,
     playerTeam: '',
     opponent: '',
-    result: ''
+    result: '',
+    score: ''
   };
 
   Factory.getAll().then(function(res) {
