@@ -21,9 +21,12 @@ app.get('/api/record', function(req, res) {
     var data = JSON.stringify(results);        
     res.send(data);
   });
-        
 });    
 
+app.post('/api/record', function(req, res) {
+  console.log(req.body);
+  res.send(200);
+});
 
 var PORT = process.env.PORT || 3000;
 
