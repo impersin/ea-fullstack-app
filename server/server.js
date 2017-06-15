@@ -24,21 +24,48 @@ app.get('/api/record', function(req, res) {
 });    
 
 app.post('/api/record', function(req, res) {
-  var playerIdQuery = `SELECT id from players where name = "${req.body.playerName}"`; 
-  name = 'A', age = 19;
+
+  var playerIdQuery = `SELECT id from players where name = "${req.body.playerName}"`;
   if (req.body.result === 'win') {
     var win = 1;
     var lose = 0;
     db.query(playerIdQuery, function(err, results, fiedls) {
       if (err) { throw err; }
-      var playerId = parseInt(results[0].id);
-      var temp = `INSERT INTO players (id, name, win, lose) VALUES(${playerId}, "${req.body.playerName}", ${win}, ${lose}) ON DUPLICATE KEY UPDATE win = win + 1`;   
-      db.query(temp, function(err, results, fiedls) {
-        if (err) { throw err; }
-        res.send(200);
-      });
+      var playerId = results[0];
+      if (!playerId) {
+        var query = `INSERT INTO players (name, win, lose) VALUES("${req.body.playerName}", ${win}, ${lose})`;   
+        db.query(query, function(err, results, fiedls) {
+          if (err) { throw err; }
+          res.send(200);
+        });
+      } else {  
+        var query = `UPDATE players SET win = win + 1 WHERE id = ${parseInt(playerId.id)}`;
+        db.query(query, function(err, results, fiedls) {   
+          if (err) { throw console.log('here'); }
+          res.send(200);
+        });
+      }
     });  
   } else {
+    var win = 0;
+    var lose = 1;
+    db.query(playerIdQuery, function(err, results, fiedls) {
+      if (err) { throw err; }
+      var playerId = results[0];
+      if (!playerId) {
+        var query = `INSERT INTO players (name, win, lose) VALUES("${req.body.playerName}", ${win}, ${lose})`;   
+        db.query(query, function(err, results, fiedls) {
+          if (err) { throw err; }
+          res.send(200);
+        });
+      } else {  
+        var query = `UPDATE players SET lose = lose + 1 WHERE id = ${parseInt(playerId.id)}`; 
+        db.query(query, function(err, results, fiedls) {  
+          if (err) { throw console.log('here'); }
+          res.send(200);
+        });
+      }
+    });
   }
 });
 
