@@ -1,3 +1,25 @@
 <div>
   <h1>{{title}}</h1>
+    <Table>
+      <thead>
+        <tr>
+          <th>Player Name</th>
+          <th>Match Location</th>
+          <th>Match Duration</th>
+          <th>Win Team</th>
+          <th>Lose Team</th>
+          <th>Fianl Score</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="match in matchResults">
+        <td>{{match['Player Name']}}</td>
+        <td>{{match['Match Location']}}</td>
+        <td>{{match['Match Duration']}}</td>
+        <td>{{match['Win Team']}}</td>
+        <td>{{match['Lose Team']}}</td>
+        <td>{{match['Final Score']}}</td>
+      </tr>    
+    </tbody>
+    </Table>
 </div>
