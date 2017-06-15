@@ -1,11 +1,29 @@
+body{
+  width: 98%;
+  background-image: url(https://s-media-cache-ak0.pinimg.com/originals/85/38/dc/8538dc21f7c23dc288b23002d3261d51.jpg);
+  text-align: center;
+}
 .container {
   width: 200px;
+  margin:0 auto;
 }
 .container input {
   width: 90%;
   margin-bottom: 5px;
 }
+.main-contents{
+  background-color: white;
+  width: 600px;
+  margin:0 auto;
+  border-radius: 5px;
+}
+table{
+  margin: 0 auto;
+}
 form{
   border: 1px solid black;
   padding: 10px;  
+}
+h1, h2{
+  color: white;
 }
