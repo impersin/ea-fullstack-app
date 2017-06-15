@@ -1,20 +1,21 @@
 body{
   width: 98%;
-  background-image: url(https://s-media-cache-ak0.pinimg.com/originals/85/38/dc/8538dc21f7c23dc288b23002d3261d51.jpg);
+  background-image: url(https://images.alphacoders.com/718/thumb-1920-718668.jpg);
   text-align: center;
+  background-size: cover;
 }
 .container {
   width: 200px;
-  margin:0 auto;
+  margin-left: 200px;
 }
 .container input {
   width: 90%;
   margin-bottom: 5px;
 }
 .main-contents{
-  background-color: white;
+  /*background-color: white;*/
   width: 600px;
-  margin:0 auto;
+  /*margin:0 auto;*/
   border-radius: 5px;
 }
 table{
