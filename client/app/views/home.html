@@ -1,5 +1,7 @@
 <div>
   <h1>{{title}}</h1>
+  <hr>
+  <h2>Please Enter Match Result</h2>
   <div class="container">
     <form>
       Player Name: <input type="text" ng-model="matchInfo.playerName" placeholder="Player Name"/><br>
@@ -14,8 +16,10 @@
       Final Score: <input type="text" ng-model="matchInfo.score" placeholder="Won team : Lost team"/><br>        
       <button ng-click="sendRecord()">Submit</button>
     </form>
-</div>
-  <h2>Match Results</h2>
+  </div>
+<hr>
+<div class="main-contents">
+  <h3>Match Results</h3>
   <label>Search: <input ng-model="searchInput" placeholder="Enter Plyers Name" id="searchbar"></label>
     <Table>
       <thead>
@@ -39,4 +43,5 @@
       </tr>    
     </tbody>
     </Table>
+  </div>  
 </div>
