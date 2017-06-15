@@ -8,6 +8,15 @@ angular.module('eaApp.Service', [])
         }).then(function(res) {
           return res;
         });
+      },
+      addRecord: function(matchResult) {
+        return $http({
+          method: 'POST',
+          url: 'api/record',
+          data: matchResult
+        }).then(function(res) {
+          console.log(res);
+        });
       }
     };
   });
