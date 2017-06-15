@@ -25,7 +25,7 @@ app.get('/api/record', function(req, res) {
 
 app.post('/api/record', function(req, res) {
 
-  var playerIdQuery = `SELECT id from players where name = "${req.body.playerName}"`;
+  var playerIdQuery = `SELECT id from players where name = "${req.body.playerName}"`; 
   if (req.body.result === 'win') {
     var win = 1;
     var lose = 0;
@@ -36,17 +36,27 @@ app.post('/api/record', function(req, res) {
         var query = `INSERT INTO players (name, win, lose) VALUES("${req.body.playerName}", ${win}, ${lose})`;   
         db.query(query, function(err, results, fiedls) {
           if (err) { throw err; }
-          res.send(200);
+          var matchQuery = `INSERT INTO matchs (duration, location, win_team, lose_team, score, winner_id) VALUES("${req.body.duration}", "${req.body.location}", "${req.body.playerTeam}", "${req.body.opponent}","${req.body.score}", ${parseInt(results.insertId)})`;
+          db.query(matchQuery, function(err, results, fiedls) {
+            if (err) { throw err; }
+            res.send(200);
+          });
         });
+        
       } else {  
+        var matchQuery = `INSERT INTO matchs (duration, location, win_team, lose_team, score, winner_id) VALUES("${req.body.duration}", "${req.body.location}", "${req.body.playerTeam}", "${req.body.opponent}", "${req.body.score}", ${parseInt(playerId.id)} )`;
         var query = `UPDATE players SET win = win + 1 WHERE id = ${parseInt(playerId.id)}`;
         db.query(query, function(err, results, fiedls) {   
-          if (err) { throw console.log('here'); }
-          res.send(200);
+          if (err) { throw err; }
+          db.query(matchQuery, function(err, results, fiedls) {
+            if (err) { throw err; }
+            res.send(200);
+          });
         });
       }
     });  
   } else {
+
     var win = 0;
     var lose = 1;
     db.query(playerIdQuery, function(err, results, fiedls) {
@@ -56,14 +66,25 @@ app.post('/api/record', function(req, res) {
         var query = `INSERT INTO players (name, win, lose) VALUES("${req.body.playerName}", ${win}, ${lose})`;   
         db.query(query, function(err, results, fiedls) {
           if (err) { throw err; }
-          res.send(200);
+          var matchQuery = `INSERT INTO matchs (duration, location, win_team, lose_team, score, winner_id) VALUES("${req.body.duration}", "${req.body.location}", "${req.body.playerTeam}", "${req.body.opponent}","${req.body.score}", ${parseInt(results.insertId)})`;
+          db.query(matchQuery, function(err, results, fiedls) {
+            if (err) { throw err; }
+            res.send(200);
+          });  
         });
+
+
       } else {  
+        var matchQuery = `INSERT INTO matchs (duration, location, win_team, lose_team, score, winner_id) VALUES("${req.body.duration}", "${req.body.location}", "${req.body.playerTeam}", "${req.body.opponent}", "${req.body.score}", ${parseInt(playerId.id)} )`;
         var query = `UPDATE players SET lose = lose + 1 WHERE id = ${parseInt(playerId.id)}`; 
         db.query(query, function(err, results, fiedls) {  
           if (err) { throw console.log('here'); }
-          res.send(200);
+          db.query(matchQuery, function(err, results, fiedls) {
+            if (err) { throw err; }
+            res.send(200);
+          });  
         });
+
       }
     });
   }
