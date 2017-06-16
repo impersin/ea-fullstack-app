@@ -4,27 +4,36 @@ body{
   text-align: center;
   background-size: cover;
 }
-.container {
-  width: 200px;
-  margin-left: 200px;
-}
-.container input {
-  width: 90%;
-  margin-bottom: 5px;
-}
 .main-contents{
-  /*background-color: white;*/
   width: 600px;
-  /*margin:0 auto;*/
+  height: 410px;
+  overflow: auto;
   border-radius: 5px;
+  margin-left: 100px;
 }
 table{
   margin: 0 auto;
 }
-form{
-  border: 1px solid black;
+th{
+  text-align: center;
+}
+td{
+  text-align: center;
+  padding: 5px;
+}
+.container {
+  width: 300px;
+  margin-left: 200px;
+  margin-top: 25px;
+}
+.container input,select {
+  margin-bottom: 5px;
+  width: 50%;
+}
+fieldset{
+  text-align: left;
   padding: 10px;  
 }
-h1, h2{
-  color: white;
+button{
+  margin-left:130px;
 }
