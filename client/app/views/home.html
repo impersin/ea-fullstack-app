@@ -1,32 +1,15 @@
 <div>
   <h1>{{title}}</h1>
   <hr>
-  <div class="container">
-  <h2>Please Enter Match Result</h2>
-    <form>
-      Player Name: <input type="text" ng-model="matchInfo.playerName" placeholder="Player Name"/><br>
-      Match Location: <input type="text" ng-model="matchInfo.location" placeholder="Location"/><br>
-      Match Duration: <input type="number" min="0" max="150" ng-model="matchInfo.duration"/><br>
-      Player's Team: <input type="text" ng-model="matchInfo.playerTeam" placeholder="Player Name"/><br>
-      Opponent Team: <input type="text" ng-model="matchInfo.opponent" placeholder="Opponent Team"/><br>
-      Result: <select ng-model="matchInfo.result">
-                <option>Win</option>
-                <option>Lose</option>
-              </select><br>
-      Final Score: <input type="text" ng-model="matchInfo.score" placeholder="Won team : Lost team"/><br>        
-      <button ng-click="sendRecord()">Submit</button>
-    </form>
-  </div>
-<hr>
-<div class="main-contents">
+  <div class="main-contents">
   <h3>Match Results</h3>
   <label>Search: <input ng-model="searchInput" placeholder="Enter Plyers Name" id="searchbar"></label>
     <Table>
       <thead>
         <tr>
           <th>Player Name</th>
-          <th>Match Location</th>
-          <th>Match Duration</th>
+          <th>Location</th>
+          <th>Duration</th>
           <th>Win Team</th>
           <th>Lose Team</th>
           <th>Fianl Score</th>
@@ -43,5 +26,21 @@
       </tr>    
     </tbody>
     </Table>
-  </div>  
+  </div> 
+  <div class="container">
+    <fieldset>
+      <legend><h3>Please Enter Match Result</h3></legend>
+      Player Name: <input type="text" ng-model="matchInfo.playerName" placeholder="Player Name"/><br>
+      Match Location: <input type="text" ng-model="matchInfo.location" placeholder="Location"/><br>
+      Match Duration: <input type="number" min="0" max="150" ng-model="matchInfo.duration"/><br>
+      Player's Team: <input type="text" ng-model="matchInfo.playerTeam" placeholder="Player Name"/><br>
+      Opponent Team: <input type="text" ng-model="matchInfo.opponent" placeholder="Opponent Team"/><br>
+      Result: <select ng-model="matchInfo.result">
+                <option>Win</option>
+                <option>Lose</option>
+              </select><br>
+      Final Score: <input type="text" ng-model="matchInfo.score" placeholder="Won team : Lost team"/><br>        
+      <button ng-click="sendRecord()">Submit</button>
+    </fieldset>
+  </div> 
 </div>
