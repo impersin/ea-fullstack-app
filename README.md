@@ -1,11 +1,12 @@
 # EA Match Result App
 
+
 <img src="https://s3-us-west-1.amazonaws.com/taegyudocs/EA-App.png" width="680px" height="380">
 
 ## Team
 
-  - __Product Owner__: Terry
-  - __Development Team: Terry
+  - __Product Owner__: Taegyu(Terry) Leem
+  - __Development Team: Taegyu(Terry) Leem
 
 ## Usage
 
