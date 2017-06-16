@@ -1,7 +1,7 @@
 # EA Match Result App
 
 
-<img src="https://s3-us-west-1.amazonaws.com/taegyudocs/EA-App.png" width="680px" height="380">
+<img src="https://s3-us-west-1.amazonaws.com/taegyudocs/EA-app-main.png" width="680px" height="380">
 
 ## Team
 
