@@ -1,6 +1,6 @@
 angular.module('eaApp.Home', [])
 .controller('HomeController', function($scope, Factory) {
-  $scope.title = 'Welcome to EA Home Page';
+  $scope.title = 'FIFA 2018 Match Result Page';
   $scope.matchInfo = {
     playerName: '',
     location: '',
