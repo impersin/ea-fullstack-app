@@ -1,10 +1,16 @@
 body{
   width: 98%;
   background-image: url(https://images.alphacoders.com/718/thumb-1920-718668.jpg);
-  text-align: center;
   background-size: cover;
+  text-align: center;
 }
-.main-contents{
+.main-content-header{
+  width: 600px;
+  margin-left: 100px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.main-content{
   width: 600px;
   height: 410px;
   overflow: auto;
