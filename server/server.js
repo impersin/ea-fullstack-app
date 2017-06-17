@@ -7,6 +7,7 @@ var players = require('./db/models/players');
 var matchs = require('./db/models/matchs');
 
 
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client'));
 
@@ -24,7 +25,6 @@ app.get('/api/record', function(req, res) {
 });    
 
 app.post('/api/record', function(req, res) {
-
   var playerIdQuery = `SELECT id from players where name = "${req.body.playerName}"`; 
   if (req.body.result === 'win') {
     var win = 1;
