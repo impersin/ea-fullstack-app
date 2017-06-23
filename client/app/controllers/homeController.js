@@ -18,6 +18,12 @@ angular.module('eaApp.Home', [])
     china: 'cn',
     taiwan: 'tw',
     england: 'gb',
+    japan: 'jp',
+    portugal: 'pt',
+    germany: 'de',
+    france: 'fr',
+    argentina: 'ar',
+    brazil: 'br'
   };
 
   Factory.getAll().then(function(res) {
