@@ -23,7 +23,7 @@
         <td>{{match['Match Location']}}</td>
         <td>{{match['Match Duration']}}</td>
         <td>{{match['Win Team']}} <flag country="{{isoCode[match['Win Team'].toLowerCase()]}}" size="16"></flag></td>
-        <td>{{match['Lose Team']}}</td>
+        <td>{{match['Lose Team']}}<flag country="{{isoCode[match['Lose Team'].toLowerCase()]}}" size="16"></td>
         <td>{{match['Final Score']}}</td>
       </tr>    
     </tbody>
@@ -40,6 +40,7 @@
       Result: <select ng-model="matchInfo.result">
                 <option>Win</option>
                 <option>Lose</option>
+                <option>Draw</option>
               </select><br>
       Final Score: <input type="text" ng-model="matchInfo.score" placeholder="Won team : Lost team"/><br>        
       <button ng-click="sendRecord()">Submit</button>
