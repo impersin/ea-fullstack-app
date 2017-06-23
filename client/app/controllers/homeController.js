@@ -11,6 +11,15 @@ angular.module('eaApp.Home', [])
     score: ''
   };
 
+  $scope.isoCode = {
+    korea: 'kr',
+    usa: 'us',
+    spain: 'es',
+    china: 'cn',
+    taiwan: 'tw',
+    england: 'gb',
+  };
+
   Factory.getAll().then(function(res) {
     $scope.matchResults = res.data;
     $scope.matchResults.forEach(function(match) {

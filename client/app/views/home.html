@@ -22,7 +22,7 @@
         <td>{{match['Player Name']}}</td>
         <td>{{match['Match Location']}}</td>
         <td>{{match['Match Duration']}}</td>
-        <td>{{match['Win Team']}}</td>
+        <td>{{match['Win Team']}} <flag country="{{isoCode[match['Win Team'].toLowerCase()]}}" size="16"></flag></td>
         <td>{{match['Lose Team']}}</td>
         <td>{{match['Final Score']}}</td>
       </tr>    
