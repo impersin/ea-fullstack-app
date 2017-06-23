@@ -1,7 +1,8 @@
 var app = angular.module('eaApp', [
   'ngRoute',
   'eaApp.Home',
-  'eaApp.Service'
+  'eaApp.Service',
+  'ngFlag'
 ]);
 
 app.config(($routeProvider) => {
