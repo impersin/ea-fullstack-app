@@ -1,49 +1,107 @@
-<div>
-  <h1>{{title}}</h1>
-  <hr>
-  <div class="main-content-header">
-    <h3>Match Results</h3>
-    <label>Search: <input ng-model="searchInput" placeholder="Enter Plyers Name" id="searchbar"></label>
+<div class="home-wrapper" ng-cloak>
+  <div layout="row" class="home-header">
+    <div flex="40" flex-offset="20">
+      <img class="home-header-image1 fadein" id="slide2" src="../app/images/fifa18_logo.png" alt="CR7 IMAGE" width="600px" height="406px">
+    </div>
+    <div flex="40">
+      <img class="home-header-image2" id="slide" src="../app/images/cr7_cover.png" alt="CR7 IMAGE" width="384px" height="384px">
+    </div>
   </div>
-  <div class="main-content">
-    <Table>
-      <thead>
-        <tr>
-          <th>Player Name</th>
-          <th>Location</th>
-          <th>Duration</th>
-          <th>Win Team</th>
-          <th>Lose Team</th>
-          <th>Fianl Score</th>
-        </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="match in matchResults | filter:searchInput">
-        <td>{{match['Player Name']}}</td>
-        <td>{{match['Match Location']}}</td>
-        <td>{{match['Match Duration']}}</td>
-        <td>{{match['Win Team']}} <flag country="{{isoCode[match['Win Team'].toLowerCase()]}}" size="16"></flag></td>
-        <td>{{match['Lose Team']}}<flag country="{{isoCode[match['Lose Team'].toLowerCase()]}}" size="16"></td>
-        <td>{{match['Final Score']}}</td>
-      </tr>    
-    </tbody>
-    </Table>
-  </div> 
-  <div class="container">
-    <fieldset>
-      <legend><h3>Please Enter Match Result</h3></legend>
-      Player Name: <input type="text" ng-model="matchInfo.playerName" placeholder="Player Name"/><br>
-      Match Location: <input type="text" ng-model="matchInfo.location" placeholder="Location"/><br>
-      Match Duration: <input type="number" min="0" max="150" ng-model="matchInfo.duration"/><br>
-      Player's Team: <input type="text" ng-model="matchInfo.playerTeam" placeholder="Player Name"/><br>
-      Opponent Team: <input type="text" ng-model="matchInfo.opponent" placeholder="Opponent Team"/><br>
-      Result: <select ng-model="matchInfo.result">
-                <option>Win</option>
-                <option>Lose</option>
-                <option>Draw</option>
-              </select><br>
-      Final Score: <input type="text" ng-model="matchInfo.score" placeholder="Won team : Lost team"/><br>        
-      <button ng-click="sendRecord()">Submit</button>
-    </fieldset>
-  </div> 
-</div>
+
+  <div layout="row" class="home-contents">
+    <div flex>
+      <div layout="row" class="home-contents">
+        <div flex="60" flex-offset="20">
+          <div layout="column">
+            <div flex="100" class="home-posts" ng-show="posts">
+              <div class="home-posts-header">
+                <h2>Community Q/A</h2>
+                <label>Search: <input ng-model="searchInput" placeholder="Enter Key Word" id="searchbar"></label>
+              </div>
+              <md-content class="post"  layout="row" ng-repeat="post in posts | filter:searchInput">
+                <div flex-xs flex-gt-xs layout="column">
+                  <md-card>
+                    <md-card-header>
+                      <md-card-avatar>
+                        <md-icon class="md-avatar-icon" md-svg-icon="app/images/icons/check_circle_w.svg"></md-icon>
+                      </md-card-avatar>
+                      <md-card-header-text>
+                         {{post.userid}}<a href="" ng-click="toggle()"><span class="md-title">{{post.title}}</span></a> 
+                         <span class="md-subhead">subhead</span> 
+                      </md-card-header-text>
+                    </md-card-header>
+                     <!-- <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">  -->
+                     <div class="text hide" id="{{'post' + post.postIndex}}">
+                       <p>{{post.text}}</p>
+                    </div> 
+                      <md-card-actions layout="row" layout-align="right">
+                    <md-card-icon-actions>
+                      <md-button class="md-icon-button" aria-label="Favorite" ng-click="toggleComment()">
+                        <md-icon md-svg-icon="app/images/icons/comment.svg"></md-icon>
+                        <span>{{post.comments.length}}</span>
+                      </md-button>
+                      <md-button class="md-icon-button" aria-label="Share">
+                        <md-icon md-svg-icon="app/images/icons/satisfied.svg"></md-icon>
+                        <span>0</span>
+                      </md-button>
+                      <md-button class="md-icon-button" aria-label="Share">
+                        <md-icon md-svg-icon="app/images/icons/neutral.svg"></md-icon>
+                        <span>0</span>
+                      </md-button>
+                      <md-button class="md-icon-button" aria-label="Share">
+                        <md-icon md-svg-icon="app/images/icons/dissatisfied.svg"></md-icon>
+                        <span>0</span>
+                      </md-button>
+                    </md-card-icon-actions>
+                    <md-button ng-click="toggleForm()">Comment</md-button>
+                    <md-button ng-click="test()">testing</md-button>
+                    </md-card-actions>
+                    <span>Posted:{{post.timeStamps[0]}}</span>
+
+                      <div layout="row" layout-align="center" id="{{'form' + post.postIndex}}">
+                      <div flex="80" class="temp" ng-show="formToggles['form'+post.postIndex]">
+                        <form name="postForm" class="post-form" role="search">
+                          <div class="form-group">
+                            <textarea ng-model="newComment.comment" name="text" class="form-control" placeholder="Text" required rows="4" cols="50"> 
+                            </textarea>
+                            <span class="invalid" ng-show="postForm.textBox.$touched && postForm.textBox.$invalid">This can't be empty</span>
+                            <button ng-disabled="postForm.$invalid" type="submit" class="btn btn-primary btn-block" ng-click="sendComment()">submit</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <div>  
+                  
+                    <md-content class="post comment-text" id="{{'comment' + post.postIndex}}" layout="row">
+                      <div flex class="temp" ng-show="commentToggles['comment'+post.postIndex]">
+                        <md-card ng-repeat="comment in post.comments">
+                            <md-card-actions>
+                            </md-card-actions>
+                            <div class="comment-text-box">
+                              <a>Commented By:{{comment.commentedBy}}</a>
+                              <div class="comment-text">
+                                <p>{{comment.comment}}</p>
+                              </div>
+                            </div>
+                            <span>Posted:{{comment.timeStamps[0]}}</span>
+                        </md-card>
+                      </div>
+                    </md-content> 
+                    </div>
+
+                  </md-card>
+                </div>
+              </md-content>  
+              
+            </div>
+          </div>    
+        </div>
+      </div>
+    </div>
+    
+    <div flex="30">
+      <sidebar-component></sidebar-component>   
+    </div>
+
+  </div>
+</div>  
