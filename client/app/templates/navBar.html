@@ -1,0 +1,93 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" ng-click="isCollapsed = !isCollapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><img id="nav-icon" src="app/images/EA_Sports_2.png" alt="EA Sports Log" width="50px" height="50px"></a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" uib-collapse="isCollapsed" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="/#!/home">Home<span class="sr-only">(current)</span></a></li>
+          <li><a href="/#!/about">About<span class="sr-only">(current)</span></a></li>
+          <li><a href="/#!/news">News<span class="sr-only">(current)</span></a></li>
+          <li><a href="/#!/matchResults">Match Results <span class="sr-only">(current)</span></a></li>
+          <li class="dropdown" uib-dropdown>
+            <a href="#" class="dropdown-toggle" uib-dropdown-toggle data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+            <ul class="dropdown-menu" uib-dropdown-menu>
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right" ng-show="!auth">
+          <li class="dropdown" uib-dropdown>
+            <a href="#" class="dropdown-toggle" uib-dropdown-toggle data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">REGISTER<span class="caret"></span></a>
+            <ul class="dropdown-menu" uib-dropdown-menu>
+              <li>
+                <form name="signupForm" class="navbar-form" role="search">
+                  <div class="form-group">
+                    <input ng-model="firstName" name="firstName" type="text" class="form-control" placeholder="Firstname" required>
+                    <span class="invalid" ng-show="signupForm.firstName.$touched && signupForm.firstName.$invalid">The first name is required.</span>
+                    <input ng-model="lastName" name="lastName" type="text" class="form-control" placeholder="Lastname" required>
+                    <span class="invalid" ng-show="signupForm.lastName.$touched && signupForm.lastName.$invalid">The last name is required.</span>
+                    <input ng-model="userId" type="text" class="form-control" placeholder="User ID" required>
+                    <input ng-model="password" name="password" type="password" class="form-control" placeholder="Password" ng-pattern="regex" title="Six or more characters" required>
+                    <span class="invalid" ng-show="signupForm.password.$touched && signupForm.password.$invalid">Password should be 6 or more characters</span>
+                    <input ng-model="confirm" name="confirm" type="password" class="form-control" placeholder="Password" ng-pattern="regex" required>
+                    <span class="invalid" ng-show="signupForm.confirm.$touched && password != confirm">Password doesn not match</span>
+                    <input ng-model="email" name="email" type="email" class="form-control" placeholder="Email" required>
+                    <div ng-messages="signupForm.email.$touched &&signupForm.email.$error">
+                      <div class="invalid" ng-message="required">This field is required</div>
+                      <div class="invalid" ng-message="email">Your email address is invalid</div>
+                    </div>
+                    <button ng-disabled="signupForm.$invalid" type="submit" class="btn btn-default" ng-click="addUser()">Sign Up</button>
+                  </div>
+                </form>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right" ng-show="!auth">
+          <li class="dropdown" uib-dropdown>
+            <a href="#" class="dropdown-toggle" uib-dropdown-toggle data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">SIGN IN<span class="caret"></span></a>
+            <ul class="dropdown-menu" uib-dropdown-menu>
+              <li>
+                <form name="loginForm" class="navbar-form" role="search">
+                  <div class="form-group">
+                    <input ng-model="userId" type="text" class="form-control" placeholder="User ID" ng-required="required">
+                    <input ng-model="password" type="password" class="form-control" placeholder="Password" ng-required="required">
+                    <button ng-disabled="loginForm.$invalid" type="submit" class="btn btn-default" ng-click="login()">Log In</button>
+                  </div>
+                </form>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right" ng-show="auth">
+          <li><a href="/#!/profile">Profile <span class="sr-only">(current)</span></a></li>
+          <li>
+            <li ng-show="auth"><a href="/#!/profile" ng-click="logOut()">Log out <span class="sr-only">(current)</span></a></li>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+
+  
