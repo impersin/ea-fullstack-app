@@ -5,7 +5,6 @@ mongoose.connect(mongoUri);
 
 var db = mongoose.connection;
 
-var importData = require('./users.json');
 var User = require('./models/Users.js');  
 
 db.once('open', () => {
