@@ -1,98 +1,56 @@
 var express = require('express');
-var bodyParser = require('body-Parser');
+var bodyParser = require('body-parser');
 var path = require('path');
-var app = express();
 var db = require('./db');
-var players = require('./db/models/players');
-var matchs = require('./db/models/matchs');
+var controller = require('./db/controllers/controller.js');
+var app = express();
+var jwt = require('jsonwebtoken');
+var secureRoutes = express.Router();
+var cookieParser = require('cookie-parser');
 
+process.env.SECRET_KEY = 'mybadasskey';
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/../client')));
+app.use('/secure-api', secureRoutes);
 
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/../client/index.html'));
+app.get('/', function(req, res) {
+  res.send(200);
 });
-
-app.get('/api/record', function(req, res) {
-  var query = 'SELECT p.name "Player Name", m.location "Match Location", m.duration "Match Duration", m.win_team "Win Team" ,m.lose_team "Lose Team", m.score "Final Score" FROM players p INNER JOIN matchs m ON p.id = m.winner_id';
-  db.query(query, function(err, results, fiedls) {
-    var data = JSON.stringify(results);        
-    res.send(data);
-  });
-});    
-
-app.post('/api/record', function(req, res) {
-  var playerIdQuery = `SELECT id from players where name = "${req.body.playerName}"`; 
-  if (req.body.result === 'win') {
-    var win = 1;
-    var lose = 0;
-    db.query(playerIdQuery, function(err, results, fiedls) {
-      if (err) { throw err; }
-      var playerId = results[0];
-      if (!playerId) {
-        var query = `INSERT INTO players (name, win, lose) VALUES("${req.body.playerName}", ${win}, ${lose})`;   
-        db.query(query, function(err, results, fiedls) {
-          if (err) { throw err; }
-          var matchQuery = `INSERT INTO matchs (duration, location, win_team, lose_team, score, winner_id) VALUES("${req.body.duration}", "${req.body.location}", "${req.body.playerTeam}", "${req.body.opponent}","${req.body.score}", ${parseInt(results.insertId)})`;
-          db.query(matchQuery, function(err, results, fiedls) {
-            if (err) { throw err; }
-            res.send(200);
-          });
-        });
-        
-      } else {  
-        var matchQuery = `INSERT INTO matchs (duration, location, win_team, lose_team, score, winner_id) VALUES("${req.body.duration}", "${req.body.location}", "${req.body.playerTeam}", "${req.body.opponent}", "${req.body.score}", ${parseInt(playerId.id)} )`;
-        var query = `UPDATE players SET win = win + 1 WHERE id = ${parseInt(playerId.id)}`;
-        db.query(query, function(err, results, fiedls) {   
-          if (err) { throw err; }
-          db.query(matchQuery, function(err, results, fiedls) {
-            if (err) { throw err; }
-            res.send(200);
-          });
-        });
-      }
-    });  
-  } else {
-
-    var win = 0;
-    var lose = 1;
-    db.query(playerIdQuery, function(err, results, fiedls) {
-      if (err) { throw err; }
-      var playerId = results[0];
-      if (!playerId) {
-        var query = `INSERT INTO players (name, win, lose) VALUES("${req.body.playerName}", ${win}, ${lose})`;   
-        db.query(query, function(err, results, fiedls) {
-          if (err) { throw err; }
-          var matchQuery = `INSERT INTO matchs (duration, location, win_team, lose_team, score, winner_id) VALUES("${req.body.duration}", "${req.body.location}", "${req.body.playerTeam}", "${req.body.opponent}","${req.body.score}", ${parseInt(results.insertId)})`;
-          db.query(matchQuery, function(err, results, fiedls) {
-            if (err) { throw err; }
-            res.send(200);
-          });  
-        });
+app.get('/favicon.ico', controller.favcon);
+app.post('/api/signUp', controller.signUp);
+app.get('/api/users', controller.retrieve);
+app.post('/api/login', controller.login);
+app.get('/api/signout', controller.signOut);
+app.get('/api/record', controller.getRecords);
+app.get('/api/post', controller.getAllPost);
 
 
-      } else {  
-        var matchQuery = `INSERT INTO matchs (duration, location, win_team, lose_team, score, winner_id) VALUES("${req.body.duration}", "${req.body.location}", "${req.body.playerTeam}", "${req.body.opponent}", "${req.body.score}", ${parseInt(playerId.id)} )`;
-        var query = `UPDATE players SET lose = lose + 1 WHERE id = ${parseInt(playerId.id)}`; 
-        db.query(query, function(err, results, fiedls) {  
-          if (err) { throw console.log('here'); }
-          db.query(matchQuery, function(err, results, fiedls) {
-            if (err) { throw err; }
-            res.send(200);
-          });  
-        });
-
+secureRoutes.use(function(req, res, next) {
+  var token = req.body.token || req.headers.token;
+  // console.log('token:', token);
+  // console.log(req);
+  if (token) {
+    jwt.verify(token, process.env.SECRET_KEY, function(err, decode) {
+      if (err) {
+        res.status(500).send('Invalid Token');
+      } else {
+        next();//This pass to next matching pass 
       }
     });
+  } else {
+    res.send('Dude.. get a token');
   }
 });
 
-var PORT = process.env.PORT || 3000;
+secureRoutes.get('/checkRequest', controller.test);
+secureRoutes.post('/record', controller.addResult);
+secureRoutes.post('/post/add', controller.addPost);
+secureRoutes.put('/post/add/comment/:number', controller.addComment);
 
-app.listen(PORT, () => {
-  console.log('server listening on:' + PORT);
+// /secure-api/checkRequest
+app.listen(9000, function() {
+  console.log('Listening Port:9000');
 });
-
