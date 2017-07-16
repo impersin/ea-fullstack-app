@@ -1,7 +1,7 @@
-# EA Match Result App
+# EA FIFA forum Application
 
 
-<img src="https://s3-us-west-1.amazonaws.com/taegyudocs/SnapShot.png" width="680px" height="380">
+<img src="https://s3-us-west-1.amazonaws.com/fifatalk/appImages/fifatalk-cover-0.png" width="" height="">
 
 ## Team
 
@@ -10,11 +10,9 @@
 
 ## Usage
 
-1. npm install
-2. mysql -u user -p password < schema.sql 
+1. npm install 
 3. node server/server.js
 
 ## Requirements
 
 -Node 7.2.1
--MySQL 2.13.0
