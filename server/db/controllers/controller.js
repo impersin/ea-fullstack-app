@@ -1,6 +1,6 @@
 var user = require('../models/Users.js');
 var match = require('../models/Matchs.js');
-var post = require('../models/Post.js');
+var post = require('../models/Posts.js');
 var db = require('../index.js');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
