@@ -10,9 +10,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+  "angular": "^1.6.4",
+    "angular-cookies": "^1.6.5",
+    "angular-route": "^1.6.4",
+    "angular-router": "0.0.2",
+    "angular-storage": "0.0.15",
+    "bcrypt": "^1.0.2",
+    "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
-    "jquery": "^3.2.1",
-    "mysql": "^2.13.0"
+    "jsonwebtoken": "^7.4.1",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "mongoose": "^4.11.1"
   }
 }
