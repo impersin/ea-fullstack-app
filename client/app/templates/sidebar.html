@@ -1,0 +1,30 @@
+<div layout="column" class="sidebar">
+  <div flex="100">
+    <h2>{{header}}</h2>
+    <button  type="button" class="btn btn-primary btn-block" ng-click="toggleForm()">NEW POST</button>
+    <div layout="row" layout-align="center" ng-show="toggle" class="temp">
+      <div flex="80">
+        <form name="postForm" class="post-form" role="search">
+          <div class="form-group">
+            <input ng-model="newPost.title" name="title" type="text" class="form-control" placeholder="Title" required>
+            <span class="invalid" ng-show="postForm.title.$touched && postForm.title.$invalid">Title is required.</span>
+            <textarea ng-model="newPost.text" name="text" class="form-control" placeholder="Text" required rows="4" cols="50"> 
+            </textarea>
+            <span class="invalid" ng-show="postForm.textBox.$touched && postForm.textBox.$invalid">This can't be empty</span>
+            <div class="form-upload">
+              <label for="file">Upload Image</label>
+              <input ng-model="newPost.file" type="file" name="file" id="myFile" value="file">
+            </div>
+            <button ng-disabled="postForm.$invalid" type="submit" class="btn btn-primary btn-block" ng-click="addPost()">POST</button>
+          </div>
+        </form>
+      </div>
+    </div>    
+    <h3>side-menu</h3>
+  <ol>
+    <li>a</li>
+    <li>b</li>
+    <li>c</li>
+    <li>d</li>
+  </ol>
+</div>
