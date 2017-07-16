@@ -1,0 +1,34 @@
+<div class="result-wrapper" ng-cloak>
+  <div layout="row" layout-align="center" class="result-contents-header">
+    <div flex-md="50">
+      <h3 id="result-content-header-title">Match Results</h3>
+      <label>Search: <input ng-model="searchInput" placeholder="Enter Plyers Name" id="searchbar"></label>
+    </div>
+  </div>
+  <div layout="row" layout-align="center" class="result-container">
+    <div flex-md="50" class="result-contents">
+            <Table>
+                <thead>
+                  <tr>
+                    <th>Player Name</th>
+                    <th>Location</th>
+                    <th>Duration</th>
+                    <th>Win Team</th>
+                    <th>Lose Team</th>
+                    <th>Fianl Score</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="match in matchResults | filter:searchInput">
+                  <td>{{match['Player Name']}}</td>
+                  <td>{{match['Match Location']}}</td>
+                  <td>{{match['Match Duration']}}</td>
+                  <td>{{match['Win Team']}} <flag country="{{isoCode[match['Win Team'].toLowerCase()]}}" size="16"></flag></td>
+                  <td>{{match['Lose Team']}}<flag country="{{isoCode[match['Lose Team'].toLowerCase()]}}" size="16"></td>
+                  <td>{{match['Final Score']}}</td>
+                </tr>    
+              </tbody>
+            </Table>
+    </div>
+  </div>
+</div>  
