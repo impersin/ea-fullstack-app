@@ -1,19 +1,53 @@
-<html ng-app="eaApp">
+<html ng-app="myApp">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>EA Full Stack App </title>
-  <link rel="stylesheet" type="text/css" href="./style/main.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
-  <link rel="stylesheet" type="text/css" href="http://cloud.github.com/downloads/lafeber/world-flags-sprite/flags16.css" />
+  <title>FIFA 2018</title>
+    <link rel="stylesheet" href="app/style/bootstrap.css">
+    <link rel="stylesheet" href="app/style/main.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-animate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-animate.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.1/angular-material-icons.min.js"></script> 
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+
+    <script
+    src="https://code.jquery.com/jquery-2.2.4.js"
+    integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+    crossorigin="anonymous"></script>
 </head>
-<body ng-view>
+<body>
+  <nav-component></nav-component>
+    <ui-view></ui-view>
     <script src="app/app.js"></script>
-    <script src="app/controllers/homeController.js"></script>
-    <script src="app/service/eaAppService.js"></script>
-    <script src="app/directives/ng-flags.js"></script>
+    <script src="app/components/footer.component.js"></script>
+    <script src="app/components/popup.component.js"></script>
+    <script src="app/components/sidebar.component.js"></script>
+    <script src="app/components/landing.component.js"></script>
+    <script src="app/components/home.component.js"></script>
+    <script src="app/components/result.component.js"></script>
+    <script src="app/components/nav.component.js"></script>
+    <script src="app/components/about.component.js"></script>
+    <script src="app/components/profile.component.js"></script>
+    <script src="app/components/post.component.js"></script>
+    <script src="app/src/angular-video/anguvideo.js"></script>
+    <script src="app/factory/factory.js"></script>
+    <script src="app/directives/validation.dir.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
+    <footer-component></footer-component>
 </body>
 </html>
