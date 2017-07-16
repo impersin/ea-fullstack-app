@@ -1,0 +1,61 @@
+<div class="profile-wrapper">
+  <md-content class="profile md-padding" layout-xs="column" layout="row">
+    
+    <div flex-xs flex-gt-xs="50" layout="column">
+      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-media>
+            <div class="md-media-lg card-media" layout-padding>
+              <img ng-src="app/images/profile_sample.jpg" alt="profile-picture">
+            </div>
+          </md-card-title-media>
+          <md-card-title-text>
+            <span>Game Records</span>
+        <span>WIN:{{win}} LOSE:{{lose}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+    
+    <div flex-xs flex-gt-xs="50" layout="column">
+      <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Recent Match Results</span>
+          </md-card-title-text>
+        </md-card-title>
+          <md-card-content>
+            <div class="md-content-sm card-content">
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Player Name</th>
+                    <th>Location</th>
+                    <th>Duration</th>
+                    <th>Win Team</th>
+                    <th>Lose Team</th>
+                    <th>Fianl Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="match in matchResults | filter:searchInput">
+                    <td>{{match['Player Name']}}</td>
+                    <td>{{match['Match Location']}}</td>
+                    <td>{{match['Match Duration']}}</td>
+                    <td>{{match['Win Team']}} <flag country="{{isoCode[match['Win Team'].toLowerCase()]}}" size="16"></flag></td>
+                    <td>{{match['Lose Team']}}<flag country="{{isoCode[match['Lose Team'].toLowerCase()]}}" size="16"></td>
+                    <td>{{match['Final Score']}}</td>
+                  </tr>    
+                </tbody>
+              </Table>
+            </div>
+          </md-card-content>
+      </md-card>
+    </div>
+
+</md-content>
+</div>
