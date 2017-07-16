@@ -1,0 +1,35 @@
+<div class="home-wrapper" ng-cloak>
+  <div layout="row" class="home-header">
+    <div flex="40" flex-offset="20">
+      <img class="home-header-image1 fadein" id="slide2" src="../app/images/fifa18_logo.png" alt="CR7 IMAGE" width="600px" height="406px">
+    </div>
+    <div flex="40">
+      <img class="home-header-image2" id="slide" src="../app/images/cr7_cover.png" alt="CR7 IMAGE" width="384px" height="384px">
+    </div>
+  </div>
+  <div layout="row" class="home-contents">
+    <div flex>
+      <div layout="row" class="home-contents">
+        <div flex="60" flex-offset="20">
+              <div layout="column">
+          <div flex="100" class="home-posts" ng-show="posts">
+            <div class="home-posts-header">
+              <h2>Community Q/A</h2>
+            </div>
+            <div>
+              <h1>POST CONTENTS</h1>  
+            </div>  
+          </div>
+        </div>    
+        </div>
+        <div ng-show="!posts">
+
+        </div>
+      </div>
+    </div>
+    <div flex="30">
+      <sidebar-component></sidebar-component>   
+      </div>
+    </div>
+  </div>
+</div>
