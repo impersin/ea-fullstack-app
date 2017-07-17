@@ -149,27 +149,41 @@ exports.addViewCount = function(req, res) {
 };
 
 exports.addVoteCount = function(req, res) {
-  var target = req.params.number.slice(0, 1);
-  var type = req.params.number.slice(1);
-
-  if (type === 'satisfied') {
-    post.update({postIndex: target}, { $inc: { satisfied: 1 }}).then(function(data) {
-      post.find({postIndex: target}).then(function(data) {
-        res.send(data[0]);
-      });
-    });  
-  } else if (type === 'dissatisfied') {
-    post.update({postIndex: target}, { $inc: { dissatisfied: 1 }}).then(function(data) {
-      post.find({postIndex: target}).then(function(data) {
-        res.send(data[0]);
-      });
-    });  
-  } else {
-    post.update({postIndex: target}, { $inc: { neutral: 1 }}).then(function(data) {
-      post.find({postIndex: target}).then(function(data) {
-        res.send(data[0]);
-      });
-    });
-  }
+  var params = req.params.number.split('+');
+  var target = params[0];
+  var commenter = params[1];
+  var type = params[2];
+  
+  post.find({postIndex: target}).then(function(data) {
+    if (data[0].commenterList.indexOf(commenter) === -1) { //user never vote before
+      if (type === 'satisfied') {
+        post.update({postIndex: target}, { $inc: { satisfied: 1 }}).then(function(data) {
+          post.update({ postIndex: target}, { $push: {commenterList: commenter} }).then(function(data) {
+            post.find({postIndex: target}).then(function(data) {
+              res.send(data[0]);
+            });
+          });
+        });  
+      } else if (type === 'dissatisfied') {
+        post.update({postIndex: target}, { $inc: { dissatisfied: 1 }}).then(function(data) {
+          post.update({ postIndex: target}, { $push: {commenterList: commenter} }).then(function(data) {
+            post.find({postIndex: target}).then(function(data) {
+              res.send(data[0]);
+            });
+          });
+        });  
+      } else {
+        post.update({postIndex: target}, { $inc: { neutral: 1 }}).then(function(data) {
+          post.update({ postIndex: target}, { $push: {commenterList: commenter} }).then(function(data) {
+            post.find({postIndex: target}).then(function(data) {
+              res.send(data[0]);
+            });
+          });
+        });
+      } 
+    } else {
+      res.send(data[0]);
+    }
+  });
 
 };
