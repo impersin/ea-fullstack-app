@@ -105,6 +105,9 @@ exports.addPost = function(req, res) {
       var number = 1;
       newPost.postIndex = number;
       newPost.viewcount = 0;
+      newPost.satisfied = 0;
+      newPost.neutral = 0;
+      newPost.dissatisfied = 0;
       post.insertMany([newPost], function(err, data) {
         if (err) { throw err; }
         res.json(data);
@@ -113,6 +116,9 @@ exports.addPost = function(req, res) {
       var number = data[0].postIndex + 1;
       newPost.postIndex = number;
       newPost.viewcount = 0;
+      newPost.satisfied = 0;
+      newPost.neutral = 0;
+      newPost.dissatisfied = 0;
       post.insertMany([newPost], function(err, data) {
         if (err) { throw err; }
         res.json(data);
@@ -140,4 +146,30 @@ exports.addViewCount = function(req, res) {
       res.send(data[0]);
     });
   });
+};
+
+exports.addVoteCount = function(req, res) {
+  var target = req.params.number.slice(0, 1);
+  var type = req.params.number.slice(1);
+
+  if (type === 'satisfied') {
+    post.update({postIndex: target}, { $inc: { satisfied: 1 }}).then(function(data) {
+      post.find({postIndex: target}).then(function(data) {
+        res.send(data[0]);
+      });
+    });  
+  } else if (type === 'dissatisfied') {
+    post.update({postIndex: target}, { $inc: { dissatisfied: 1 }}).then(function(data) {
+      post.find({postIndex: target}).then(function(data) {
+        res.send(data[0]);
+      });
+    });  
+  } else {
+    post.update({postIndex: target}, { $inc: { neutral: 1 }}).then(function(data) {
+      post.find({postIndex: target}).then(function(data) {
+        res.send(data[0]);
+      });
+    });
+  }
+
 };
