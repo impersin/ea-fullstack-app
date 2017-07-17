@@ -8,6 +8,7 @@ var postSchema = new Schema({
   title: String,
   text: String,
   comments: Array,
+  commenterList: Array,
   timeStamps: Array,
   satisfied: Number,
   neutral: Number,
