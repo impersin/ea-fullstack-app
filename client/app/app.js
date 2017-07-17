@@ -91,7 +91,10 @@ appModule.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
       // }
     } else { //if there is no token
       $rootScope.auth = false;
-      // $location.path('/');
+      var requestedPath = $location.path();
+      if (requestedPath !== '/home' && requestedPath !== '/about' && requestedPath !== '/news' && requestedPath !== '/news' && requestedPath !== '/matchResults') {
+        $location.path('/');
+      }
     }
   });
 });
