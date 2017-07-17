@@ -113,6 +113,15 @@ angular.module('appFactory', [])
         });
       },
 
+      addViewCount: function(postIndex, newComment) {
+        return $http({
+          method: 'PUT',
+          url: `secure-api/post/add/viewcount/${postIndex}`,
+        }).then(function(res) {
+          return res;
+        });
+      }
+
     };
   });
 
