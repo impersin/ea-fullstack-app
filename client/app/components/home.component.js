@@ -9,6 +9,7 @@ appModule.component('homeComponent', {
     $scope.postToggles = {};
     $scope.commentToggles = {};
     $scope.formToggles = {};
+    $scope.commenterList = [];
     $scope.newComment = {
       commentedBy: '',
       postIndex: '',
@@ -30,6 +31,7 @@ appModule.component('homeComponent', {
       Factory.getAllPosts().then(function(res) {
         console.log(res.data);
         $scope.posts = res.data;
+        $scope.commenterList = res.data;
       });
     };
     $scope.getAllPosts();
@@ -121,6 +123,19 @@ appModule.component('homeComponent', {
           // or an element
           .closeTo(angular.element(document.querySelector('#right')))
         );
+      } else if (type === 'duplicate') {
+        $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('Cannot vote more than one time')
+          .textContent('')
+          .ariaLabel('Left to right demo')
+          .ok('Close')
+          // You can specify either sting with query selector
+          .openFrom('#left')
+          // or an element
+          .closeTo(angular.element(document.querySelector('#right')))
+        );
       }
     };
 
@@ -133,26 +148,45 @@ appModule.component('homeComponent', {
     $scope.vote = function(event) {
       var postIndex = this.post.postIndex;
       var type = event.target.id.slice(0, event.target.id.length - 1);
+
       if (!$cookies.get('auth')) {
         $scope.authWarning('auth');
       } else {
         var currentUser = $cookies.get('userid'); 
         var postedUser = this.post.userid;
-        if (currentUser === postedUser) {
-          $scope.authWarning('vote');
+        
+        if ($scope.checkCommenterList(postIndex, currentUser)) {
+          $scope.authWarning('duplicate');
         } else {
-          Factory.addVoteCount(postIndex, type).then(function(res) {
-            var satisfiedElement = angular.element( document.querySelector('#satisfiedCount' + postIndex) );
-            var neutralElement = angular.element( document.querySelector('#neutralCount' + postIndex) );
-            var dissatisfiedElement = angular.element( document.querySelector('#dissatisfiedCount' + postIndex) );
-            satisfiedElement[0].innerText = res.data.satisfied;
-            neutralElement[0].innerText = res.data.neutral;
-            dissatisfiedElement[0].innerText = res.data.dissatisfied;
-          });  
+          if (currentUser === postedUser) {
+            $scope.authWarning('vote');
+          } else {
+            Factory.addVoteCount(postIndex, currentUser, type).then(function(res) {
+              var satisfiedElement = angular.element( document.querySelector('#satisfiedCount' + postIndex) );
+              var neutralElement = angular.element( document.querySelector('#neutralCount' + postIndex) );
+              var dissatisfiedElement = angular.element( document.querySelector('#dissatisfiedCount' + postIndex) );
+              satisfiedElement[0].innerText = res.data.satisfied;
+              neutralElement[0].innerText = res.data.neutral;
+              dissatisfiedElement[0].innerText = res.data.dissatisfied;
+              $scope.getAllPosts();
+            });  
+          }
         }
         
       }
     };
-
+    $scope.checkCommenterList = function(num, user) {
+      var result = false;
+      for (var i = 0; i < $scope.commenterList.length; i++) {
+        var postNum = $scope.commenterList[i].postIndex;
+        var commenterList = $scope.commenterList[i].commenterList;
+        if (postNum === num && commenterList.indexOf(user) > -1) {
+          console.log('here');
+          result = true;
+          break;
+        }
+      }
+      return result;   
+    };  
   }
 });
