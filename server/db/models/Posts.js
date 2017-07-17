@@ -8,7 +8,11 @@ var postSchema = new Schema({
   title: String,
   text: String,
   comments: Array,
-  timeStamps: Array  
+  timeStamps: Array,
+  satisfied: Number,
+  neutral: Number,
+  dissatisfied: Number, 
+  viewcount: Number, 
 });
  
 var Post = mongoose.model('Post', postSchema);
