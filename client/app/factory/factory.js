@@ -79,7 +79,7 @@ angular.module('appFactory', [])
       sendComment: function(postIndex, newComment) {
         return $http({
           method: 'PUT',
-          url: `secure-api/post/add/comment/${postIndex}`,
+          url: `secure-api/update/add/comment/${postIndex}`,
           data: newComment
         }).then(function(res) {
           return res;
@@ -116,7 +116,16 @@ angular.module('appFactory', [])
       addViewCount: function(postIndex, newComment) {
         return $http({
           method: 'PUT',
-          url: `secure-api/post/add/viewcount/${postIndex}`,
+          url: `secure-api/update/add/viewcount/${postIndex}`,
+        }).then(function(res) {
+          return res;
+        });
+      },
+
+      addVoteCount: function(postIndex, type) {
+        return $http({
+          method: 'PUT',
+          url: `secure-api/update/add/vote/${postIndex + type}`
         }).then(function(res) {
           return res;
         });
