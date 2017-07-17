@@ -8,7 +8,8 @@ var appModule = angular.module('myApp', [
   'anguvideo',
   'ngMessages',
   'ngMaterial',
-  'ngMdIcons'
+  'ngMdIcons',
+  'angular-storage',
 ]);
 
 appModule.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
