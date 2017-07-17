@@ -40,17 +40,17 @@
                         <md-icon md-svg-icon="app/images/icons/comment.svg"></md-icon>
                         <span>{{post.comments.length}}</span>
                       </md-button>
-                      <md-button class="md-icon-button" aria-label="satisfied" ng-click="test($event)">
-                        <md-icon id="stisfied" md-svg-icon="app/images/icons/satisfied.svg"></md-icon>
-                        <span>0</span>
+                      <md-button class="md-icon-button" aria-label="satisfied" ng-click="vote($event)">
+                        <md-icon id="{{'satisfied' + post.postIndex}}" md-svg-icon="app/images/icons/satisfied.svg"></md-icon>
+                        <span id="{{'satisfiedCount' + post.postIndex}}">{{post.satisfied}}</span>
                       </md-button>
-                      <md-button class="md-icon-button" aria-label="neutral" ng-click="test($event)">
-                        <md-icon id="neutral" md-svg-icon="app/images/icons/neutral.svg"></md-icon>
-                        <span>0</span>
+                      <md-button class="md-icon-button" aria-label="neutral" ng-click="vote($event)">
+                        <md-icon id="{{'neutral' + post.postIndex}}" md-svg-icon="app/images/icons/neutral.svg"></md-icon>
+                        <span id="{{'neutralCount' + post.postIndex}}">{{post.neutral}}</span>
                       </md-button>
-                      <md-button class="md-icon-button" aria-label="dissatisfied" ng-click="test($event)">
-                        <md-icon id="dissatisfied" md-svg-icon="app/images/icons/dissatisfied.svg"></md-icon>
-                        <span>0</span>
+                      <md-button class="md-icon-button" aria-label="dissatisfied" ng-click="vote($event)">
+                        <md-icon id="{{'dissatisfied' + post.postIndex}}" md-svg-icon="app/images/icons/dissatisfied.svg"></md-icon>
+                        <span id="{{'dissatisfiedCount' + post.postIndex}}">{{post.dissatisfied}}</span>
                       </md-button>
                     </md-card-icon-actions>
                     <md-button ng-click="toggleForm()">Comment</md-button>
