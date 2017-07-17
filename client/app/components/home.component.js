@@ -78,7 +78,7 @@ appModule.component('homeComponent', {
       $scope.newComment.title = this.post.title;
       // console.log($scope.newComment); 
       if (!$cookies.get('auth')) {
-        $scope.authWarning();
+        $scope.authWarning('auth');
       } else if ($cookies.get('auth')) {
         var id = 'form' + this.post.postIndex;
         var myEl = angular.element( document.querySelector('#' + id) );
@@ -94,19 +94,34 @@ appModule.component('homeComponent', {
       console.log($scope.formToggles);
     };
     
-    $scope.authWarning = function() {
-      $mdDialog.show(
-      $mdDialog.alert()
-        .clickOutsideToClose(true)
-        .title('Please Sign In ')
-        .textContent('')
-        .ariaLabel('Left to right demo')
-        .ok('Close')
-        // You can specify either sting with query selector
-        .openFrom('#left')
-        // or an element
-        .closeTo(angular.element(document.querySelector('#right')))
-      );
+    $scope.authWarning = function(type) {
+      if (type === 'auth') {
+        $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('Please Sign In ')
+          .textContent('')
+          .ariaLabel('Left to right demo')
+          .ok('Close')
+          // You can specify either sting with query selector
+          .openFrom('#left')
+          // or an element
+          .closeTo(angular.element(document.querySelector('#right')))
+        );
+      } else if (type === 'vote') {
+        $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('You cannot vote on own post')
+          .textContent('')
+          .ariaLabel('Left to right demo')
+          .ok('Close')
+          // You can specify either sting with query selector
+          .openFrom('#left')
+          // or an element
+          .closeTo(angular.element(document.querySelector('#right')))
+        );
+      }
     };
 
     $scope.sendRequest = function() {
@@ -119,12 +134,12 @@ appModule.component('homeComponent', {
       var postIndex = this.post.postIndex;
       var type = event.target.id.slice(0, event.target.id.length - 1);
       if (!$cookies.get('auth')) {
-        $scope.authWarning();
+        $scope.authWarning('auth');
       } else {
         var currentUser = $cookies.get('userid'); 
         var postedUser = this.post.userid;
         if (currentUser === postedUser) {
-          alert('sorry you can vote for your own comment'); 
+          $scope.authWarning('vote');
         } else {
           Factory.addVoteCount(postIndex, type).then(function(res) {
             var satisfiedElement = angular.element( document.querySelector('#satisfiedCount' + postIndex) );
