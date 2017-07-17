@@ -98,14 +98,24 @@ body{
   overflow:auto;
 }
 
+.home-posts::-webkit-scrollbar {
+  /* Safari and Chrome  */
+    display: none;
+}
+
 .home-posts-header{
   text-align: center;
 }
+.md-title{
+  font-size: 20px !important;
+}
 
 div.text{
-  margin: 10px;
-  /* background-color: #efefef; */
+  margin: 20px 10px 10px 10px;
+  padding:5px;
+  background-color: #efefef;
   border: 1px solid black;
+  border-radius: 5px;
 }
 
 md-contnet.post{
@@ -221,7 +231,7 @@ md-content.profile{
 }
 
 md-card-content{
-  height: 164px;
+  height: 178px;
   overflow: auto;
 }
 .md-headline{
