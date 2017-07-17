@@ -104,7 +104,7 @@ exports.addPost = function(req, res) {
     if (data.length === 0) {
       var number = 1;
       newPost.postIndex = number;
-  
+      newPost.viewcount = 0;
       post.insertMany([newPost], function(err, data) {
         if (err) { throw err; }
         res.json(data);
@@ -112,7 +112,7 @@ exports.addPost = function(req, res) {
     } else {
       var number = data[0].postIndex + 1;
       newPost.postIndex = number;
-
+      newPost.viewcount = 0;
       post.insertMany([newPost], function(err, data) {
         if (err) { throw err; }
         res.json(data);
@@ -130,4 +130,14 @@ exports.addComment = function(req, res) {
     res.send(data);
   });
   res.send(newPost);
+};
+
+exports.addViewCount = function(req, res) {
+  var target = req.params.number;
+
+  post.update({postIndex: target}, { $inc: { viewcount: 1 }}).then(function(data) {
+    post.find({postIndex: target}).then(function(data) {
+      res.send(data[0]);
+    });
+  });
 };
