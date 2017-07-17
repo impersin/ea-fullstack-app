@@ -49,6 +49,7 @@ secureRoutes.get('/checkRequest', controller.test);
 secureRoutes.post('/record', controller.addResult);
 secureRoutes.post('/post/add', controller.addPost);
 secureRoutes.put('/post/add/comment/:number', controller.addComment);
+secureRoutes.put('/post/add/viewcount/:number', controller.addViewCount);
 
 // /secure-api/checkRequest
 app.listen(9000, function() {
