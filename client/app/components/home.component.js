@@ -115,9 +115,17 @@ appModule.component('homeComponent', {
       });
     };
 
-    $scope.test = function(event) {
-      var targetName = event.target.id;
-      console.log(targetName);
+    $scope.vote = function(event) {
+      var postIndex = this.post.postIndex;
+      var type = event.target.id.slice(0, event.target.id.length - 1);
+      Factory.addVoteCount(postIndex, type).then(function(res) {
+        var satisfiedElement = angular.element( document.querySelector('#satisfiedCount' + postIndex) );
+        var neutralElement = angular.element( document.querySelector('#neutralCount' + postIndex) );
+        var dissatisfiedElement = angular.element( document.querySelector('#dissatisfiedCount' + postIndex) );
+        satisfiedElement[0].innerText = res.data.satisfied;
+        neutralElement[0].innerText = res.data.neutral;
+        dissatisfiedElement[0].innerText = res.data.dissatisfied;
+      });
     };
 
   }
