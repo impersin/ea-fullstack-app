@@ -48,8 +48,9 @@ secureRoutes.use(function(req, res, next) {
 secureRoutes.get('/checkRequest', controller.test);
 secureRoutes.post('/record', controller.addResult);
 secureRoutes.post('/post/add', controller.addPost);
-secureRoutes.put('/post/add/comment/:number', controller.addComment);
-secureRoutes.put('/post/add/viewcount/:number', controller.addViewCount);
+secureRoutes.put('/update/add/comment/:number', controller.addComment);
+secureRoutes.put('/update/add/viewcount/:number', controller.addViewCount);
+secureRoutes.put('/update/add/vote/:number', controller.addVoteCount);
 
 // /secure-api/checkRequest
 app.listen(9000, function() {
