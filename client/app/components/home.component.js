@@ -78,7 +78,7 @@ appModule.component('homeComponent', {
       $scope.newComment.title = this.post.title;
       // console.log($scope.newComment); 
       if (!$cookies.get('auth')) {
-        $scope.openFromLeft();
+        $scope.authWarning();
       } else if ($cookies.get('auth')) {
         var id = 'form' + this.post.postIndex;
         var myEl = angular.element( document.querySelector('#' + id) );
@@ -94,7 +94,7 @@ appModule.component('homeComponent', {
       console.log($scope.formToggles);
     };
     
-    $scope.openFromLeft = function() {
+    $scope.authWarning = function() {
       $mdDialog.show(
       $mdDialog.alert()
         .clickOutsideToClose(true)
@@ -118,14 +118,18 @@ appModule.component('homeComponent', {
     $scope.vote = function(event) {
       var postIndex = this.post.postIndex;
       var type = event.target.id.slice(0, event.target.id.length - 1);
-      Factory.addVoteCount(postIndex, type).then(function(res) {
-        var satisfiedElement = angular.element( document.querySelector('#satisfiedCount' + postIndex) );
-        var neutralElement = angular.element( document.querySelector('#neutralCount' + postIndex) );
-        var dissatisfiedElement = angular.element( document.querySelector('#dissatisfiedCount' + postIndex) );
-        satisfiedElement[0].innerText = res.data.satisfied;
-        neutralElement[0].innerText = res.data.neutral;
-        dissatisfiedElement[0].innerText = res.data.dissatisfied;
-      });
+      if (!$cookies.get('auth')) {
+        $scope.authWarning();
+      } else {
+        Factory.addVoteCount(postIndex, type).then(function(res) {
+          var satisfiedElement = angular.element( document.querySelector('#satisfiedCount' + postIndex) );
+          var neutralElement = angular.element( document.querySelector('#neutralCount' + postIndex) );
+          var dissatisfiedElement = angular.element( document.querySelector('#dissatisfiedCount' + postIndex) );
+          satisfiedElement[0].innerText = res.data.satisfied;
+          neutralElement[0].innerText = res.data.neutral;
+          dissatisfiedElement[0].innerText = res.data.dissatisfied;
+        });
+      }
     };
 
   }
