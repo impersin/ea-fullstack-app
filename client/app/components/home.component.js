@@ -121,14 +121,21 @@ appModule.component('homeComponent', {
       if (!$cookies.get('auth')) {
         $scope.authWarning();
       } else {
-        Factory.addVoteCount(postIndex, type).then(function(res) {
-          var satisfiedElement = angular.element( document.querySelector('#satisfiedCount' + postIndex) );
-          var neutralElement = angular.element( document.querySelector('#neutralCount' + postIndex) );
-          var dissatisfiedElement = angular.element( document.querySelector('#dissatisfiedCount' + postIndex) );
-          satisfiedElement[0].innerText = res.data.satisfied;
-          neutralElement[0].innerText = res.data.neutral;
-          dissatisfiedElement[0].innerText = res.data.dissatisfied;
-        });
+        var currentUser = $cookies.get('userid'); 
+        var postedUser = this.post.userid;
+        if (currentUser === postedUser) {
+          alert('sorry you can vote for your own comment'); 
+        } else {
+          Factory.addVoteCount(postIndex, type).then(function(res) {
+            var satisfiedElement = angular.element( document.querySelector('#satisfiedCount' + postIndex) );
+            var neutralElement = angular.element( document.querySelector('#neutralCount' + postIndex) );
+            var dissatisfiedElement = angular.element( document.querySelector('#dissatisfiedCount' + postIndex) );
+            satisfiedElement[0].innerText = res.data.satisfied;
+            neutralElement[0].innerText = res.data.neutral;
+            dissatisfiedElement[0].innerText = res.data.dissatisfied;
+          });  
+        }
+        
       }
     };
 
