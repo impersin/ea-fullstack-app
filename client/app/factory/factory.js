@@ -122,10 +122,10 @@ angular.module('appFactory', [])
         });
       },
 
-      addVoteCount: function(postIndex, type) {
+      addVoteCount: function(postIndex, commenter, type) {
         return $http({
           method: 'PUT',
-          url: `secure-api/update/add/vote/${postIndex + type}`
+          url: `secure-api/update/add/vote/${postIndex + '+' + commenter + '+' + type}`
         }).then(function(res) {
           return res;
         });
