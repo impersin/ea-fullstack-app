@@ -41,13 +41,17 @@ appModule.component('homeComponent', {
     };
 
     $scope.toggle = function() {
+      var postIndex = this.post.postIndex;
       var id = 'post' + this.post.postIndex;
       var myEl = angular.element( document.querySelector('#' + id) );
-      console.log(myEl);
+      // console.log(myEl);
       if (!$scope.postToggles[id]) {
         myEl.removeClass('hide');
-        // $scope.postToggles[id] = true; 
-        $scope.postToggles[id] = true;
+        Factory.addViewCount(this.post.postIndex).then(function(res) {
+          var el = angular.element( document.querySelector('#viewcount' + postIndex) );
+          el[0].innerText = 'viewed: ' + res.data.viewcount;
+          $scope.postToggles[id] = true;
+        }); 
       } else {
         myEl.addClass('hide');
         $scope.postToggles[id] = false; 
@@ -109,6 +113,11 @@ appModule.component('homeComponent', {
       $http.get('/secure-api/checkRequest').then(function(res) {
         console.log(res);
       });
+    };
+
+    $scope.test = function(event) {
+      var targetName = event.target.id;
+      console.log(targetName);
     };
 
   }
