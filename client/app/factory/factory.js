@@ -76,6 +76,17 @@ angular.module('appFactory', [])
           return res;
         });
       },
+      uploadFile: function(file) {
+        return $http({
+          method: 'POST',
+          transformRequest: angular.identity,
+          headers: {'Content-Type': undefined},
+          url: 'secure-api/post/upload/file',
+          data: file
+        }).then(function(res) {
+          return res;
+        });
+      },
       sendComment: function(postIndex, newComment) {
         return $http({
           method: 'PUT',
