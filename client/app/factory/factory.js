@@ -76,6 +76,14 @@ angular.module('appFactory', [])
           return res;
         });
       },
+      deletePost: function(postIndex) {
+        return $http({
+          method: 'DELETE',
+          url: `secure-api/post/delete/${postIndex}`,
+        }).then(function(res) {
+          
+        });
+      },
       uploadFile: function(file) {
         return $http({
           method: 'POST',
