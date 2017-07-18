@@ -29,7 +29,6 @@ appModule.component('homeComponent', {
 
     $scope.getAllPosts = function() {
       Factory.getAllPosts().then(function(res) {
-        console.log(res.data);
         $scope.posts = res.data;
         $scope.commenterList = res.data;
       });
@@ -38,7 +37,10 @@ appModule.component('homeComponent', {
 
     $scope.sendComment = function() {
       Factory.sendComment($scope.newComment.postIndex, $scope.newComment).then(function(res) {
-        $window.location.reload();
+        var id = res.data.postIndex;
+        $scope.commentToggles['comment' + id] = true; 
+        $scope.newComment.comment = '';
+        $scope.getAllPosts();
       });
     };
 
