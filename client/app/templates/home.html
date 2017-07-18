@@ -31,7 +31,7 @@
                          <span id="{{'viewcount' + post.postIndex}}" class="md-subhead viewcount">viewed: {{post.viewcount}}</span> 
                       </md-card-header-text>
                     </md-card-header>
-                     <div class="text hide" id="{{'post' + post.postIndex}}">
+                     <div class="text temp" id="{{'post' + post.postIndex}}" ng-show="postToggles['post'+post.postIndex]">
                        <div ng-if="post.fileName">
                           <img ng-src="https://s3-us-west-1.amazonaws.com/fifatalk/{{post.fileName}}" class="md-card-image" alt="Washed Out" width="200px" height="200px">  
                         </div>
@@ -57,7 +57,9 @@
                       </md-button>
                     </md-card-icon-actions>
                     <md-button ng-click="toggleForm()">Comment</md-button>
-                    <md-button ng-click="test()">testing</md-button>
+                    <md-button class="md-icon-button" ng-if="currentUser === post.userid" aria-label="Favorite" ng-click="deletePost()">
+                        <md-icon md-svg-icon="app/images/icons/delete_black.svg"></md-icon>
+                      </md-button>
                     </md-card-actions>
                     <span>Posted:{{post.timeStamps[0]}}</span>
                   
@@ -74,7 +76,6 @@
                         </form>
                       </div>
                     </div>
-                  </md-card>
                     <md-content class="post comment-text" id="{{'comment' + post.postIndex}}" layout="row">
                       <div flex class="temp" ng-show="commentToggles['comment'+post.postIndex]">
                         <md-card ng-repeat="comment in post.comments | orderBy: reverse:true">
@@ -89,9 +90,10 @@
                             <span>Posted:{{comment.timeStamps[0]}}</span>
                         </md-card>
                       </div>
+                    </md-content>  
+                  </md-card>
 
                 </div>
-              </md-content>  
               
             </div>
           </div>    
