@@ -13,7 +13,7 @@
             <span class="invalid" ng-show="postForm.textBox.$touched && postForm.textBox.$invalid">This can't be empty</span>
             <div class="form-upload">
               <label for="file">Upload Image</label>
-              <input ng-model="newPost.file" type="file" name="file" id="myFile" value="file">
+              <input type="file" name="file" file-model="file">
             </div>
             <button ng-disabled="postForm.$invalid" type="submit" class="btn btn-primary btn-block" ng-click="addPost()">POST</button>
           </div>
