@@ -13,7 +13,8 @@ var postSchema = new Schema({
   satisfied: Number,
   neutral: Number,
   dissatisfied: Number, 
-  viewcount: Number, 
+  viewcount: Number,
+  fileName: String 
 });
  
 var Post = mongoose.model('Post', postSchema);
