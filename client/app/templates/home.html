@@ -31,11 +31,13 @@
                          <span id="{{'viewcount' + post.postIndex}}" class="md-subhead viewcount">viewed: {{post.viewcount}}</span> 
                       </md-card-header-text>
                     </md-card-header>
-                     <div class="text temp" id="{{'post' + post.postIndex}}" ng-show="postToggles['post'+post.postIndex]">
+                     <div class="post-board temp" id="{{'post' + post.postIndex}}" ng-show="postToggles['post'+post.postIndex]">
                        <div ng-if="post.fileName">
-                          <img ng-src="https://s3-us-west-1.amazonaws.com/fifatalk/{{post.fileName}}" class="md-card-image" alt="Washed Out" width="200px" height="200px">  
+                          <img ng-src="https://s3-us-west-1.amazonaws.com/fifatalk/{{post.fileName}}" class="md-card-image" alt="Washed Out" width="400px" height="400px">  
                         </div>
-                       <p>{{post.text}}</p>
+                        <div class="post-text">
+                          <p>{{post.text}}</p>
+                        </div>
                     </div> 
                       <md-card-actions layout="row" layout-align="right">
                     <md-card-icon-actions>

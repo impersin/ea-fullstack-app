@@ -110,12 +110,22 @@ body{
   font-size: 20px !important;
 }
 
-div.text{
+ div.post-board{
+  margin: 20px 10px 10px 10px;
+  text-align: center;
+  padding:5px;
+} 
+div.post-text{
   margin: 20px 10px 10px 10px;
   padding:5px;
   background-color: #efefef;
   border: 1px solid black;
   border-radius: 5px;
+  text-align: left;
+}
+
+div.post-text > p{
+  font-size: 20px;
 }
 
 md-contnet.post{
