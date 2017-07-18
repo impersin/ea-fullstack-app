@@ -3,15 +3,19 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var db = require('./db');
 var controller = require('./db/controllers/controller.js');
+var s3Controller = require('./db/controllers/s3controller.js');
 var app = express();
 var jwt = require('jsonwebtoken');
 var secureRoutes = express.Router();
+const multiparty = require('connect-multiparty');
 var cookieParser = require('cookie-parser');
 
 process.env.SECRET_KEY = 'mybadasskey';
+const multipartyMiddleware = multiparty();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(multipartyMiddleware);
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/../client')));
 app.use('/secure-api', secureRoutes);
@@ -21,11 +25,13 @@ app.get('/', function(req, res) {
 });
 app.get('/favicon.ico', controller.favcon);
 app.post('/api/signUp', controller.signUp);
+app.post('/api/upload/File', s3Controller);
 app.get('/api/users', controller.retrieve);
 app.post('/api/login', controller.login);
 app.get('/api/signout', controller.signOut);
 app.get('/api/record', controller.getRecords);
 app.get('/api/post', controller.getAllPost);
+
 
 
 secureRoutes.use(function(req, res, next) {
@@ -48,9 +54,11 @@ secureRoutes.use(function(req, res, next) {
 secureRoutes.get('/checkRequest', controller.test);
 secureRoutes.post('/record', controller.addResult);
 secureRoutes.post('/post/add', controller.addPost);
+secureRoutes.post('/post/upload/file', s3Controller);
 secureRoutes.put('/update/add/comment/:number', controller.addComment);
 secureRoutes.put('/update/add/viewcount/:number', controller.addViewCount);
 secureRoutes.put('/update/add/vote/:number', controller.addVoteCount);
+
 
 // /secure-api/checkRequest
 app.listen(9000, function() {
