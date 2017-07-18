@@ -29,7 +29,7 @@ appModule.component('sidebarComponent', {
         fd.append('file', file);
         Factory.uploadFile(fd).then(function(res) {
           Factory.addPost($scope.newPost).then(function(res) {
-            console.log(res);
+            $window.location.reload();
           });
         });
       } else {
