@@ -10,7 +10,7 @@ appModule.component('sidebarComponent', {
       userid: $cookies.get('userid'),
       title: '',
       text: '',
-      file: ''
+      fileName: ''
     };
     
     $scope.toggleForm = function() {
@@ -22,12 +22,24 @@ appModule.component('sidebarComponent', {
     };
 
     $scope.addPost = function() {
-      Factory.addPost($scope.newPost).then(function(res) {
-        $window.location.reload();
-      });
+      var file = $scope.file;
+      $scope.newPost.fileName = file.name;
+      if (file) {
+        var fd = new FormData();
+        fd.append('file', file);
+        Factory.uploadFile(fd).then(function(res) {
+          Factory.addPost($scope.newPost).then(function(res) {
+            console.log(res);
+          });
+        });
+      } else {
+        Factory.addPost($scope.newPost).then(function(res) {
+          $window.location.reload();
+        });
+
+      }
     };
     
-    // console.log($cookies.get('token'));
     $scope.openFromLeft = function() {
       $mdDialog.show(
       $mdDialog.alert()
