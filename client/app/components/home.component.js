@@ -43,6 +43,7 @@ appModule.component('homeComponent', {
         $scope.postToggles['post' + id] = true; 
         $scope.newComment.comment = '';
         $scope.getAllPosts();
+        $scope.toggleComment(id);
       });
     };
 
@@ -64,10 +65,15 @@ appModule.component('homeComponent', {
       }
     };
 
-    $scope.toggleComment = function() {
+    $scope.toggleComment = function(postNum) {
       // console.log('===============>', this.post);
-      var id = 'comment' + this.post.postIndex;
-      var myEl = angular.element( document.querySelector('#' + id) );
+      if (!postNum) {
+        var id = 'comment' + this.post.postIndex;
+        var myEl = angular.element( document.querySelector('#' + id) );  
+      } else {
+        var id = 'comment' + postNum;
+        var myEl = angular.element( document.querySelector('#' + id) ); 
+      }
       // console.log(myEl);
       if (!$scope.commentToggles[id]) {
         // myEl.removeClass('hide');
