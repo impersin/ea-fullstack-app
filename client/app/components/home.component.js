@@ -4,6 +4,7 @@ appModule.component('homeComponent', {
   controller: function($scope, $rootScope, $cookies, $http, $mdDialog, Factory, $window, $location) {
     $scope.title = 'This is my first Angular 1.5 component!! yay';
     $scope.auth = $cookies.get('auth');
+    $scope.currentUser = $cookies.get('userid');
     $scope.comment = true;
     $scope.commentForm = false;
     $scope.postToggles = {};
@@ -29,6 +30,7 @@ appModule.component('homeComponent', {
 
     $scope.getAllPosts = function() {
       Factory.getAllPosts().then(function(res) {
+        console.log(res.data);
         $scope.posts = res.data;
         $scope.commenterList = res.data;
       });
@@ -38,7 +40,7 @@ appModule.component('homeComponent', {
     $scope.sendComment = function() {
       Factory.sendComment($scope.newComment.postIndex, $scope.newComment).then(function(res) {
         var id = res.data.postIndex;
-        $scope.commentToggles['comment' + id] = true; 
+        $scope.postToggles['post' + id] = true; 
         $scope.newComment.comment = '';
         $scope.getAllPosts();
       });
@@ -50,14 +52,14 @@ appModule.component('homeComponent', {
       var myEl = angular.element( document.querySelector('#' + id) );
       // console.log(myEl);
       if (!$scope.postToggles[id]) {
-        myEl.removeClass('hide');
+        // myEl.removeClass('hide');
         Factory.addViewCount(this.post.postIndex).then(function(res) {
           var el = angular.element( document.querySelector('#viewcount' + postIndex) );
           el[0].innerText = 'viewed: ' + res.data.viewcount;
           $scope.postToggles[id] = true;
         }); 
       } else {
-        myEl.addClass('hide');
+        // myEl.addClass('hide');
         $scope.postToggles[id] = false; 
       }
     };
@@ -68,10 +70,10 @@ appModule.component('homeComponent', {
       var myEl = angular.element( document.querySelector('#' + id) );
       // console.log(myEl);
       if (!$scope.commentToggles[id]) {
-        myEl.removeClass('hide');
+        // myEl.removeClass('hide');
         $scope.commentToggles[id] = true; 
       } else {
-        myEl.addClass('hide');
+        // myEl.addClass('hide');
         $scope.commentToggles[id] = false; 
       }
     };
@@ -154,16 +156,16 @@ appModule.component('homeComponent', {
       if (!$cookies.get('auth')) {
         $scope.authWarning('auth');
       } else {
-        var currentUser = $cookies.get('userid'); 
+        // var currentUser = $cookies.get('userid'); 
         var postedUser = this.post.userid;
         
-        if ($scope.checkCommenterList(postIndex, currentUser)) {
+        if ($scope.checkCommenterList(postIndex, $scope.currentUser)) {
           $scope.authWarning('duplicate');
         } else {
-          if (currentUser === postedUser) {
+          if ($scope.currentUser === postedUser) {
             $scope.authWarning('vote');
           } else {
-            Factory.addVoteCount(postIndex, currentUser, type).then(function(res) {
+            Factory.addVoteCount(postIndex, $scope.currentUser, type).then(function(res) {
               var satisfiedElement = angular.element( document.querySelector('#satisfiedCount' + postIndex) );
               var neutralElement = angular.element( document.querySelector('#neutralCount' + postIndex) );
               var dissatisfiedElement = angular.element( document.querySelector('#dissatisfiedCount' + postIndex) );
@@ -189,6 +191,14 @@ appModule.component('homeComponent', {
         }
       }
       return result;   
-    };  
+    };
+    $scope.deletePost = function(event) {
+      var postIndex = this.post.postIndex;
+      Factory.deletePost(postIndex).then(function(res) {
+        console.log(res.data);
+        $scope.getAllPosts();
+      });  
+    };
+    
   }
 });
