@@ -20,6 +20,7 @@
               </div>
               <md-content class="post"  layout="row" ng-repeat="post in posts | filter:searchInput">
                 <div flex-xs flex-gt-xs layout="column">
+
                   <md-card>
                     <md-card-header>
                       <md-card-avatar>
@@ -30,8 +31,10 @@
                          <span id="{{'viewcount' + post.postIndex}}" class="md-subhead viewcount">viewed: {{post.viewcount}}</span> 
                       </md-card-header-text>
                     </md-card-header>
-                     <!-- <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">  -->
                      <div class="text hide" id="{{'post' + post.postIndex}}">
+                       <div ng-if="post.fileName">
+                          <img ng-src="https://s3-us-west-1.amazonaws.com/fifatalk/{{post.fileName}}" class="md-card-image" alt="Washed Out" width="200px" height="200px">  
+                        </div>
                        <p>{{post.text}}</p>
                     </div> 
                       <md-card-actions layout="row" layout-align="right">
@@ -57,7 +60,8 @@
                     <md-button ng-click="test()">testing</md-button>
                     </md-card-actions>
                     <span>Posted:{{post.timeStamps[0]}}</span>
-
+                  
+                    </md-content> 
                       <div layout="row" layout-align="center" id="{{'form' + post.postIndex}}">
                       <div flex="80" class="temp" ng-show="formToggles['form'+post.postIndex]">
                         <form name="postForm" class="post-form" role="search">
@@ -70,11 +74,10 @@
                         </form>
                       </div>
                     </div>
-                    <div>  
-                  
+                  </md-card>
                     <md-content class="post comment-text" id="{{'comment' + post.postIndex}}" layout="row">
                       <div flex class="temp" ng-show="commentToggles['comment'+post.postIndex]">
-                        <md-card ng-repeat="comment in post.comments">
+                        <md-card ng-repeat="comment in post.comments | orderBy: reverse:true">
                             <md-card-actions>
                             </md-card-actions>
                             <div class="comment-text-box">
@@ -86,10 +89,7 @@
                             <span>Posted:{{comment.timeStamps[0]}}</span>
                         </md-card>
                       </div>
-                    </md-content> 
-                    </div>
 
-                  </md-card>
                 </div>
               </md-content>  
               
