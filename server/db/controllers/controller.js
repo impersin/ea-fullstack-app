@@ -186,3 +186,13 @@ exports.addVoteCount = function(req, res) {
     }
   });
 };
+
+exports.deletePost = function(req, res) {
+  var newPost = req.body;
+  var target = req.params.number;
+  post.remove({ postIndex: target}).then(function(data) {
+    console.log(data);
+    res.send(data);
+  });
+  res.send(newPost);
+};
