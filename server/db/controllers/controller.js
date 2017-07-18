@@ -185,5 +185,4 @@ exports.addVoteCount = function(req, res) {
       res.send(data[0]);
     }
   });
-
 };
