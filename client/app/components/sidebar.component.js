@@ -23,8 +23,8 @@ appModule.component('sidebarComponent', {
 
     $scope.addPost = function() {
       var file = $scope.file;
-      $scope.newPost.fileName = file.name;
       if (file) {
+        $scope.newPost.fileName = file.name;
         var fd = new FormData();
         fd.append('file', file);
         Factory.uploadFile(fd).then(function(res) {
