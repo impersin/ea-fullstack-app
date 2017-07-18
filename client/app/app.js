@@ -10,6 +10,7 @@ var appModule = angular.module('myApp', [
   'ngMaterial',
   'ngMdIcons',
   'angular-storage',
+  'fileModel'
 ]);
 
 appModule.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
