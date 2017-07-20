@@ -10,7 +10,8 @@ var appModule = angular.module('myApp', [
   'ngMaterial',
   'ngMdIcons',
   'angular-storage',
-  'fileModel'
+  'fileModel',
+  'ngLoadingSpinner'
 ]);
 
 appModule.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
