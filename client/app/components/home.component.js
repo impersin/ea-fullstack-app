@@ -47,18 +47,21 @@ appModule.component('homeComponent', {
       });
     };
 
-    $scope.toggle = function() {
+    $scope.toggle = function($event) {
       var postIndex = this.post.postIndex;
       var id = 'post' + this.post.postIndex;
       var myEl = angular.element( document.querySelector('#' + id) );
-      // console.log(myEl);
+      var poster = $event.target.classList[1];
       if (!$scope.postToggles[id]) {
-        // myEl.removeClass('hide');
-        Factory.addViewCount(this.post.postIndex).then(function(res) {
-          var el = angular.element( document.querySelector('#viewcount' + postIndex) );
-          el[0].innerText = 'viewed: ' + res.data.viewcount;
+        if ($scope.currentUser === poster) {
           $scope.postToggles[id] = true;
-        }); 
+        } else {
+          Factory.addViewCount(this.post.postIndex).then(function(res) {
+            var el = angular.element( document.querySelector('#viewcount' + postIndex) );
+            el[0].innerText = 'viewed: ' + res.data.viewcount;
+            $scope.postToggles[id] = true;
+          }); 
+        }
       } else {
         // myEl.addClass('hide');
         $scope.postToggles[id] = false; 
@@ -201,7 +204,6 @@ appModule.component('homeComponent', {
     $scope.deletePost = function(event) {
       var postIndex = this.post.postIndex;
       Factory.deletePost(postIndex).then(function(res) {
-        console.log(res.data);
         $scope.getAllPosts();
       });  
     };
