@@ -18,14 +18,28 @@
             <button ng-disabled="postForm.$invalid" type="submit" class="btn btn-primary btn-block" ng-click="addPost()">POST</button>
           </div>
         </form>
+        <div class="chat-wrapper">
+          <h3>chat box</h3>
+        </div>
+      </div>
+    </div>
+    <div layout="column" layout-align="center" class="temp chat-container">
+      <div flex="40">
+        <div class="chat-header">
+          <h3>chat box</h3>
+          <div class="chat-screen" scroll-bottom="messages">
+            <span>this is chat screen</span>
+             <div class="chat-messages" ng-repeat="message in messages track by $index">
+              <span class="chat-message" id="{{'message'+$index}}"><a href="#">{{message.userid}}</a>:{{message.text}}</span>
+            </div>
+          </div>
+          <input class="form-control" type="text" ng-model="message.text" ng-keypress="sendMessage($event)" placeholder="Enter message" required>
+          <!-- <label for="file">Upload Image</label>
+           <input type="file" name="file" file-model="file">  -->
+          <!-- <button type="submit" class="btn btn-primary" ng-click="sendMessage()">POST</button> -->
+        </div>
       </div>
     </div>    
+  </div>
     <span us-spinner="{radius:30, width:8, length: 16}"></span>
-    <h3>side-menu</h3>
-  <ol>
-    <li>a</li>
-    <li>b</li>
-    <li>c</li>
-    <li>d</li>
-  </ol>
 </div>
