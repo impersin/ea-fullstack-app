@@ -31,10 +31,13 @@ appModule.component('navComponent', {
 
     $scope.login = function() {
       Factory.login({userid: $scope.userId, password: $scope.password}).then(function(res) {
-        $scope.auth = $cookies.get('auth');
         $scope.userId = '';
         $scope.password = '';
         if ($location.path() === '/home') {
+          $window.location.reload();
+          $scope.$apply(function () {
+            $scope.auth = $cookies.get('auth');
+          });
         } else {
           $location.path('/home');  
         }
