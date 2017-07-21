@@ -151,6 +151,10 @@ angular.module('appFactory', [])
       }
 
     };
-  });
+  }).factory('socket', ['$rootScope', function($rootScope) {
+    var socket = io.connect();
+
+    return socket;
+  }]);
 
   
