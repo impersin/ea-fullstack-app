@@ -11,7 +11,8 @@ var appModule = angular.module('myApp', [
   'ngMdIcons',
   'angular-storage',
   'fileModel',
-  'ngLoadingSpinner'
+  'ngLoadingSpinner',
+  'scrollBottom'
 ]);
 
 appModule.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
