@@ -9,6 +9,8 @@ var jwt = require('jsonwebtoken');
 var secureRoutes = express.Router();
 const multiparty = require('connect-multiparty');
 var cookieParser = require('cookie-parser');
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 process.env.SECRET_KEY = 'mybadasskey';
 const multipartyMiddleware = multiparty();
@@ -23,6 +25,30 @@ app.use('/secure-api', secureRoutes);
 app.get('/', function(req, res) {
   res.send(200);
 });
+
+var chatStore = [];
+
+io.on('connection', function(socket) {
+  socket.emit('connection', chatStore);
+  console.log('Socket.io is GO');
+
+  socket.on('add-customer', function(customer) {
+    console.log('Customer added', customer); 
+  });
+
+  socket.on('notification', function(data) {
+    console.log('NEW CUSTOMER IN THE QUEUE', data);
+  });
+  socket.on('msg', function(data) {
+      //Send message to everyone
+    console.log('new message comming');
+    console.log(chatStore);
+    chatStore.push(data);
+    io.sockets.emit('newmsg', chatStore);
+  });
+
+});
+
 app.get('/favicon.ico', controller.favcon);
 app.post('/api/signUp', controller.signUp);
 app.post('/api/upload/File', s3Controller);
@@ -62,6 +88,6 @@ secureRoutes.put('/update/add/vote/:number', controller.addVoteCount);
 
 
 // /secure-api/checkRequest
-app.listen(9000, function() {
+server.listen(9000, function() {
   console.log('Listening Port:9000');
 });
