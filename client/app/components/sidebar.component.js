@@ -46,7 +46,7 @@ appModule.component('sidebarComponent', {
       }
     };
     
-    $scope.openFromLeft = function() {
+    $scope.authWarning = function() {
       $mdDialog.show(
       $mdDialog.alert()
         .clickOutsideToClose(true)
@@ -72,9 +72,14 @@ appModule.component('sidebarComponent', {
     });
 
     $scope.sendMessage = function(keyEvent) {
-      if (keyEvent.which === 13) {
-        socket.emit('msg', $scope.message);
-        $scope.message.text = '';
+      if (!$cookies.get('auth')) {
+        $scope.authWarning();  
+      } else {
+        if (keyEvent.which === 13) {
+          socket.emit('msg', $scope.message);
+          $scope.message.text = '';
+        }
+        
       }
     };
 
