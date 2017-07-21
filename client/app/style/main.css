@@ -294,6 +294,16 @@ form.post-form{
   margin: 0px 0px 5px 0px;
 }
 
+.chat-screen{
+  height: 35%;
+  border: 1px solid red;
+  overflow: auto;
+}
+.chat-messages{
+  list-style: none;
+  margin-bottom: 0px;
+  padding-left: 5px;
+}
 .temp.ng-hide-remove {
   -webkit-animation:0.3s show;
   animation:0.3s show;
