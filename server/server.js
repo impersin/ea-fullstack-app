@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var db = require('./db');
 var controller = require('./db/controllers/controller.js');
+var socketController = require('./db/controllers/socketController.js');
 var s3Controller = require('./db/controllers/s3controller.js');
 var app = express();
 var jwt = require('jsonwebtoken');
@@ -11,7 +12,6 @@ const multiparty = require('connect-multiparty');
 var cookieParser = require('cookie-parser');
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-
 process.env.SECRET_KEY = 'mybadasskey';
 const multipartyMiddleware = multiparty();
 
@@ -26,10 +26,8 @@ app.get('/', function(req, res) {
   res.send(200);
 });
 
-var chatStore = [];
-
 io.on('connection', function(socket) {
-  socket.emit('connection', chatStore);
+  socketController.getMessage(socket);
   console.log('Socket.io is GO');
 
   socket.on('add-customer', function(customer) {
@@ -39,12 +37,10 @@ io.on('connection', function(socket) {
   socket.on('notification', function(data) {
     console.log('NEW CUSTOMER IN THE QUEUE', data);
   });
-  socket.on('msg', function(data) {
+  socket.on('newMessage', function(data) {
       //Send message to everyone
     console.log('new message comming');
-    console.log(chatStore);
-    chatStore.push(data);
-    io.sockets.emit('newmsg', chatStore);
+    socketController.addMessage(data);
   });
 
 });
@@ -91,3 +87,5 @@ secureRoutes.put('/update/add/vote/:number', controller.addVoteCount);
 server.listen(9000, function() {
   console.log('Listening Port:9000');
 });
+
+exports.io = io;
