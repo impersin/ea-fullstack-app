@@ -17,6 +17,7 @@ appModule.component('homeComponent', {
       title: '',
       comment: '',
     };
+    $scope.posts = []
 
     $scope.switch = false;
 
@@ -30,7 +31,7 @@ appModule.component('homeComponent', {
 
     $scope.getAllPosts = function() {
       Factory.getAllPosts().then(function(res) {
-        console.log(res.data);
+        // console.log(res.data);
         $scope.posts = res.data;
         $scope.commenterList = res.data;
       });
@@ -43,7 +44,9 @@ appModule.component('homeComponent', {
         $scope.postToggles['post' + id] = true; 
         $scope.newComment.comment = '';
         $scope.getAllPosts();
-        $scope.toggleComment(id);
+        if (!$scope.commentToggles['comment' + id]) {
+          $scope.toggleComment(id);
+        }
       });
     };
 
