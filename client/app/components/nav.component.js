@@ -17,6 +17,7 @@ appModule.component('navComponent', {
 
     $scope.addUser = function() {
       Factory.signUp({firstName: $scope.firstName, lastName: $scope.lastName, userid: $scope.userId, password: $scope.password, email: $scope.email}).then(function(res) {
+        $scope.auth = $cookies.get('auth');
         $location.path('/home');
         $scope.firstName = '';
         $scope.lastName = '';
@@ -39,6 +40,7 @@ appModule.component('navComponent', {
             $scope.auth = $cookies.get('auth');
           });
         } else {
+          $scope.auth = $cookies.get('auth');
           $location.path('/home');  
         }
       });
