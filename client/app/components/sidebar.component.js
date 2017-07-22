@@ -21,7 +21,7 @@ appModule.component('sidebarComponent', {
     
     $scope.toggleForm = function() {
       if (!$cookies.get('auth')) {
-        $scope.openFromLeft();
+        $scope.authWarning();
       } else if ($cookies.get('auth')) {
         $scope.toggle = !$scope.toggle;
       }
@@ -76,7 +76,7 @@ appModule.component('sidebarComponent', {
         $scope.authWarning();  
       } else {
         if (keyEvent.which === 13) {
-          socket.emit('msg', $scope.message);
+          socket.emit('newMessage', $scope.message);
           $scope.message.text = '';
         }
         
