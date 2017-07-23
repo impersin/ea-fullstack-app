@@ -60,13 +60,15 @@ body{
 }
 
 .home-contents{
+  height: 100%;
+  /* background-image: url(""); */
   background-size: cover;
   background-repeat: no-repeat;
   overflow-y: scroll;
 }
 
 .home-header{
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding-top:50px;
 }
 
@@ -94,7 +96,7 @@ body{
   background-size: cover;
   background-repeat: no-repeat;*/
   background-color: white;
-  border: 1px solid blue;
+  /* border: 1px solid #ccc; */
   overflow:auto;
 }
 
@@ -123,7 +125,7 @@ div.post-text{
   margin: 20px 10px 10px 10px;
   padding:5px;
   background-color: #efefef;
-  border: 1px solid black;
+  border: 1px solid #ccc;
   border-radius: 5px;
   text-align: left;
 }
@@ -287,11 +289,14 @@ td{
 .sidebar{
   padding:0px 0px 0px 0px;
   margin:0px 0px 0px 0px;
-  border:1px solid black;
+  /* border:1px solid black; */
 }
 
 form.post-form{
-  /*border:1px solid black;*/
+  background-color: rgb(250,250,250);
+  border: 1px solid #ccc;
+  margin: 15px 0px 0px 0px;
+  padding: 10px;
 }
 
 .form-upload{
@@ -377,18 +382,24 @@ form.post-form{
   }
 }
 .board-container{
-  width: 300px;
+  /* width: 300px; */
   /* height: 400px; */
+  margin: 30px 0px 0px 0px;
   border: 1px solid #ccc;
+  border-radius: 4px;
 }
 .board-header{
   text-align: center;
   background-color: rgba(0, 0, 0, 0.2);
 }
-
+.board-header > h3{
+  margin: 0px 0px 0px 0px;
+  padding:10px;
+}
 .board-header > a{
   display: inline-block;
-  margin: 0px 5px 0px 5px
+  margin: 0px 5px 0px 5px;
+  padding: 0px 0px 10px 0px;
 }
 .board-screen{
   width:50%;
@@ -400,10 +411,9 @@ form.post-form{
 
 /*footer*/
 .footer {
+	width: 100%;
 	height: auto;
 	padding-bottom: 30px;
-	position: relative;
-	width: 100%;
 	border-bottom: 1px solid #CCCCCC;
 	border-top: 1px solid #DDDDDD;
 }
@@ -414,7 +424,6 @@ form.post-form{
 	max-width: 100%;
 }
 .footer h3 {
-	border-bottom: 1px solid #BAC1C8;
 	color: #54697E;
 	font-size: 18px;
 	font-weight: 600;
