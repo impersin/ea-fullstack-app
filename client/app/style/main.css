@@ -60,10 +60,9 @@ body{
 }
 
 .home-contents{
-  /* background-color: #efefef; */
-  /* background-image: url("../images/homebg_1.jpg"); */
   background-size: cover;
   background-repeat: no-repeat;
+  overflow-y: scroll;
 }
 
 .home-header{
@@ -94,6 +93,7 @@ body{
   /*background-image: url("../images/post_sample.jpg");
   background-size: cover;
   background-repeat: no-repeat;*/
+  background-color: white;
   border: 1px solid blue;
   overflow:auto;
 }
@@ -153,6 +153,7 @@ md-contnet.post{
   border: 1px solid red;
 }
 .sidebar{
+  background-color: white;
   overflow: auto;
 } 
 
@@ -293,7 +294,9 @@ form.post-form{
 .form-upload{
   margin: 0px 0px 5px 0px;
 }
-
+.chat-header{
+  text-align: center;
+}
 .chat-screen{
   height: 35%;
   border: 1px solid red;
@@ -369,7 +372,20 @@ form.post-form{
     transform: scale(1);
   }
 }
+.boader-container{
+  width: 300px;
+  height: 400px;
+}
+.board-header{
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.2);
+}
 
+.board-header > a{
+  display: inline-block;
+  margin: 5px 15px;
+
+}
 
 
 
