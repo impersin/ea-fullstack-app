@@ -80,7 +80,7 @@
                     </div>
                     <md-content class="post comment-text" id="{{'comment' + post.postIndex}}" layout="row">
                       <div flex class="temp" ng-show="commentToggles['comment'+post.postIndex]">
-                        <md-card ng-repeat="comment in post.comments | orderBy: reverse:true">
+                        <md-card id="anchor{{$index}}" ng-repeat="comment in post.comments | orderBy: reverse:true">
                             <md-card-actions>
                             </md-card-actions>
                             <div class="comment-text-box">
@@ -105,6 +105,22 @@
     
     <div flex="30">
       <sidebar-component></sidebar-component>   
+        <div class="board-wrapper">
+          <div class="board-header">
+            <h3>board box</h3>
+            <a href="" ng-click="boardSort('views')">
+              Most View  {{x}}
+            </a>
+            <a href="" ng-click="boardSort('popular')">
+              Most Popular
+            </a>
+          </div>
+          <div class="board-screen">
+            <div class="board-list" ng-repeat="post in boardData track by $index">
+              <a href="" id={{post.title}} ng-click="searchPost(post.postIndex)">{{$index+1}}.{{post.title}}</a>
+            </div>
+          </div>
+        </div>
     </div>
 
   </div>
