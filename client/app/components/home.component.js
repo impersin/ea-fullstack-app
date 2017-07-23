@@ -1,7 +1,7 @@
 appModule.component('homeComponent', {
   templateUrl: 'app/templates/home.html',
   controllerAs: 'headerController',
-  controller: function($scope, $rootScope, $cookies, $http, $mdDialog, Factory, $window, $location, $anchorScroll) {
+  controller: function($scope, $rootScope, $cookies, $http, $mdDialog, Factory, $window, $location, $anchorScroll, $timeout) {
     $scope.title = 'This is my first Angular 1.5 component!! yay';
     $scope.auth = $cookies.get('auth');
     $scope.currentUser = $cookies.get('userid');
@@ -11,6 +11,7 @@ appModule.component('homeComponent', {
     $scope.commentToggles = {};
     $scope.formToggles = {};
     $scope.commenterList = [];
+    $scope.limit = 15;
     $scope.newComment = {
       commentedBy: '',
       postIndex: '',
@@ -30,7 +31,6 @@ appModule.component('homeComponent', {
 
     $scope.getAllPosts = function() {
       Factory.getAllPosts().then(function(res) {
-        // console.log(res.data);
         $scope.posts = res.data;
         $scope.commenterList = res.data;
         $scope.boardData = [];
@@ -83,10 +83,8 @@ appModule.component('homeComponent', {
         var id = 'comment' + postNum;
         var myEl = angular.element( document.querySelector('#' + id) ); 
       }
-      // console.log(myEl);
       if (!$scope.commentToggles[id]) {
         // myEl.removeClass('hide');
-        $scope.gotoAnchor();
         $scope.commentToggles[id] = true; 
       } else {
         // myEl.addClass('hide');
@@ -104,7 +102,6 @@ appModule.component('homeComponent', {
       } else if ($cookies.get('auth')) {
         var id = 'form' + this.post.postIndex;
         var myEl = angular.element( document.querySelector('#' + id) );
-        console.log(myEl);
         if (!$scope.formToggles[id]) {
           // myEl.removeClass('hide');
           $scope.formToggles[id] = true; 
@@ -113,7 +110,6 @@ appModule.component('homeComponent', {
           $scope.formToggles[id] = false; 
         }
       }
-      console.log($scope.formToggles);
     };
     
     $scope.authWarning = function(type) {
@@ -159,12 +155,6 @@ appModule.component('homeComponent', {
       }
     };
 
-    $scope.sendRequest = function() {
-      $http.get('/secure-api/checkRequest').then(function(res) {
-        console.log(res);
-      });
-    };
-
     $scope.vote = function(event) {
       var postIndex = this.post.postIndex;
       var type = event.target.id.slice(0, event.target.id.length - 1);
@@ -172,9 +162,7 @@ appModule.component('homeComponent', {
       if (!$cookies.get('auth')) {
         $scope.authWarning('auth');
       } else {
-        // var currentUser = $cookies.get('userid'); 
-        var postedUser = this.post.userid;
-        
+        var postedUser = this.post.userid;        
         if ($scope.checkCommenterList(postIndex, $scope.currentUser)) {
           $scope.authWarning('duplicate');
         } else {
@@ -191,23 +179,23 @@ appModule.component('homeComponent', {
               $scope.getAllPosts();
             });  
           }
-        }
-        
+        } 
       }
     };
+
     $scope.checkCommenterList = function(num, user) {
       var result = false;
       for (var i = 0; i < $scope.commenterList.length; i++) {
         var postNum = $scope.commenterList[i].postIndex;
         var commenterList = $scope.commenterList[i].commenterList;
         if (postNum === num && commenterList.indexOf(user) > -1) {
-          console.log('here');
           result = true;
           break;
         }
       }
       return result;   
     };
+
     $scope.deletePost = function(event) {
       var postIndex = this.post.postIndex;
       Factory.deletePost(postIndex).then(function(res) {
@@ -227,12 +215,48 @@ appModule.component('homeComponent', {
           $scope.boardData = data.sort(function(a, b) {
             return b.satisfied - a.satisfied;
           });
-        } 
+        } else {
+          $scope.boardData = data.sort(function(a, b) {
+            return b.comments.length - a.comments.length;
+          });
+        }
       } else {
         return data.sort(function(a, b) {
           return b.viewcount - a.viewcount;
         });
       }
+    };
+
+    $scope.searchPost = function(target) {
+      var start = 0;
+      var end = $scope.posts.length - 1;
+      var mid;
+      var post;
+      while (start <= end) {
+        mid = Math.floor((start + end) / 2);
+        if ($scope.posts[mid].postIndex === target) {
+          $scope.searchInput = $scope.posts[mid].title;
+          $scope.postToggles['post' + target] = true;
+          return;
+        } else if ($scope.posts[mid].postIndex > target) {
+          start = mid + 1;
+        } else {
+          end = mid - 1;
+        }
+      }
+    };
+
+    $scope.searchInputReset = function(target) {
+      $scope.searchInput = '';
+      $scope.postToggles[target] = false; 
+    };
+
+    $scope.addToLimit = function($event) {
+      var el = angular.element( document.querySelector('.home-posts') );
+      $scope.limit = $scope.limit + 15;
+      $timeout( function() {
+        el[0].scrollTop += 200;
+      }, 500 );
     };
 
   }
