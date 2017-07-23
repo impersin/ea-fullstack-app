@@ -1,7 +1,7 @@
 appModule.component('homeComponent', {
   templateUrl: 'app/templates/home.html',
   controllerAs: 'headerController',
-  controller: function($scope, $rootScope, $cookies, $http, $mdDialog, Factory, $window, $location) {
+  controller: function($scope, $rootScope, $cookies, $http, $mdDialog, Factory, $window, $location, $anchorScroll) {
     $scope.title = 'This is my first Angular 1.5 component!! yay';
     $scope.auth = $cookies.get('auth');
     $scope.currentUser = $cookies.get('userid');
@@ -17,10 +17,9 @@ appModule.component('homeComponent', {
       title: '',
       comment: '',
     };
-    $scope.posts = []
-
+    $scope.posts = [];
     $scope.switch = false;
-
+    $scope.boardData = [];
     $scope.test = function() {
       $scope.switch = !$scope.switch;
     };
@@ -34,6 +33,11 @@ appModule.component('homeComponent', {
         // console.log(res.data);
         $scope.posts = res.data;
         $scope.commenterList = res.data;
+        $scope.boardData = [];
+        res.data.forEach(function(post) {
+          $scope.boardData.push(post);
+        });
+        $scope.boardSort($scope.boardData, 'views');
       });
     };
     $scope.getAllPosts();
@@ -72,7 +76,6 @@ appModule.component('homeComponent', {
     };
 
     $scope.toggleComment = function(postNum) {
-      // console.log('===============>', this.post);
       if (!postNum) {
         var id = 'comment' + this.post.postIndex;
         var myEl = angular.element( document.querySelector('#' + id) );  
@@ -83,6 +86,7 @@ appModule.component('homeComponent', {
       // console.log(myEl);
       if (!$scope.commentToggles[id]) {
         // myEl.removeClass('hide');
+        $scope.gotoAnchor();
         $scope.commentToggles[id] = true; 
       } else {
         // myEl.addClass('hide');
@@ -210,6 +214,26 @@ appModule.component('homeComponent', {
         $scope.getAllPosts();
       });  
     };
-    
+
+    $scope.boardSort = function(data, sortBy) {
+      if (arguments.length === 1) {
+        sortBy = data;
+        data = $scope.boardData;
+        if (sortBy === 'views') {
+          $scope.boardData = data.sort(function(a, b) {
+            return b.viewcount - a.viewcount;
+          }); 
+        } else if (sortBy === 'popular') {
+          $scope.boardData = data.sort(function(a, b) {
+            return b.satisfied - a.satisfied;
+          });
+        } 
+      } else {
+        return data.sort(function(a, b) {
+          return b.viewcount - a.viewcount;
+        });
+      }
+    };
+
   }
 });
