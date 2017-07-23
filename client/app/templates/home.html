@@ -59,16 +59,19 @@
                             <span id="{{'dissatisfiedCount' + post.postIndex}}">{{post.dissatisfied}}</span>
                           </md-button>
                         </md-card-icon-actions>
-                        <md-button ng-click="toggleForm()">Comment</md-button>
+                        <md-button class="md-icon-button" aria-label="dissatisfied" ng-click="toggleForm()">
+                            <md-icon id="{{'dissatisfied' + post.postIndex}}" md-svg-icon="app/images/icons/create_black.svg"></md-icon>
+                          </md-button>
+                        <!-- <md-button ng-click="toggleForm()">Comment</md-button> -->
                         <md-button class="md-icon-button" ng-if="currentUser === post.userid" aria-label="Favorite" ng-click="deletePost()">
                           <md-icon md-svg-icon="app/images/icons/delete_black.svg"></md-icon>
                         </md-button>
                       </md-card-actions>
                       <div layout="row" layout-align="center" id="{{'form' + post.postIndex}}">
                         <div flex="80" class="temp" ng-show="formToggles['form'+post.postIndex]">
-                          <form name="postForm" class="post-form" role="search">
+                          <form name="postForm" class="comment-form" role="search">
                             <div class="form-group">
-                              <textarea ng-model="newComment.comment" name="text" class="form-control" placeholder="Text" required rows="4" cols="50"> 
+                              <textarea ng-model="newComment.comment" name="text" class="form-control" placeholder="Write a comment..." required rows="4" cols="50"> 
                               </textarea>
                               <span class="invalid" ng-show="postForm.textBox.$touched && postForm.textBox.$invalid">This can't be empty</span>
                               <button ng-disabled="postForm.$invalid" type="submit" class="btn btn-primary btn-block" ng-click="sendComment()">submit</button>
@@ -105,9 +108,9 @@
       <sidebar-component></sidebar-component>   
         <div class="board-container">
           <div class="board-header">
-            <h3>board box</h3>
+            <h3>TOP 10</h3>
               <a href="" ng-click="boardSort('views')">
-                Most View  {{x}}
+                Most View
               </a>
               <a href="" ng-click="boardSort('popular')">
                 Most Popular
