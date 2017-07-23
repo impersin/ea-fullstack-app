@@ -29,7 +29,7 @@
           <div class="chat-screen" scroll-bottom="messages">
             <span>this is chat screen</span>
             <div class="chat-messages" ng-repeat="message in messages track by $index">
-              <span class="chat-message" id="{{'message'+$index}}"><a href="#">{{message.messageIndex}}{{message.userid}}</a>:{{message.message}}</span>
+              <span class="chat-message" id="{{'message'+$index}}"><a href="">{{message.userid}}</a>:{{message.message}}</span>
             </div>
           </div>
               <input class="form-control" type="text" ng-model="message.text" ng-keypress="sendMessage($event)" placeholder="Enter message" required>
