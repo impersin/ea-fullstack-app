@@ -7,7 +7,6 @@ appModule.component('sidebarComponent', {
     $scope.auth = $cookies.get('auth');
     $scope.toggle = false;
     $scope.messages = []; 
-
     $scope.message = {
       userid: $cookies.get('userid'),
       text: ''
