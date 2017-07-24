@@ -45,7 +45,7 @@ appModule.component('homeComponent', {
 
     $scope.sendComment = function() {
       Factory.sendComment($scope.newComment.postIndex, $scope.newComment).then(function(res) {
-        var id = res.data.postIndex;
+        var id = $scope.newComment.postIndex;
         $scope.postToggles['post' + id] = true; 
         $scope.newComment.comment = '';
         $scope.getAllPosts();
