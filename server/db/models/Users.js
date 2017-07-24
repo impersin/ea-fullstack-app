@@ -7,7 +7,8 @@ var userSchema = new Schema({
   lastname: String,
   userid: String,
   password: String,
-  email: String
+  email: String,
+  profileImage: String
    
 });
  
