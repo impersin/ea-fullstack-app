@@ -16,16 +16,17 @@ exports.signUp = function(req, res) {
   var userid = req.body.userid;
   var password = req.body.password;
   var email = req.body.email;
+  var profileImage = '';
 
   user.find({userId: userid}).then(function(data) {
     if (data.length === 0) {
       bcrypt.hash(password, 10).then(function(hash) {
-        user.insertMany([{firstname: firstName, lastname: lastName, userid: userid, password: hash, email: email}], function(err, data) {
+        user.insertMany([{firstname: firstName, lastname: lastName, userid: userid, password: hash, email: email, profileImage: profileImage}], function(err, data) {
           if (err) { throw err; }
           var token = jwt.sign({userid: userid, password: password}, process.env.SECRET_KEY, {expiresIn: 4000});
           
           res.json({success: true, userid: userid, firstName: firstName,
-            lastName: lastName, token: token});
+            lastName: lastName, token: token, profileImage: profileImage});
         });
 
       }) .catch(bcrypt.MISMATCH_ERROR, handleInvalidPassword);
@@ -47,10 +48,11 @@ exports.login = function(req, res) {
           var email = data[0].email;
           var firstName = data[0].firstname;
           var lastName = data[0].lastname;
+          var profileImage = data[0].profileImage;
           var token = jwt.sign({userid: userid, password: password}, process.env.SECRET_KEY, {expiresIn: 4000});
           console.log('Welcome!');
           res.json({success: true, userid: userid, firstName: firstName,
-            lastName: lastName, email: email, token: token});   
+            lastName: lastName, email: email, token: token, profileImage: profileImage});   
         } else {
           console.log('Sorry It doenst match...');
           res.sendStatus(401);   
@@ -138,7 +140,6 @@ exports.addComment = function(req, res) {
   post.update({ postIndex: target}, { $push: {comments: newPost} }).then(function(data) {
     res.send(data);
   });
-  res.send(newPost);
 };
 
 exports.addViewCount = function(req, res) {
@@ -148,6 +149,17 @@ exports.addViewCount = function(req, res) {
     post.find({postIndex: target}).then(function(data) {
       res.send(data[0]);
     });
+  });
+};
+
+exports.addProfileImage = function(req, res) {
+  var target = req.body.userid;
+  var fileName = req.body.fileName;
+  console.log(target, fileName);
+  user.update({userid: target}, {profileImage: fileName}).then(function(data) {
+    // post.find({postIndex: target}).then(function(data) {
+    res.json(fileName);
+    // });
   });
 };
 
