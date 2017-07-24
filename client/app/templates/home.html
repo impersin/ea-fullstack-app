@@ -62,7 +62,6 @@
                         <md-button class="md-icon-button" aria-label="dissatisfied" ng-click="toggleForm()">
                             <md-icon id="{{'dissatisfied' + post.postIndex}}" md-svg-icon="app/images/icons/create_black.svg"></md-icon>
                           </md-button>
-                        <!-- <md-button ng-click="toggleForm()">Comment</md-button> -->
                         <md-button class="md-icon-button" ng-if="currentUser === post.userid" aria-label="Favorite" ng-click="deletePost()">
                           <md-icon md-svg-icon="app/images/icons/delete_black.svg"></md-icon>
                         </md-button>
@@ -86,7 +85,7 @@
                             <md-card-actions>
                             </md-card-actions>
                             <div class="comment-text-box">
-                              <a>Commented By:{{comment.commentedBy}}</a>
+                              <span>Commented By:<a href="">{{comment.commentedBy}}</a></span>
                               <div class="comment-text">
                                 <p>{{comment.comment}}</p>
                               </div>
@@ -107,24 +106,33 @@
     <div flex="30" class="sidebar-wrapper">
       <sidebar-component></sidebar-component>   
         <div class="board-container">
-          <div class="board-header">
-            <h3>TOP 10</h3>
-              <a href="" ng-click="boardSort('views')">
-                Most View
-              </a>
-              <a href="" ng-click="boardSort('popular')">
-                Most Popular
-              </a>
-              <a href="" ng-click="boardSort('')">
-                Most Comments 
-              </a>
-          </div>
-          <div class="board-screen">
-            <div class="board-list" ng-repeat="post in boardData track by $index">
-                <a href="" id={{post.title}} ng-click="searchPost(post.postIndex)">{{$index+1}}.{{post.title}}</a>
-            </div>
-          </div>
+          <Table>
+            <thead>
+              <tr>
+                <th>
+                  <a href="" ng-click="boardSort('views')">
+                    <span><b>Views</b></span>
+                  </a>
+                </th>
+                <th>
+                  <a href="" ng-click="boardSort('popular')">
+                    <span><b>Popular</b></span>
+                  </a>
+                </th>
+                <th>
+                  <a href="" ng-click="boardSort('comments')">
+                    <span><b>Commentss</b></span>
+                  </a></th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="post in boardData track by $index">
+                <td class="board-list-number">{{$index + 1}}</td>
+                <td class="board-list-title"> <a href="" id={{post.title}} ng-click="searchPost(post.postIndex)">{{post.title}}</a></td>
+              </tr>    
+            </tbody>
+          </Table>
         </div>
     </div> 
-    </div>
+  </div>
 </div>  
