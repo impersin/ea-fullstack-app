@@ -110,6 +110,7 @@ body{
 }
 
 .home-posts-header{
+  padding-top: 10px;
   text-align: center;
 }
 .md-title{
@@ -157,10 +158,6 @@ button.show-more{
 .side-menu{
   border: 1px solid red;
 }
-.sidebar{
-  background-color: white;
-  overflow: auto;
-} 
 
 @-webkit-keyframes slide {
     100% { left: 0; }
@@ -282,8 +279,10 @@ td{
 /*sidebar*/
 
 .sidebar{
-  padding:0px 0px 0px 0px;
-  margin:0px 0px 0px 0px;
+  background-color: white;
+  padding: 70px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  overflow: auto;
   /* border:1px solid black; */
 }
 #sidebar-header{
@@ -308,6 +307,9 @@ form.post-form{
   border: 1px solid #ccc;
   border-radius: 4px;
   overflow: auto;
+}
+table.chat-table{
+  margin-left:0px;
 }
 .chat-user{
 vertical-align: text-top;
