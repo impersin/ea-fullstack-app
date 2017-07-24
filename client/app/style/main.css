@@ -391,14 +391,7 @@ vertical-align: text-top;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-.board-header{
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.2);
-}
-.board-header > h3{
-  margin: 0px 0px 0px 0px;
-  padding:10px;
-}
+
 .board-header > a{
   display: inline-block;
   margin: 0px 5px 0px 5px;

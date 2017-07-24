@@ -1,16 +1,14 @@
 <div class="home-wrapper" ng-cloak>
-  <div layout="row" class="home-header">
+  <div hide-xs layout="row" class="home-header">
     <div flex="40" flex-offset="20">
       <img class="home-header-image1 fadein" id="slide2" src="../app/images/fifa18_logo.png" alt="CR7 IMAGE" width="600px" height="406px">
     </div>
-    <div flex="40">
+    <div hide-sm show-gt-sm flex="40">
       <img class="home-header-image2" id="slide" src="../app/images/cr7_cover.png" alt="CR7 IMAGE" width="384px" height="384px">
     </div>
   </div>
     <div layout="row" class="home-contents">
-      <div flex>
-        <div layout="row" class="home-contents">
-          <div flex="60" flex-offset="20">
+          <div flex="55" flex-xs="70" flex-offset="10">
             <div layout="column">
               <div flex="100" class="home-posts" ng-show="posts">
                 <div class="home-posts-header">
@@ -101,38 +99,37 @@
                 <button class="btn btn-link show-more" ng-hide="results.length === items.length" ng-click="addToLimit($event)">show more...</button> 
             </div>
           </div>    
-        </div>
+        <div hide-xs flex="30" flex-offset="10" class="sidebar-wrapper">
+          <sidebar-component></sidebar-component>   
+            <div class="board-container">
+              <Table>
+                <thead>
+                  <tr>
+                    <th>
+                      <a href="" ng-click="boardSort('views')">
+                        <span><b>Views</b></span>
+                      </a>
+                    </th>
+                    <th>
+                      <a href="" ng-click="boardSort('popular')">
+                        <span><b>Popular</b></span>
+                      </a>
+                    </th>
+                    <th>
+                      <a href="" ng-click="boardSort('comments')">
+                        <span><b>Commentss</b></span>
+                      </a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="post in boardData track by $index">
+                    <td class="board-list-number">{{$index + 1}}</td>
+                    <td class="board-list-title"> <a href="" id={{post.title}} ng-click="searchPost(post.postIndex)">{{post.title}}</a></td>
+                  </tr>    
+                </tbody>
+              </Table>
+            </div>
+        </div> 
       </div>
-    <div flex="30" class="sidebar-wrapper">
-      <sidebar-component></sidebar-component>   
-        <div class="board-container">
-          <Table>
-            <thead>
-              <tr>
-                <th>
-                  <a href="" ng-click="boardSort('views')">
-                    <span><b>Views</b></span>
-                  </a>
-                </th>
-                <th>
-                  <a href="" ng-click="boardSort('popular')">
-                    <span><b>Popular</b></span>
-                  </a>
-                </th>
-                <th>
-                  <a href="" ng-click="boardSort('comments')">
-                    <span><b>Commentss</b></span>
-                  </a></th>
-                </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="post in boardData track by $index">
-                <td class="board-list-number">{{$index + 1}}</td>
-                <td class="board-list-title"> <a href="" id={{post.title}} ng-click="searchPost(post.postIndex)">{{post.title}}</a></td>
-              </tr>    
-            </tbody>
-          </Table>
-        </div>
-    </div> 
   </div>
 </div>  
