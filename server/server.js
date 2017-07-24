@@ -76,6 +76,7 @@ secureRoutes.use(function(req, res, next) {
 secureRoutes.get('/checkRequest', controller.test);
 secureRoutes.post('/record', controller.addResult);
 secureRoutes.post('/post/add', controller.addPost);
+secureRoutes.post('/post/add/profile/image', controller.addProfileImage);
 secureRoutes.delete('/post/delete/:number', controller.deletePost);
 secureRoutes.post('/post/upload/file', s3Controller);
 secureRoutes.put('/update/add/comment/:number', controller.addComment);
