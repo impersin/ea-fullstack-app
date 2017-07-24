@@ -6,12 +6,25 @@
         <md-card-title>
           <md-card-title-media>
             <div class="md-media-lg card-media" layout-padding>
-              <img ng-src="app/images/profile_sample.jpg" alt="profile-picture">
+              <img ng-src="{{profileImage}}" alt="profile-picture">
+              <md-card-actions layout="row" layout-align="center" ng-show="auth">
+                <md-button ng-click="formToggle()">Edit Photo</md-button>
+            </md-card-actions>
             </div>
           </md-card-title-media>
           <md-card-title-text>
+            <soan>{{user}}</soan>
             <span>Game Records</span>
-        <span>WIN:{{win}} LOSE:{{lose}}</span>
+            <span>WIN:{{win}} LOSE:{{lose}}</span>
+            <form name="postForm" class="post-form temp" ng-show="profileForm" role="search">
+              <div class="form-group">
+                <div class="form-upload">
+                  <label for="file">Upload Image</label>
+                  <input type="file" name="file" file-model="file" required>
+                </div>
+              <button ng-disabled="postForm.$invalid" type="submit" class="btn btn-primary" ng-click="sendProfileImage()">Submit</button>
+              </div>
+            </form>
           </md-card-title-text>
         </md-card-title>
         <md-card-actions layout="row" layout-align="end center">
