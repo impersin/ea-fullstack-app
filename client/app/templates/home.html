@@ -122,7 +122,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="post in boardData track by $index">
+                  <tr ng-repeat="post in boardData track by $index" ng-if="$index <= boardLimit">
                     <td class="board-list-number">{{$index + 1}}</td>
                     <td class="board-list-title"> <a href="" id={{post.title}} ng-click="searchPost(post.postIndex)">{{post.title}}</a></td>
                   </tr>    

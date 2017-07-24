@@ -12,6 +12,7 @@ appModule.component('homeComponent', {
     $scope.formToggles = {};
     $scope.commenterList = [];
     $scope.limit = 15;
+    $scope.boardLimit = 4;
     $scope.newComment = {
       commentedBy: '',
       postIndex: '',
