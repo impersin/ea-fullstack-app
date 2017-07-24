@@ -5,7 +5,7 @@ var db = require('../index.js');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 var cookieParser = require('cookie-parser');
-
+var dateTime = require('node-datetime');
 var result = [{'Player Name': 'TAEGYU LEEM', 'Match Location': 'Korea', 'Match Duration': 90, 'Win Team': 'Korea', 'Lose Team': 'Japan', 'Final Score': '3:1'}, {'Player Name': 'TAEGYU LEEM', 'Match Location': 'Japan', 'Match Duration': 90, 'Win Team': 'Korea', 'Lose Team': 'Japan', 'Final Score': '2:0'},
 {'Player Name': 'TAEGYU LEEM', 'Match Location': 'Japan', 'Match Duration': 90, 'Win Team': 'Korea', 'Lose Team': 'Japan', 'Final Score': '2:0'}, {'Player Name': 'TAEGYU LEEM', 'Match Location': 'Japan', 'Match Duration': 90, 'Win Team': 'Korea', 'Lose Team': 'Japan', 'Final Score': '2:0'}, {'Player Name': 'TAEGYU LEEM', 'Match Location': 'Japan', 'Match Duration': 90, 'Win Team': 'Korea', 'Lose Team': 'Japan', 'Final Score': '2:0'},
  {'Player Name': 'Terry Leem', 'Match Location': 'Japan', 'Match Duration': 90, 'Win Team': 'Korea', 'Lose Team': 'Japan', 'Final Score': '2:0'}];
@@ -97,9 +97,10 @@ exports.getAllPost = function(req, res) {
 
 exports.addPost = function(req, res) {
   var newPost = req.body;
-  console.log(newPost);
   var timeStamp = new Date();
-  newPost.timeStamps = [timeStamp, timeStamp.getTime()];
+  var dt = dateTime.create();
+  var formatted = dt.format('Y-m-d H:M:S');
+  newPost.timeStamps = [formatted, timeStamp.getTime()];
   post.find().sort( { _id: -1 } ).limit(1).then(function(data) {
     if (data.length === 0) {
       var number = 1;
@@ -131,7 +132,9 @@ exports.addComment = function(req, res) {
   var newPost = req.body;
   var target = req.params.number;
   var timeStamp = new Date();
-  newPost.timeStamps = [timeStamp, timeStamp.getTime()];
+  var dt = dateTime.create();
+  var formatted = dt.format('Y-m-d H:M:S');
+  newPost.timeStamps = [formatted, timeStamp.getTime()];
   post.update({ postIndex: target}, { $push: {comments: newPost} }).then(function(data) {
     res.send(data);
   });
