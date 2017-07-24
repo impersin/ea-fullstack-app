@@ -34,12 +34,12 @@ angular.module('appFactory', [])
           url: 'api/signUp',
           data: newUser
         }).then(function(res) {
-          console.log(res);
           $cookies.put('userid', res.data.userid);
           $cookies.put('token', res.data.token);
           $cookies.put('auth', res.data.success);
           $cookies.put('userName', res.data.firstName + res.data.lastName);
           $cookies.put('email', res.data.email);
+          $cookies.put('profileImage', res.data.profileImage);
           return res;
         });
       },
@@ -54,8 +54,7 @@ angular.module('appFactory', [])
           $cookies.put('auth', res.data.success);
           $cookies.put('userName', res.data.firstName + ' ' + res.data.lastName);
           $cookies.put('email', res.data.email);
-          console.log(res.data.token);
-        
+          $cookies.put('profileImage', res.data.profileImage);
           return res;
         });
       },
@@ -72,6 +71,15 @@ angular.module('appFactory', [])
           method: 'POST',
           url: 'secure-api/post/add',
           data: newPost
+        }).then(function(res) {
+          return res;
+        });
+      },
+      addProfileImage: function(newProfileImage) {
+        return $http({
+          method: 'POST',
+          url: 'secure-api/post/add/profile/image',
+          data: newProfileImage
         }).then(function(res) {
           return res;
         });
@@ -110,7 +118,7 @@ angular.module('appFactory', [])
           url: 'record',
           data: matchResult
         }).then(function(res) {
-          console.log(res);
+          return res;
         });
       },
 
@@ -119,7 +127,6 @@ angular.module('appFactory', [])
           method: 'GET',
           url: 'api/signOut',
         }).then(function(res) {
-          // console.log(res);
           $cookies.remove('token');
           $cookies.remove('auth');
           $cookies.remove('userName');
@@ -127,6 +134,7 @@ angular.module('appFactory', [])
           $cookies.remove('win');
           $cookies.remove('lose');
           $cookies.remove('userid');
+          $cookies.remove('profileImage');
           $rootScope.auth = false;
           return res;
         });
