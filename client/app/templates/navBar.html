@@ -34,7 +34,7 @@
 
         <ul class="nav navbar-nav navbar-right" ng-show="!auth">
           <li class="dropdown" uib-dropdown>
-            <a href="#" class="dropdown-toggle" uib-dropdown-toggle data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">REGISTER<span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" id="register" uib-dropdown-toggle data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">REGISTER<span class="caret"></span></a>
             <ul class="dropdown-menu" uib-dropdown-menu>
               <li>
                 <form name="signupForm" class="navbar-form" role="search">
@@ -79,9 +79,9 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right" ng-show="auth">
-          <li><a href="/#!/profile"><img id="nav-icon" src="app/images/icons/settings_01.svg" alt="Profile Logo"><span class="sr-only">(current)</span></a></li>
+          <li><a href="/#!/profile" id="profile"><img id="nav-icon" src="app/images/icons/account_01.svg" alt="Profile Logo"><span class="sr-only">(current)</span></a></li>
           <li>
-            <li ng-show="auth"><a href="/#!/profile" ng-click="logOut()"><img id="nav-icon" src="app/images/icons/exit_black.svg" alt="Exit Logo"><span class="sr-only">(current)</span></a></li>
+            <li ng-show="auth"><a href="/#!/profile" id="logout" ng-click="logOut()">LOG OUT<span class="sr-only">(current)</span></a></li>
           </li>
         </ul>
       </div>
