@@ -11,7 +11,11 @@ appModule.component('profileComponent', {
     $scope.win = $cookies.get('win');
     $scope.lose = $cookies.get('lose');
     $scope.profileForm = false;
-    $scope.profileImage = 'https://s3-us-west-1.amazonaws.com/fifatalk/' + $cookies.get('profileImage');
+    if ($cookies.get('profileImage').length === 0) {
+      $scope.profileImageUrl = 'https://s3-us-west-1.amazonaws.com/fifatalk/avatar.jpeg';  
+    } else {
+      $scope.profileImageUrl = 'https://s3-us-west-1.amazonaws.com/fifatalk/' + $cookies.get('profileImage');
+    }
     $scope.matchInfo = {
       playerName: '',
       location: '',
@@ -56,7 +60,7 @@ appModule.component('profileComponent', {
       fd.append('file', file);
       Factory.uploadFile(fd).then(function(res) {
         Factory.addProfileImage({userid: $scope.user, fileName: file.name}).then(function(res) {
-          $scope.profileImage = 'https://s3-us-west-1.amazonaws.com/fifatalk/' + res.data;
+          $scope.profileImageUrl = 'https://s3-us-west-1.amazonaws.com/fifatalk/' + res.data;
           $scope.profileForm = false;
         });
       });
