@@ -1,5 +1,4 @@
 var user = require('../models/Users.js');
-var match = require('../models/Matchs.js');
 var post = require('../models/Posts.js');
 var db = require('../index.js');
 var jwt = require('jsonwebtoken');
