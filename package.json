@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start":"node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,11 +16,13 @@
     "angular-route": "^1.6.4",
     "angular-router": "0.0.2",
     "angular-storage": "0.0.15",
+    "aws-sdk": "^2.89.0",
     "bcrypt": "^1.0.2",
     "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.17.2",
     "connect-multiparty": "^2.0.0",
     "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "fs": "0.0.1-security",
     "jsonwebtoken": "^7.4.1",
