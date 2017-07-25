@@ -18,7 +18,7 @@ exports.signUp = function(req, res) {
   var email = req.body.email;
   var profileImage = '';
 
-  user.find({userId: userid}).then(function(data) {
+  user.find({userid: userid}).then(function(data) {
     if (data.length === 0) {
       bcrypt.hash(password, 10).then(function(hash) {
         user.insertMany([{firstname: firstName, lastname: lastName, userid: userid, password: hash, email: email, profileImage: profileImage}], function(err, data) {
@@ -32,7 +32,8 @@ exports.signUp = function(req, res) {
       }) .catch(bcrypt.MISMATCH_ERROR, handleInvalidPassword);
 
     } else {
-      res.sendStatus(409);
+      console.log('ID is already exists');
+      res.json(false);
     }
   });  
 };
@@ -55,7 +56,7 @@ exports.login = function(req, res) {
             lastName: lastName, email: email, token: token, profileImage: profileImage});   
         } else {
           console.log('Sorry It doenst match...');
-          res.sendStatus(401);   
+          res.json(false);
         }
       });
     } else {
