@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var userSchema = new Schema({
+var matchSchema = new Schema({
   playername: String,
   location: String,
   duration: String,
@@ -13,7 +13,7 @@ var userSchema = new Schema({
    
 });
  
-var Match = mongoose.model('Match', userSchema);
+var Match = mongoose.model('Match', matchSchema);
  
 module.exports = Match;
 
