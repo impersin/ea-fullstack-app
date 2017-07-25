@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var mongoUri = 'mongodb://localhost/eaApp';
+var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/eaApp';
 
 mongoose.connect(mongoUri);
 

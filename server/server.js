@@ -8,12 +8,22 @@ var s3Controller = require('./db/controllers/s3controller.js');
 var app = express();
 var jwt = require('jsonwebtoken');
 var secureRoutes = express.Router();
-const multiparty = require('connect-multiparty');
+var multiparty = require('connect-multiparty');
 var cookieParser = require('cookie-parser');
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-process.env.SECRET_KEY = 'mybadasskey';
-const multipartyMiddleware = multiparty();
+var multipartyMiddleware = multiparty();
+var AWS = require('aws-sdk');
+var isDeveloping = process.env.NODE_ENV !== 'production';
+require('dotenv').config();
+
+if (!isDeveloping) {
+  AWS.config.update({
+    accessKeyId: process.env.S3_KEY, 
+    secretAccessKey: process.env.S3_SECRET, 
+    region: process.env.S3_REGION
+  });
+}
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -58,8 +68,6 @@ app.get('/api/post', controller.getAllPost);
 
 secureRoutes.use(function(req, res, next) {
   var token = req.body.token || req.headers.token;
-  // console.log('token:', token);
-  // console.log(req);
   if (token) {
     jwt.verify(token, process.env.SECRET_KEY, function(err, decode) {
       if (err) {
@@ -83,9 +91,9 @@ secureRoutes.put('/update/add/comment/:number', controller.addComment);
 secureRoutes.put('/update/add/viewcount/:number', controller.addViewCount);
 secureRoutes.put('/update/add/vote/:number', controller.addVoteCount);
 
-
+var port = process.env.PORT || 9000;
 // /secure-api/checkRequest
-server.listen(9000, function() {
+server.listen(port, function() {
   console.log('Listening Port:9000');
 });
 
