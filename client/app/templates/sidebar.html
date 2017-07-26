@@ -27,17 +27,15 @@
           </div>
           <div class="chat-screen" scroll-bottom="messages">
             <Table class="chat-table">
-              <thead>
-              </thead>
               <tbody class="chat-body">
                 <tr class="chat-list-message" ng-repeat="message in messages track by $index">
                   <td class="chat-user"><a href="" class="chat-message" id="{{'message'+$index}}"><b>{{message.userid}}:</b></a></td>
-                  <td><div class="chat-bubble">{{" "+message.message}}</div></td>
+                  <td class="chat-text"><div class="chat-bubble">{{" "+message.message}}</div></td>
                 </tr>    
               </tbody>
             </Table>
           </div>
-          <input class="form-control" type="text" ng-model="message.text" ng-keypress="sendMessage($event)" placeholder="Enter message" required>
+          <input id="chat-input" class="form-control" type="text" ng-model="message.text" ng-keypress="sendMessage($event)" placeholder="Enter message" required>
         </div>
       </div>
     </div>
