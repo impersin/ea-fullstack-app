@@ -127,7 +127,11 @@ body{
   font-size: 20px !important;
 }
 
- div.post-board{
+#post-image{
+  max-width:90%;
+}
+
+div.post-board{
   margin: 20px 10px 10px 10px;
   text-align: center;
   padding:5px;
