@@ -41,6 +41,8 @@ angular.module('appFactory', [])
           $cookies.put('email', res.data.email);
           $cookies.put('profileImage', res.data.profileImage);
           return res;
+        }, function(err) {
+          return err;
         });
       },
       login: function(newUser) {
@@ -56,6 +58,8 @@ angular.module('appFactory', [])
           $cookies.put('email', res.data.email);
           $cookies.put('profileImage', res.data.profileImage);
           return res;
+        }, function(err) {
+          return err;
         });
       },
       getAllPosts: function() {
@@ -73,6 +77,8 @@ angular.module('appFactory', [])
           data: newPost
         }).then(function(res) {
           return res;
+        }, function(err) {
+          return err;
         });
       },
       addProfileImage: function(newProfileImage) {
@@ -82,6 +88,8 @@ angular.module('appFactory', [])
           data: newProfileImage
         }).then(function(res) {
           return res;
+        }, function(err) {
+          return err;
         });
       },
       deletePost: function(postIndex) {
@@ -89,7 +97,9 @@ angular.module('appFactory', [])
           method: 'DELETE',
           url: `secure-api/post/delete/${postIndex}`,
         }).then(function(res) {
-          
+          return res;
+        }, function(err) {
+          return err;
         });
       },
       uploadFile: function(file) {
@@ -101,6 +111,8 @@ angular.module('appFactory', [])
           data: file
         }).then(function(res) {
           return res;
+        }, function(err) {
+          return err;
         });
       },
       sendComment: function(postIndex, newComment) {
@@ -110,6 +122,8 @@ angular.module('appFactory', [])
           data: newComment
         }).then(function(res) {
           return res;
+        }, function(err) {
+          return err;
         });
       },
       addRecord: function(matchResult) {
@@ -119,6 +133,8 @@ angular.module('appFactory', [])
           data: matchResult
         }).then(function(res) {
           return res;
+        }, function(err) {
+          return err;
         });
       },
 
@@ -146,6 +162,8 @@ angular.module('appFactory', [])
           url: `secure-api/update/add/viewcount/${postIndex}`,
         }).then(function(res) {
           return res;
+        }, function(err) {
+          return err;
         });
       },
 
@@ -155,6 +173,8 @@ angular.module('appFactory', [])
           url: `secure-api/update/add/vote/${postIndex + '+' + commenter + '+' + type}`
         }).then(function(res) {
           return res;
+        }, function(err) {
+          return err;
         });
       }
 
