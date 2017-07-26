@@ -30,7 +30,7 @@ exports.addMessage = function(newMesaage) {
       message.insertMany([newMesaage], function(err, data) {
         if (err) { throw err; }
         message.find().then(function(data) {
-          io.io.sockets.emit('newmsg', data);
+          io.io.sockets.emit('newmsg', data.slice(-40));
         });
       });  
     }
