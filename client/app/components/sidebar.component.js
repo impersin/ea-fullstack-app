@@ -1,7 +1,7 @@
 appModule.component('sidebarComponent', {
   templateUrl: 'app/templates/sidebar.html',
   controllerAs: 'sidebarController',
-  controller: function($scope, $rootScope, $cookies, $http, $mdDialog, Factory, $window, socket, $anchorScroll, $location) {
+  controller: function($scope, $rootScope, $cookies, $http, $mdDialog, Factory, $window, socket, $anchorScroll, $location, $timeout) {
 
     $scope.header = 'This is sidebar component!! yay';
     $scope.auth = $cookies.get('auth');
@@ -34,30 +34,53 @@ appModule.component('sidebarComponent', {
         fd.append('file', file);
         Factory.uploadFile(fd).then(function(res) {
           Factory.addPost($scope.newPost).then(function(res) {
-            $window.location.reload();
+            if (res.status !== 500) {
+              $window.location.reload();
+            } else {
+              $scope.authWarning('session');
+              $scope.logOut();
+            }
           });
         });
       } else {
         Factory.addPost($scope.newPost).then(function(res) {
-          $window.location.reload();
+          if (res.status !== 500) {
+            $window.location.reload();
+          } else {
+            $scope.authWarning('session');
+            $scope.logOut();
+          }
         });
 
       }
     };
     
-    $scope.authWarning = function() {
-      $mdDialog.show(
-      $mdDialog.alert()
-        .clickOutsideToClose(true)
-        .title('Please Sign In ')
-        .textContent('')
-        .ariaLabel('Left to right demo')
-        .ok('Close')
-        // You can specify either sting with query selector
-        .openFrom('#left')
-        // or an element
-        .closeTo(angular.element(document.querySelector('#right')))
-      );
+    $scope.authWarning = function(type) {
+      if (type === 'session') {
+        $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('session has expired Please login again')
+          .textContent('')
+          .ariaLabel('Left to right demo')
+          .ok('Close')
+          .openFrom('#left')
+          .closeTo(angular.element(document.querySelector('#right')))
+        );
+      } else {
+        $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('Please Sign In ')
+          .textContent('')
+          .ariaLabel('Left to right demo')
+          .ok('Close')
+          // You can specify either sting with query selector
+          .openFrom('#left')
+          // or an element
+          .closeTo(angular.element(document.querySelector('#right')))
+        );
+      }
     };
     $scope.message = {
       userid: $cookies.get('userid'),
@@ -87,6 +110,13 @@ appModule.component('sidebarComponent', {
         $scope.messages = data;
       });
     });
+
+    $scope.logOut = function() {
+      $timeout(function() {
+        var el = document.getElementById('logout');
+        angular.element(el).triggerHandler('click');
+      }, 1000);
+    };
 
   }
 });

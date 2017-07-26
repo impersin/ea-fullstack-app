@@ -26,6 +26,13 @@ appModule.component('homeComponent', {
       $scope.switch = !$scope.switch;
     };
 
+    $scope.logOut = function() {
+      $timeout(function() {
+        var el = document.getElementById('logout');
+        angular.element(el).triggerHandler('click');
+      }, 1000);
+    };
+
     $scope.loadPost = function() {
       $location.path('/post');
     };
@@ -45,12 +52,17 @@ appModule.component('homeComponent', {
 
     $scope.sendComment = function() {
       Factory.sendComment($scope.newComment.postIndex, $scope.newComment).then(function(res) {
-        var id = $scope.newComment.postIndex;
-        $scope.postToggles['post' + id] = true; 
-        $scope.newComment.comment = '';
-        $scope.getAllPosts();
-        if (!$scope.commentToggles['comment' + id]) {
-          $scope.toggleComment(id);
+        if (res.status !== 500) {
+          var id = $scope.newComment.postIndex;
+          $scope.postToggles['post' + id] = true; 
+          $scope.newComment.comment = '';
+          $scope.getAllPosts();
+          if (!$scope.commentToggles['comment' + id]) {
+            $scope.toggleComment(id);
+          }
+        } else {
+          $scope.authWarning('session');
+          $scope.logOut();
         }
       });
     };
@@ -153,6 +165,17 @@ appModule.component('homeComponent', {
           // or an element
           .closeTo(angular.element(document.querySelector('#right')))
         );
+      } else if ('session') {
+        $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('session has expired Please login again')
+          .textContent('')
+          .ariaLabel('Left to right demo')
+          .ok('Close')
+          .openFrom('#left')
+          .closeTo(angular.element(document.querySelector('#right')))
+        );
       }
     };
 
@@ -171,13 +194,18 @@ appModule.component('homeComponent', {
             $scope.authWarning('vote');
           } else {
             Factory.addVoteCount(postIndex, $scope.currentUser, type).then(function(res) {
-              var satisfiedElement = angular.element( document.querySelector('#satisfiedCount' + postIndex) );
-              var neutralElement = angular.element( document.querySelector('#neutralCount' + postIndex) );
-              var dissatisfiedElement = angular.element( document.querySelector('#dissatisfiedCount' + postIndex) );
-              satisfiedElement[0].innerText = res.data.satisfied;
-              neutralElement[0].innerText = res.data.neutral;
-              dissatisfiedElement[0].innerText = res.data.dissatisfied;
-              $scope.getAllPosts();
+              if (res.status !== 500) {
+                var satisfiedElement = angular.element( document.querySelector('#satisfiedCount' + postIndex) );
+                var neutralElement = angular.element( document.querySelector('#neutralCount' + postIndex) );
+                var dissatisfiedElement = angular.element( document.querySelector('#dissatisfiedCount' + postIndex) );
+                satisfiedElement[0].innerText = res.data.satisfied;
+                neutralElement[0].innerText = res.data.neutral;
+                dissatisfiedElement[0].innerText = res.data.dissatisfied;
+                $scope.getAllPosts();
+              } else {
+                $scope.authWarning('session');
+                $scope.logOut();
+              }
             });  
           }
         } 
@@ -200,7 +228,12 @@ appModule.component('homeComponent', {
     $scope.deletePost = function(event) {
       var postIndex = this.post.postIndex;
       Factory.deletePost(postIndex).then(function(res) {
-        $scope.getAllPosts();
+        if (res.status !== 500) {
+          $scope.getAllPosts();
+        } else {
+          $scope.authWarning('session');
+          $scope.logOut();
+        }
       });  
     };
 

@@ -17,13 +17,14 @@ appModule.component('navComponent', {
 
     $scope.addUser = function() {
       Factory.signUp({firstName: $scope.firstName, lastName: $scope.lastName, userid: $scope.userId, password: $scope.password, email: $scope.email}).then(function(res) {
-        if (res.data) {
+        if (res.status !== 409) {
           $scope.auth = $cookies.get('auth');
           $location.path('/home');
           $scope.firstName = '';
           $scope.lastName = '';
           $scope.userId = '';
           $scope.password = '';
+          $scope.confirm = '';
           $scope.email = '';
         } else {
           $scope.userId = '';
@@ -39,7 +40,7 @@ appModule.component('navComponent', {
 
     $scope.login = function() {
       Factory.login({userid: $scope.userId, password: $scope.password}).then(function(res) {
-        if (res.data) {
+        if (res.status !== 404) {
           $scope.userId = '';
           $scope.password = '';
           if ($location.path() === '/home') {
