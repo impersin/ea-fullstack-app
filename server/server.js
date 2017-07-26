@@ -6,7 +6,6 @@ var controller = require('./db/controllers/controller.js');
 var socketController = require('./db/controllers/socketController.js');
 var s3Controller = require('./db/controllers/s3controller.js');
 var app = express();
-var jwt = require('jsonwebtoken');
 var secureRoutes = express.Router();
 var multiparty = require('connect-multiparty');
 var cookieParser = require('cookie-parser');
@@ -15,6 +14,7 @@ var io = require('socket.io')(server);
 var multipartyMiddleware = multiparty();
 var AWS = require('aws-sdk');
 var isDeveloping = process.env.NODE_ENV !== 'production';
+var jwt = require('jsonwebtoken-refresh');
 require('dotenv').config();
 
 if (!isDeveloping) {
