@@ -259,7 +259,7 @@ md-card-content{
 .md-headline{
   text-align: center;
 }
-table{
+ table{
   margin: 0 auto;
 }
 th{
@@ -269,7 +269,7 @@ th{
 td{
   text-align: center;
   padding: 5px;
-}
+} 
 
 
  .box {         
@@ -312,10 +312,11 @@ form.post-form{
   text-align: center;
 }
 .chat-screen{
-  height: 40%;
+  height: 50%;
   border: 1px solid #ccc;
   border-radius: 4px;
   overflow: auto;
+  padding: 10px 0px 0px 10px;
 }
 table.chat-table{
   margin-left:0px;
@@ -326,12 +327,20 @@ vertical-align: text-top;
 .chat-list-message{
   border: 0px solid white;
 }
+td.chat-text{
+max-width:310px;
+}
 .chat-bubble{
+  width: 96%;
+  word-wrap: break-word;
   background-color: #ededed;
   border-radius: 5px;
   padding: 0px 0px 5px 5px;
   margin: 0px 0px 0px 5px;
   text-align: left;
+}
+input#chat-input{
+
 }
 .temp.ng-hide-remove {
   -webkit-animation:0.3s show;
