@@ -1,7 +1,7 @@
 var user = require('../models/Users.js');
 var post = require('../models/Posts.js');
 var db = require('../index.js');
-var jwt = require('jsonwebtoken');
+var jwt = require('jsonwebtoken-refresh');
 var bcrypt = require('bcrypt');
 var cookieParser = require('cookie-parser');
 var dateTime = require('node-datetime');
@@ -22,7 +22,7 @@ exports.signUp = function(req, res) {
       bcrypt.hash(password, 10).then(function(hash) {
         user.insertMany([{firstname: firstName, lastname: lastName, userid: userid, password: hash, email: email, profileImage: profileImage}], function(err, data) {
           if (err) { throw err; }
-          var token = jwt.sign({userid: userid, password: password}, process.env.SECRET_KEY, {expiresIn: 4000});
+          var token = jwt.sign({userid: userid}, process.env.SECRET_KEY, {expiresIn: 3600});
           
           res.json({success: true, userid: userid, firstName: firstName,
             lastName: lastName, token: token, profileImage: profileImage});
@@ -31,8 +31,7 @@ exports.signUp = function(req, res) {
       }) .catch(bcrypt.MISMATCH_ERROR, handleInvalidPassword);
 
     } else {
-      console.log('ID is already exists');
-      res.json(false);
+      res.status(409).send('ID is already exists');
     }
   });  
 };
@@ -49,13 +48,12 @@ exports.login = function(req, res) {
           var firstName = data[0].firstname;
           var lastName = data[0].lastname;
           var profileImage = data[0].profileImage;
-          var token = jwt.sign({userid: userid, password: password}, process.env.SECRET_KEY, {expiresIn: 4000});
-          console.log('Welcome!');
+          var token = jwt.sign({userid: userid}, process.env.SECRET_KEY, {expiresIn: 3600});
           res.json({success: true, userid: userid, firstName: firstName,
             lastName: lastName, email: email, token: token, profileImage: profileImage});   
         } else {
           console.log('Sorry It doenst match...');
-          res.json(false);
+          res.status(400).send('Sorry It doenst match...');
         }
       });
     } else {
