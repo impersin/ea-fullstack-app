@@ -8,7 +8,7 @@
     </div>
   </div>
     <div layout="row" class="home-contents">
-          <div flex="55" flex-xs="100" flex-offset="10" flex-offset-xs="0">
+          <div flex="50" flex-xs="100" flex-offset="10" flex-offset-xs="0">
             <div layout="column">
               <div flex="100" class="home-posts" ng-show="posts">
                 <div class="home-posts-header">
@@ -16,7 +16,7 @@
                   <label>Search: <input ng-model="searchInput" placeholder="Enter Key Word" id="searchbar"></label>
                 </div>
                 <md-content class="post"  layout="row" ng-repeat="post in posts | filter:searchInput | limitTo: limit as results">
-                  <div flex-xs flex-gt-xs layout="column">
+                  <div flex flex-sm flex-xs flex-gt-xs layout="column">
                     <md-card>
                       <md-card-header>
                         <md-card-avatar>
@@ -34,8 +34,10 @@
                         <div ng-if="post.fileName">
                           <img id="post-image" ng-src="https://s3-us-west-1.amazonaws.com/fifatalk/{{post.fileName}}" class="md-card-image" alt="Washed Out">  
                         </div>
-                        <div class="post-text">
-                          <p>{{post.text}}</p>
+                        <div class="post-text-box">
+                          <div class="post-text">
+                            <p>{{post.text}}</p>
+                          </div>
                         </div>
                       </div>  
                       <md-card-actions layout="row" layout-align="right">
@@ -76,22 +78,32 @@
                           </form>
                         </div>
                       </div> 
-                      <span>Posted:{{post.timeStamps[0]}}</span>                    
-                      <md-content class="post comment-text" id="{{'comment' + post.postIndex}}" layout="row">
-                        <div flex class="temp" ng-show="commentToggles['comment'+post.postIndex]">
-                          <md-card id="anchor{{$index}}" ng-repeat="comment in post.comments | orderBy: reverse:true">
-                            <md-card-actions>
-                            </md-card-actions>
+                      <span id="comment-time-stamp">{{post.timeStamps[0]}}</span>                    
+                      <div flex class="temp" ng-show="commentToggles['comment'+post.postIndex]"> 
+                       <md-content class="" id="{{'comment' + post.postIndex}}" layout="row">
+                         <div flex flex-md flex-sm flex-xs flex-gt-xs layout="column"> 
+                           <md-card id="anchor{{$index}}" class="comment-card" ng-repeat="comment in post.comments | orderBy: reverse:true">
                             <div class="comment-text-box">
-                              <span>Commented By:<a href="">{{comment.commentedBy}}</a></span>
+                              <a href=""><span><b>{{comment.commentedBy}}</b></span></a>
                               <div class="comment-text">
                                 <p>{{comment.comment}}</p>
                               </div>
-                            </div>
-                            <span>Posted:{{comment.timeStamps[0]}}</span>
-                          </md-card>
-                        </div>
-                      </md-content>   
+                            </div> 
+                            <md-card-actions layout-align="center right"> 
+                              <span class="timestamp">{{comment.timeStamps[0]}}</span>
+                              <md-button id="soccerball" class="md-icon-button comment-vote-button" aria-label="dissatisfied" ng-click="toggleForm()">
+                                <img id="{{'dissatisfied' + post.postIndex}}" src="app/images/soccerball_3_24px.png">
+                              </md-button>
+                              <span>0</span>
+                              <md-button id="redcard" class="md-icon-button comment-vote-button" aria-label="dissatisfied" ng-click="toggleForm()">
+                                <img id="{{'dissatisfied' + post.postIndex}}" src="app/images/red_card_24px.png">
+                              </md-button>
+                              <span>0</span>
+                            </md-card-actions>  
+                          </md-card>  
+                        </md-content>
+                      </div>
+                    </div>   
                     </md-card>
                   </div>  
                 </md-content> 
