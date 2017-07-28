@@ -90,6 +90,7 @@ secureRoutes.post('/post/upload/file', s3Controller);
 secureRoutes.put('/update/add/comment/:number', controller.addComment);
 secureRoutes.put('/update/add/viewcount/:number', controller.addViewCount);
 secureRoutes.put('/update/add/vote/:number', controller.addVoteCount);
+secureRoutes.post('/update/add/comment/vote', controller.addCommentVoteCount);
 
 var port = process.env.PORT || 9000;
 // /secure-api/checkRequest
