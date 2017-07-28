@@ -9,7 +9,27 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#"><img id="nav-icon" src="app/images/EA_Sports_2.png" alt="EA Sports Log" width="50px" height="50px"></a>
+        <button id="mobileAddButton" type="button" class="navbar-toggle collapsed" ng-click="mobileToggle()" ng-show="auth" data-toggle="collapse" data-target="#mobilePost" aria-expanded="false">
+          ADD NEW POST
+        </button>
       </div>
+
+       <div class="collapse navbar-collapse" uib-collapse="isMobile" id="mobilePost">
+              <form name="postForm" class="mobile-form temp" role="search">
+                <div class="form-group">
+                  <input ng-model="newPost.title" name="title" type="text" class="form-control" placeholder="Title" required>
+                  <span class="invalid" ng-show="postForm.title.$touched && postForm.title.$invalid">Title is required.</span>
+                  <textarea ng-model="newPost.text" name="text" class="form-control" placeholder="Text" required rows="4" cols="50"> 
+                  </textarea>
+                  <span class="invalid" ng-show="postForm.textBox.$touched && postForm.textBox.$invalid">This can't be empty</span>
+                  <div class="form-upload">
+                    <label for="file">Upload Image</label>
+                    <input type="file" name="file" file-model="file">
+                  </div>
+                  <button ng-disabled="postForm.$invalid" type="submit" class="btn btn-primary btn-block" ng-click="addPost()">POST</button>
+                </div>
+              </form>
+        </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" uib-collapse="isCollapsed" id="bs-example-navbar-collapse-1">
