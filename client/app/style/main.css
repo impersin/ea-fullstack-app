@@ -71,6 +71,9 @@ body{
 .navbar{
   margin-bottom: 0;
 }
+#mobileAddButton{
+      padding: 6px;
+}
 
 .form-group > button{
   /*margin-left: 10px;*/
