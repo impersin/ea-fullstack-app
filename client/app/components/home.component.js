@@ -51,6 +51,7 @@ appModule.component('homeComponent', {
     $scope.getAllPosts();
 
     $scope.sendComment = function() {
+      //$scope.newComment set by toggle form
       Factory.sendComment($scope.newComment.postIndex, $scope.newComment).then(function(res) {
         if (res.status !== 500) {
           var id = $scope.newComment.postIndex;
@@ -105,11 +106,17 @@ appModule.component('homeComponent', {
       }
     };
 
+    $scope.setCommentIndex = function() {
+      //being invoked when user click textarea
+      var myEl = document.getElementById('comment' + this.post.postIndex); 
+      $scope.newComment.commentIndex = myEl.childNodes[1].children.length + 1; 
+    };
+
     $scope.toggleForm = function() {
       $scope.newComment.commentedBy = $cookies.get('userid');
+      //Set comment postIndex when user click textarea form
       $scope.newComment.postIndex = this.post.postIndex;
       $scope.newComment.title = this.post.title;
-      // console.log($scope.newComment); 
       if (!$cookies.get('auth')) {
         $scope.authWarning('auth');
       } else if ($cookies.get('auth')) {
@@ -181,13 +188,12 @@ appModule.component('homeComponent', {
 
     $scope.vote = function(event) {
       var postIndex = this.post.postIndex;
-      var type = event.target.id.slice(0, event.target.id.length - 1);
-
+      var type = event.target.id.replace(/[0-9]/g, '');
       if (!$cookies.get('auth')) {
         $scope.authWarning('auth');
       } else {
         var postedUser = this.post.userid;        
-        if ($scope.checkCommenterList(postIndex, $scope.currentUser)) {
+        if ($scope.checkCommenterList($scope.commenterList, postIndex, $scope.currentUser)) {
           $scope.authWarning('duplicate');
         } else {
           if ($scope.currentUser === postedUser) {
@@ -212,11 +218,44 @@ appModule.component('homeComponent', {
       }
     };
 
-    $scope.checkCommenterList = function(num, user) {
+    $scope.commentVote = function(event, index) {
+      var postIndex = this.comment.postIndex;
+      var commentIndex = this.comment.commentIndex;
+      var commentedBy = this.comment.commentedBy;
+      // Get only type of vote
+      var type = event.target.id.replace(/[0-9]/g, '');
+      var voter = $scope.currentUser;
+      // $scope.commenterList.length - postIndex becuase of data is reversed but comments are in order
+      var voterList = $scope.commenterList[$scope.commenterList.length - postIndex].comments[commentIndex - 1].voterList;
+      // console.log(voterList);
+      if (!$cookies.get('auth')) {
+        $scope.authWarning('auth');
+      } else {
+        if ($scope.currentUser === commentedBy) {
+          $scope.authWarning('vote');
+        } else {
+          if (voterList.includes(voter)) {
+            $scope.authWarning('duplicate');
+          } else {
+            Factory.addCommentVoteCount({
+              postIndex: postIndex,
+              commentIndex: commentIndex,
+              voter: $scope.currentUser,
+              type: type
+            }).then(function(res) {
+              $scope.getAllPosts();
+              $scope.commenterList[$scope.commenterList.length - postIndex].comments[commentIndex - 1].voterList.push(voter);
+            });
+          }
+        }
+      }
+    };
+
+    $scope.checkCommenterList = function(data, num, user) {
       var result = false;
-      for (var i = 0; i < $scope.commenterList.length; i++) {
-        var postNum = $scope.commenterList[i].postIndex;
-        var commenterList = $scope.commenterList[i].commenterList;
+      for (var i = 0; i < data.length; i++) {
+        var postNum = data[i].postIndex;
+        var commenterList = data[i].commenterList;
         if (postNum === num && commenterList.indexOf(user) > -1) {
           result = true;
           break;
@@ -292,6 +331,6 @@ appModule.component('homeComponent', {
         el[0].scrollTop += 200;
       }, 500 );
     };
-
+  
   }
 });
