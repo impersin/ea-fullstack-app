@@ -79,17 +79,16 @@
                         </div>
                       </div> 
                       <span id="comment-time-stamp">{{post.timeStamps[0]}}</span>                    
-                      <!-- <div flex class="temp" ng-show="commentToggles['comment'+post.postIndex]">  -->
-                        <div flex class="temp" ng-show="true">
-                       <md-content class="" id="{{'comment' + post.postIndex}}" layout="row">
+                      <div flex class="temp" ng-show="commentToggles['comment'+post.postIndex]">
+                        <md-content class="" id="{{'comment' + post.postIndex}}" layout="row">
                          <div flex flex-md flex-sm flex-xs flex-gt-xs layout="column"> 
-                           <md-card class="comment-card" ng-repeat="comment in post.comments | orderBy: reverse:true">
-                            <div class="comment-text-box">
-                              <a href=""><span><b>{{comment.commentedBy}}</b></span></a>
-                              <div class="comment-text">
-                                <p>{{comment.comment}}</p>
-                              </div>
-                            </div> 
+                            <md-card class="comment-card" ng-repeat="comment in post.comments | orderBy: reverse:true">
+                              <div class="comment-text-box">
+                                <a href=""><span><b>{{comment.commentedBy}}</b></span></a>
+                                <div class="comment-text">
+                                  <p>{{comment.comment}}</p>
+                                </div>
+                              </div> 
                             <md-card-actions layout-align="center right"> 
                               <span class="timestamp">{{comment.timeStamps[0]}}</span>
                               <md-button class="md-icon-button comment-vote-button" aria-label="dissatisfied" ng-click="commentVote($event,comment.commentIndex)">
