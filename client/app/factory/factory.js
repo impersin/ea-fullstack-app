@@ -159,7 +159,7 @@ angular.module('appFactory', [])
       addViewCount: function(postIndex, newComment) {
         return $http({
           method: 'PUT',
-          url: `secure-api/update/add/viewcount/${postIndex}`,
+          url: `/api/post/viewcount/${postIndex}`,
         }).then(function(res) {
           return res;
         }, function(err) {

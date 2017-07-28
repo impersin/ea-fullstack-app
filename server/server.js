@@ -63,6 +63,7 @@ app.post('/api/login', controller.login);
 app.get('/api/signout', controller.signOut);
 app.get('/api/record', controller.getRecords);
 app.get('/api/post', controller.getAllPost);
+app.put('/api/post/viewcount/:number', controller.addViewCount);
 
 
 
@@ -88,7 +89,6 @@ secureRoutes.post('/post/add/profile/image', controller.addProfileImage);
 secureRoutes.delete('/post/delete/:number', controller.deletePost);
 secureRoutes.post('/post/upload/file', s3Controller);
 secureRoutes.put('/update/add/comment/:number', controller.addComment);
-secureRoutes.put('/update/add/viewcount/:number', controller.addViewCount);
 secureRoutes.put('/update/add/vote/:number', controller.addVoteCount);
 secureRoutes.post('/update/add/comment/vote', controller.addCommentVoteCount);
 
