@@ -72,8 +72,20 @@ body{
   margin-bottom: 0;
 }
 #mobileAddButton{
-      padding: 6px;
+  padding: 6px;
 }
+.mobile-form{
+  padding: 55px 10px 0px 10px;
+}
+
+@media (min-width: 600px) {
+      #mobileAddbutton{
+        display: none;
+      }
+      .mobile-form{
+        display: none;
+      }
+    }
 
 .form-group > button{
   /*margin-left: 10px;*/
