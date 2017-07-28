@@ -176,6 +176,18 @@ angular.module('appFactory', [])
         }, function(err) {
           return err;
         });
+      },
+
+      addCommentVoteCount: function(vote) {
+        return $http({
+          method: 'POST',
+          url: 'secure-api/update/add/comment/vote',
+          data: vote
+        }).then(function(res) {
+          return res;
+        }, function(err) {
+          return err;
+        });
       }
 
     };
