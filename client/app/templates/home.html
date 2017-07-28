@@ -26,7 +26,7 @@
                           {{post.userid}}<a href="" class="{{post.userid}}" ng-click="toggle($event)"><span class="md-title {{post.userid}}">{{post.title}}</span></a> 
                           <span id="{{'viewcount' + post.postIndex}}" class="md-subhead viewcount">viewed: {{post.viewcount}}</span> 
                         </md-card-header-text>
-                          <md-button class="md-icon-button" ng-show="postToggles['post'+{{post.postIndex}}]" aria-label="close" ng-click="searchInputReset('post'+post.postIndex)">
+                          <md-button class="md-icon-button" ng-show="postToggles['post'+{{post.postIndex}}]" aria-label="close" ng-click="searchInputReset('post'+post.postIndex,post.postIndex)">
                           <md-icon md-svg-icon="app/images/icons/clear_black.svg"></md-icon>
                         </md-button>
                       </md-card-header> 
