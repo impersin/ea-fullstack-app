@@ -15,6 +15,7 @@ appModule.component('navComponent', {
     $scope.regex = '.{6,}';
     $scope.required = true;
     $scope.isMobile = true;
+    $scope.mobilePost = false;
     $scope.newPost = {
       userid: $cookies.get('userid'),
       title: '',
