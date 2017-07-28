@@ -130,6 +130,9 @@ exports.addPost = function(req, res) {
 
 exports.addComment = function(req, res) {
   var newPost = req.body;
+  newPost.soccerball = 0;
+  newPost.redcard = 0;
+  newPost.voterList = [];
   var target = req.params.number;
   var timeStamp = new Date();
   var dt = dateTime.create();
@@ -155,9 +158,7 @@ exports.addProfileImage = function(req, res) {
   var fileName = req.body.fileName;
   console.log(target, fileName);
   user.update({userid: target}, {profileImage: fileName}).then(function(data) {
-    // post.find({postIndex: target}).then(function(data) {
     res.json(fileName);
-    // });
   });
 };
 
@@ -198,6 +199,23 @@ exports.addVoteCount = function(req, res) {
       res.send(data[0]);
     }
   });
+};
+
+exports.addCommentVoteCount = function(req, res) {
+  var vote = req.body;
+  
+  if (vote.type === 'soccerball') {
+    post.update({postIndex: vote.postIndex, 'comments.commentIndex': vote.commentIndex}, {$inc: {'comments.$.soccerball': 1}, $push: {'comments.$.voterList': vote.voter } }).then(function(data) {
+      post.find().then(function(data) {
+        res.send(data);
+      });
+    });
+  } else {
+    post.update({postIndex: vote.postIndex, 'comments.commentIndex': vote.commentIndex}, {$inc: {'comments.$.redcard': 1}, $push: {'comments.$.voterList': vote.voter } }).then(function(data) {
+      res.send(data);
+    });
+  }
+  
 };
 
 exports.deletePost = function(req, res) {
