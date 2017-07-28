@@ -319,9 +319,10 @@ appModule.component('homeComponent', {
       }
     };
 
-    $scope.searchInputReset = function(target) {
+    $scope.searchInputReset = function(target, postIndex) {
       $scope.searchInput = '';
-      $scope.postToggles[target] = false; 
+      $scope.postToggles[target] = false;
+      $scope.commentToggles['comment' + postIndex] = false;
     };
 
     $scope.addToLimit = function($event) {
