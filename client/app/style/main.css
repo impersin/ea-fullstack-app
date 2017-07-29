@@ -111,31 +111,11 @@ img#order{
       }
     }
 @media (max-width: 495px) {
-  /* .pc{
-    display: none;    
-  } */
   .landing-video{
     padding:1px;
   }
-}
-/*  
-@media (max-width: 416px) {
-      .main-content-header{
-        margin-bottom: 10px;
-        text-align: left;
-      }
-      h1#landing-title {
-        font-size: 15px;
-        margin-top:0px;
-        padding-top:0px;          
-      }
-      div.landing-video{
-        text-align: left;
-      }
-      #more-video{
-        display: none;
-      }
-    }  */
+}  
+
 /*--------- nav  -----------*/
 
 .navbar-brand{
@@ -309,6 +289,12 @@ padding: 10px 0px 0px 15px;
 }
 .comment-vote-button{
 
+}
+
+@media (max-width:600px){
+  #home-footer{
+    display: none;
+  }
 }
 
 /*-------- sidebar ----------*/
