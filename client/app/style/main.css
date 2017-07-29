@@ -16,8 +16,7 @@ body{
   background-image: url("../images/cr7-main.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
-  
+  background-size: 100% 100%; 
 }
 
 .main-content-header{
@@ -26,14 +25,75 @@ body{
 
 .landing-main-content{
     padding: 0px 0px 0px 0px;
-    /* margin-left: 100px; */
-    text-align: center;
+     margin-left: 100px; 
+    /* text-align: center; */
     position: relative;
     -webkit-animation: mymove 1s;
     -webkit-animation-fill-mode: forwards;
     animation: mymove 1s;
     animation-fill-mode: forwards;
 }
+
+.landing-video{
+  max-width: 50%;
+  max-height:45%; 
+}
+
+.mobile-wrapper{
+  text-align: center;
+}
+.mobile-container > img{
+  width:100%;
+  padding-top: 51px;
+}
+img#order{
+    width:100%;
+    padding:1px;
+  }
+
+@media (max-width: 885px) {
+  .header-title{
+        display: none;
+      }
+      #video{
+        padding: 10px;
+      }
+      .landing-main-content-wrapper{
+       background-image: none;
+      }
+      .landing-main-content{
+        margin-left:0px; 
+      }
+      .landing-video{
+        text-align: center;
+        max-width: 100%;
+         margin-top: -10px;
+        background-color: black;   
+      }
+       #mobile-image{
+        margin-top: -49px;
+        width: 100%;
+      } 
+      #preorder2{
+        margin-top: 100px;
+        width: 100%;
+      }
+      #preorder1{
+        display: none;
+      }
+    }
+     @media (min-width: 885px) { 
+      #mobile-image{
+         display: none;
+      }
+      #preorder2{
+        display: none;
+      }
+       footer{
+         display: none;
+       } 
+         
+    } 
 
 @-webkit-keyframes mymove {
     from {top: -100px;}
@@ -44,7 +104,21 @@ body{
     from {top: -100px;}
     to {top: 100px;}
 }
- 
+
+@media (min-width: 495px) {
+      .mobile-wrapper{
+        display: none;    
+      }
+    }
+@media (max-width: 495px) {
+  /* .pc{
+    display: none;    
+  } */
+  .landing-video{
+    padding:1px;
+  }
+}
+/*  
 @media (max-width: 416px) {
       .main-content-header{
         margin-bottom: 10px;
@@ -56,13 +130,12 @@ body{
         padding-top:0px;          
       }
       div.landing-video{
-        /* display: none; */
         text-align: left;
       }
       #more-video{
         display: none;
       }
-    } 
+    }  */
 /*--------- nav  -----------*/
 
 .navbar-brand{
@@ -154,6 +227,10 @@ body{
 .home-posts-header{
   padding-top: 30px;
   text-align: center;
+}
+
+.viewcount{
+  text-align: right;
 }
 .md-title{
   font-size: 1em !important;
