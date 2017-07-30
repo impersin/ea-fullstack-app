@@ -14,15 +14,17 @@
             <soan>{{user}}</soan>
             <span>Game Records</span>
             <span>WIN:{{win}} LOSE:{{lose}}</span>
-            <form name="postForm" id="profile-form1" class="post-form temp" ng-show="profileForm" role="search">
+            <form name="postForm" id="profile-form1" class="post-form temp" ng-hide="!profileForm" role="search">
               <div class="form-group">
                 <div class="profile-upload-container">
                   <label for="file">Upload Image</label>
                   <input class="upload-input btn"type="file" name="file" file-model="file">
                 </div>
               </div>
-              <button type="submit" class="btn btn-info profile-submit-btn" ng-click="sendProfileImage()">Submit</button>
-              <button class="btn btn-danger" ng-click="formToggle()">Cancel</button>
+              <div class="btn-group">
+                <button type="submit" class="btn btn-info profile-submit-btn" ng-click="sendProfileImage()">Submit</button>
+                <input type="btn" class="btn btn-danger" ng-click="formToggle()" value="Cancel" width="15px">
+              </div>
             </form>
           </md-card-title-text>
         </md-card-title>

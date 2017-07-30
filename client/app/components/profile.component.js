@@ -1,7 +1,7 @@
 appModule.component('profileComponent', {
   templateUrl: 'app/templates/profile.html',
   controllerAs: 'profileController',
-  controller: function($scope, $cookies, Factory) {
+  controller: function($scope, $cookies, Factory, $mdDialog) {
     $scope.user = $cookies.get('userid');
     $scope.auth = $cookies.get('auth');
     $scope.title = 'about page';
@@ -10,7 +10,6 @@ appModule.component('profileComponent', {
     $scope.fieldset = false;
     $scope.win = $cookies.get('win');
     $scope.lose = $cookies.get('lose');
-    $scope.profileForm = false;
     if ($cookies.get('profileImage').length === 0) {
       $scope.profileImageUrl = 'https://s3-us-west-1.amazonaws.com/fifatalk/avatar.jpeg';  
     } else {
@@ -56,14 +55,75 @@ appModule.component('profileComponent', {
 
     $scope.sendProfileImage = function() {
       var file = $scope.file;
-      var fd = new FormData();
-      fd.append('file', file);
-      Factory.uploadFile(fd).then(function(res) {
-        Factory.addProfileImage({userid: $scope.user, fileName: file.name}).then(function(res) {
-          $scope.profileImageUrl = 'https://s3-us-west-1.amazonaws.com/fifatalk/' + res.data;
-          $scope.profileForm = false;
-        });
-      });
+  
+      if (file === undefined) {
+        $scope.authWarning('nofile');
+      } else {
+        var extention = file.name.split('.')[1].toLowerCase();
+        if (extention === 'png' || extention === 'jpg' || extention === 'jpeg') {
+          var fd = new FormData();
+          fd.append('file', file);
+          Factory.uploadFile(fd).then(function(res) {
+            Factory.addProfileImage({userid: $scope.user, fileName: file.name}).then(function(res) {
+              $scope.profileImageUrl = 'https://s3-us-west-1.amazonaws.com/fifatalk/' + res.data;
+              $scope.profileForm = false;
+            });
+          });
+        } else {
+          $scope.authWarning('fileType');
+        }
+
+      }
+    };
+
+    $scope.authWarning = function(type) {
+      if (type === 'nofile') {
+        $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('Please Select File')
+          .textContent('')
+          .ariaLabel('Left to right demo')
+          .ok('Close')
+          .openFrom('#left')
+          .closeTo(angular.element(document.querySelector('#right')))
+        );  
+      } else if (type === 'fileType') {
+        $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('Only PNG, JPG, JPEG are avaiable')
+          .textContent('')
+          .ariaLabel('Left to right demo')
+          .ok('Close')
+          .openFrom('#left')
+          .closeTo(angular.element(document.querySelector('#right')))
+        );
+      } else if (type === 'session') {
+        $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('Session has expired Please login again')
+          .textContent('')
+          .ariaLabel('Left to right demo')
+          .ok('Close')
+          .openFrom('#left')
+          .closeTo(angular.element(document.querySelector('#right')))
+        );
+      } else {
+        $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('Please Sign In ')
+          .textContent('')
+          .ariaLabel('Left to right demo')
+          .ok('Close')
+          // You can specify either sting with query selector
+          .openFrom('#left')
+          // or an element
+          .closeTo(angular.element(document.querySelector('#right')))
+        );
+      }
     };
 
   }
