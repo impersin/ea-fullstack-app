@@ -318,6 +318,15 @@ padding: 10px 0px 0px 15px;
   }
 }
 
+@media(hover: hover) {
+    md-card:hover {
+      background-color: floralwhite;
+    }
+    #chat-input:hover {
+      background-color: floralwhite;
+    }
+}
+
 /*-------- sidebar ----------*/
 .sidebar-wrapper{
   margin-right: 30px;
