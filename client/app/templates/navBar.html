@@ -16,14 +16,14 @@
           <div class="form-group">
             <input ng-model="newPost.title" name="title" type="text" class="form-control" placeholder="Title" required>
             <span class="invalid" ng-show="postForm.title.$touched && postForm.title.$invalid">Title is required.</span>
-            <textarea ng-model="newPost.text" name="text" class="form-control" placeholder="Text" required rows="4" cols="50"> 
+            <textarea ng-model="newPost.text" name="text" class="form-control mobile-form-textarea" placeholder="Text" required rows="4" cols="50"> 
             </textarea>
+            <button ng-disabled="postForm.$invalid" type="submit" class="btn btn-primary mobile-form-button" ng-click="addPost()">POST</button>
             <span class="invalid" ng-show="postForm.textBox.$touched && postForm.textBox.$invalid">This can't be empty</span>
-            <div class="form-upload">
-              <label for="file">Upload Image</label>
-              <input type="file" name="file" file-model="file">
+            <div class="mobile-form-upload">
+              <!-- <img src="app/images/icons/camera18.png" alt=""> -->
+            <input class="mobile-form-file " type="file" name="file" file-model="file">
             </div>
-            <button ng-disabled="postForm.$invalid" type="submit" class="btn btn-primary btn-block" ng-click="addPost()">POST</button>
           </div>
         </form>
       </div>
