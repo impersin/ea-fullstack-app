@@ -51,6 +51,14 @@ img#order{
     padding:1px;
   }
 
+  .landing-header-logo {
+    position: absolute;
+    left: 3%;
+    top: -22%;
+    z-index: 1;
+    width: 55%;
+}
+
 @media (max-width: 885px) {
   .header-title{
         display: none;
@@ -82,7 +90,10 @@ img#order{
         display: none;
       }
     }
-     @media (min-width: 885px) { 
+     @media (min-width: 885px) {
+      .landing-header-logo{
+        display: none;
+      } 
       #mobile-image{
          display: none;
       }
@@ -135,7 +146,7 @@ img#order{
   clear: both;
 }
 .mobile-form-file{
-  
+
 }
 
 @media (min-width: 600px) {
