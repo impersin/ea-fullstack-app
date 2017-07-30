@@ -130,6 +130,13 @@ img#order{
 .mobile-form{
   padding: 55px 10px 0px 10px;
 }
+.mobile-form-upload{
+  margin: 0px 0px 5px 0px;
+  clear: both;
+}
+.mobile-form-file{
+  
+}
 
 @media (min-width: 600px) {
       #mobileAddbutton{
@@ -139,9 +146,16 @@ img#order{
         display: none;
       }
     }
+.mobile-form-textarea{
+  width: 70%;
+  float: left;
+}
 
-.form-group > button{
-  /*margin-left: 10px;*/
+button.mobile-form-button {
+   width: 25%;
+    height: 94px;
+    margin: 5px 0px 0px 10px;
+    float: left;
 }
 
 #profile{
