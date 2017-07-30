@@ -35,7 +35,7 @@
               </tbody>
             </Table>
           </div>
-          <input id="chat-input" class="form-control" type="text" ng-model="message.text" ng-keypress="sendMessage($event)" placeholder="Enter message" required>
+          <input id="chat-input" class="form-control" type="text" ng-model="message.text" ng-keypress="sendMessage($event)" ng-mouseover="changeBackground('over')" ng-mouseleave="changeBackground('leave')" placeholder="Enter message" required>
         </div>
       </div>
     </div>

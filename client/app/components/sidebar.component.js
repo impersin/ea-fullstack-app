@@ -118,5 +118,13 @@ appModule.component('sidebarComponent', {
       }, 1000);
     };
 
+    $scope.changeBackground = function(type) {
+      var myEl = angular.element(document.querySelector('.chat-screen'));
+      if (type === 'over') {
+        myEl.css('background-color', 'floralwhite');
+      } else {
+        myEl.css('background-color', 'white');
+      }
+    };
   }
 });
