@@ -1,5 +1,5 @@
 <div class="home-wrapper" ng-cloak>
-  <div hide-xs layout="row" class="home-header">
+  <div hide-xs layout="row" class="home-header" ng-show="headerToggle">
     <div flex="40" flex-offset="20">
       <img class="home-header-image1 fadein" id="slide2" src="../app/images/fifa18_logo.png" alt="CR7 IMAGE" width="600px" height="406px">
     </div>
@@ -8,8 +8,8 @@
     </div>
   </div>
     <div layout="row" class="home-contents">
-          <div flex="50" flex-xs="100" flex-offset="10" flex-offset-xs="0">
-            <div layout="column">
+          <div flex="40" flex-sm="100" flex-xs="100" flex-offset="15" flex-offset-sm="5" flex-offset-xs="0">
+            <div layout="column"  ng-mouseover="headerToggleOn()" ng-mouseleave="headerToggleOff()">
               <div flex="100" class="home-posts" ng-show="posts">
                 <div class="home-posts-header">
                   <h2>Community Q/A</h2>
@@ -111,7 +111,7 @@
                 <button class="btn btn-link show-more" ng-hide="results.length === items.length" ng-click="addToLimit($event)">show more...</button> 
             </div>
           </div>    
-        <div hide-xs flex="30" flex-sm="40"  flex-offset="10" flex-offset-sm="5" class="sidebar-wrapper">
+        <div hide-xs flex="25" flex-sm="40"  flex-offset="5" flex-offset-sm="5" class="sidebar-wrapper">
           <sidebar-component></sidebar-component>   
             <div class="board-container">
               <Table>
@@ -147,9 +147,9 @@
 </div>
 
 <div class="footer" id="home-footer">
-    <div class="container">
         <div layout="row">
             <div flex="30" flex-sm="40" flex-xs="100" flex-offset="40" flex-offset-xs="20">
+             <div class="footer-container">
               <div class="footer-header">
                 <h3>Terry Leem</h3>
               </div>
@@ -159,7 +159,7 @@
                   <li><a href="mailto:taegyuleem@gmail.com"> <i class="fa fa-envelope-o"></i></a></li>
                   <li><a href="https://www.youtube.com/user/EAsportsfootball" target="_blank"> <i class="fa fa-youtube"></i></a></li>
                 </ul>
+              </div> 
             </div>
         </div> 
-    </div> 
 </div> 

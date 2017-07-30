@@ -268,11 +268,7 @@ div.post-text-box{
   /* border: 1px solid; */
 }
 div.post-text > p{
-  font-size: 20px;
-}
-
-md-contnet.post{
-  margin:10px 0 0 0;
+  font-size: 1em;
 }
 .md-button{
   height: 50px !important;
@@ -467,7 +463,7 @@ td{
 
 .sidebar{
   background-color: white;
-  padding: 70px 0px 0px 0px;
+  padding: 117px 0px 0px 0px;
   margin: 0px 0px 0px 0px;
   overflow: auto;
   /* border:1px solid black; */
@@ -698,3 +694,5 @@ input#chat-input{
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+
+
