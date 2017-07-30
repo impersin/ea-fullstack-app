@@ -433,7 +433,7 @@ md-card-content{
 .md-headline{
   text-align: center;
 }
- table{
+table{
   margin: 0 auto;
 }
 th{
@@ -452,11 +452,17 @@ td{
 		  text-align:center;
 		  border-style: inset;
 }
-.green {
-    background:green;
+.profile-upload-container{
+  margin: 0px 0px 5px 0px;
+  float: left
 }
-.blue {
-    background:blue;
+
+#profile-form1 {
+  width: 280px;
+  position: absolute;
+  left: 5%;
+  top: 21%;
+  z-index: 1;
 }
 
 /*sidebar*/
