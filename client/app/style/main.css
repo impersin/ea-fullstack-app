@@ -288,6 +288,7 @@ button.show-more{
   -webkit-box-orient: vertical;
   -webkit-flex-direction: column;
   flex-direction: column;
+  background-color: aliceblue;
   box-shadow:0 0px 0px 0 rgba(0,0,0,.2),0px 0px 0px 0 rgba(0,0,0,.14),0 0px 1px 1px rgba(0,0,0,.12)
 }
 .comment-header{
@@ -302,7 +303,7 @@ padding: 10px 0px 0px 15px;
   text-align: left;
 }
 .comment-text > p{
-  padding: 0px;
+  padding: 10px 0px 0px 0px;
   margin:5px 0px 0px 10px
 }
 #comment-time-stamp{
@@ -310,6 +311,10 @@ padding: 10px 0px 0px 15px;
 }
 .comment-vote-button{
 
+}
+#best-icon{
+  float: left;
+  margin-right: 5px;
 }
 
 @media (max-width:600px){
@@ -319,12 +324,7 @@ padding: 10px 0px 0px 15px;
 }
 
 @media(hover: hover) {
-    md-card:hover {
-      background-color: floralwhite;
-    }
-    #chat-input:hover {
-      background-color: floralwhite;
-    }
+    
 }
 
 /*-------- sidebar ----------*/
@@ -423,7 +423,7 @@ input.ng-valid {
 md-content.profile{
   margin:50px 0 0 0;
 }
-md-card{
+.post-card{
   width:96% !important;
   box-sizing: border-box;
   -webkit-box-orient: vertical;
