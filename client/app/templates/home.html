@@ -17,10 +17,12 @@
                 </div>
                 <md-content class="post"  layout="row" ng-repeat="post in posts | filter:searchInput | limitTo: limit as results">
                   <div flex flex-sm flex-xs flex-gt-xs layout="column">
-                    <md-card>
+                    <md-card class="post-card">
                       <md-card-header>
                         <md-card-avatar>
-                          <md-icon class="md-avatar-icon" md-svg-icon="app/images/icons/check_circle_w.svg"></md-icon>
+                           <md-icon class="md-avatar-icon" md-svg-icon="app/images/icons/face_36px.svg"></md-icon>
+                           
+                          <!-- <img ng-src="{{profileImageUrl}}" alt="profile-picture"> -->
                         </md-card-avatar>
                         <md-card-header-text>
                           {{post.userid}}<a href="" class="{{post.userid}}" ng-click="toggle($event)"><span class="md-title {{post.userid}}">{{post.title}}</span></a> 
@@ -78,15 +80,30 @@
                           </form>
                         </div>
                       </div> 
-                      <span id="comment-time-stamp">{{post.timeStamps[0]}}</span>                    
-                      <div flex class="temp" ng-show="commentToggles['comment'+post.postIndex]">
+                      <span id="comment-time-stamp">{{post.timeStamps[0]}}</span>
+                      <md-card-actions ng-show="commentToggles['comment'+post.postIndex]">
+                        <!-- <md-button id="{{'best'+post.postIndex}}" ng-click="sortCommentBy('soccerball')">Best Comment</md-button>
+                        <md-button ng-click="sortCommentBy('newest')">Newest </md-button>  -->
+                        <form>
+                          <label class="radio-inline">
+                            <input type="radio" name="optradio" ng-checked="true" id="{{'best'+post.postIndex}}" ng-click="sortCommentBy('newest')">Newest
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="optradio" id="{{'best'+post.postIndex}}" ng-click="sortCommentBy('soccerball')">Best Comment
+                          </label>
+                        </form>
+                      </md-card-actions>                   
+                         <div flex class="temp" ng-show="commentToggles['comment'+post.postIndex]"> 
                         <md-content class="" id="{{'comment' + post.postIndex}}" layout="row">
                          <div flex flex-md flex-sm flex-xs flex-gt-xs layout="column"> 
                             <md-card class="comment-card" ng-repeat="comment in post.comments | orderBy: reverse:true">
                               <div class="comment-text-box">
                                 <a href=""><span><b>{{comment.commentedBy}}</b></span></a>
                                 <div class="comment-text">
-                                  <p>{{comment.comment}}</p>
+                                  <div ng-show="!commentSortedByNewest && $index < 3 && comment.soccerball > 0">
+                                    <img id="best-icon" src="app/images/icons/best.png" width="36px" height="36px">
+                                 </div>
+                              <p>{{comment.comment}}</p>
                                 </div>
                               </div> 
                             <md-card-actions layout-align="center right"> 

@@ -22,10 +22,12 @@ appModule.component('homeComponent', {
     $scope.posts = [];
     $scope.switch = false;
     $scope.boardData = [];
+    $scope.commentSortedByNewest = true;
+
     $scope.test = function() {
       $scope.switch = !$scope.switch;
     };
-
+  
     $scope.logOut = function() {
       $timeout(function() {
         var el = document.getElementById('logout');
@@ -99,7 +101,7 @@ appModule.component('homeComponent', {
       }
       if (!$scope.commentToggles[id]) {
         // myEl.removeClass('hide');
-        $scope.commentToggles[id] = true; 
+        $scope.commentToggles[id] = true;
       } else {
         // myEl.addClass('hide');
         $scope.commentToggles[id] = false; 
@@ -225,9 +227,8 @@ appModule.component('homeComponent', {
       // Get only type of vote
       var type = event.target.id.replace(/[0-9]/g, '');
       var voter = $scope.currentUser;
-      // $scope.commenterList.length - postIndex becuase of data is reversed but comments are in order
-      var voterList = $scope.commenterList[$scope.commenterList.length - postIndex].comments[commentIndex - 1].voterList;
-      // console.log(voterList);
+      var comments = $scope.searchPost(postIndex, 'commentVote');
+      var voterList = comments[commentIndex - 1].voterList;
       if (!$cookies.get('auth')) {
         $scope.authWarning('auth');
       } else {
@@ -244,7 +245,7 @@ appModule.component('homeComponent', {
               type: type
             }).then(function(res) {
               $scope.getAllPosts();
-              $scope.commenterList[$scope.commenterList.length - postIndex].comments[commentIndex - 1].voterList.push(voter);
+              voterList.push(voter);
             });
           }
         }
@@ -262,6 +263,22 @@ appModule.component('homeComponent', {
         }
       }
       return result;   
+    };
+
+    $scope.sortCommentBy = function(type) {
+      var length = this.post.comments.length;
+      if (type === 'soccerball' && $scope.commentSortedByNewest === true) {
+        $scope.commentSortedByNewest = false;
+        this.post.comments.sort(function(a, b) {
+          return a.soccerball - b.soccerball;
+        });
+        $scope.commentSortedByNewest = false;
+      } else if (type === 'newest' && $scope.commentSortedByNewest === false ) {
+        this.post.comments.sort(function(a, b) {
+          return a.commentIndex - b.commentIndex;
+        });
+        $scope.commentSortedByNewest = true; 
+      }
     };
 
     $scope.deletePost = function(event) {
@@ -300,7 +317,7 @@ appModule.component('homeComponent', {
       }
     };
 
-    $scope.searchPost = function(target) {
+    $scope.searchPost = function(target, type) {
       var start = 0;
       var end = $scope.posts.length - 1;
       var mid;
@@ -308,9 +325,13 @@ appModule.component('homeComponent', {
       while (start <= end) {
         mid = Math.floor((start + end) / 2);
         if ($scope.posts[mid].postIndex === target) {
-          $scope.searchInput = $scope.posts[mid].title;
-          $scope.postToggles['post' + target] = true;
-          return;
+          if (type === undefined) {
+            $scope.searchInput = $scope.posts[mid].title;
+            $scope.postToggles['post' + target] = true;
+            return;
+          } else if (type === 'commentVote') {
+            return $scope.posts[mid].comments;
+          }
         } else if ($scope.posts[mid].postIndex > target) {
           start = mid + 1;
         } else {
@@ -332,6 +353,6 @@ appModule.component('homeComponent', {
         el[0].scrollTop += 200;
       }, 500 );
     };
-  
+    
   }
 });
