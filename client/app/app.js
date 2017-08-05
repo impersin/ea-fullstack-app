@@ -12,7 +12,8 @@ var appModule = angular.module('myApp', [
   'angular-storage',
   'fileModel',
   'ngLoadingSpinner',
-  'scrollBottom'
+  'scrollBottom',
+  'chart.js'
 ]);
 
 appModule.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
@@ -55,6 +56,12 @@ appModule.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     template: '<result-component></result-component>'
   };
 
+  var players = {
+    name: 'players',
+    url: '/players',
+    template: '<chart-component></chart-component>'
+  };
+
   // var post = {
   //   name: 'post',
   //   url: '/post',
@@ -67,6 +74,7 @@ appModule.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider.state(profile);
   $stateProvider.state(news);
   $stateProvider.state(matchResults);
+  $stateProvider.state(players);
   // $stateProvider.state(post);
 
   $httpProvider.interceptors.push(function($q, $cookies) {
