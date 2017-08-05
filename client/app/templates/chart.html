@@ -1,0 +1,95 @@
+<div class="chart-wrapper">
+  <div class="chart-container">
+    <div class="player player-info">
+      <h1 class="player-name">#1</h1>
+      <h3 class="player-name">CRISTIANO RONALDO</h3>
+      <img id="club-logo" class="players-img" src="app/images/icons/real_madrid.png" alt=""> 
+      <img id="country-flag" class="players-img" src="app/images/flags/portugal.png" alt="">
+      <h3>LW 99</h3>   
+    </div>
+    <div class="player player-img-container">
+      <img class="players-img" src="app/images/toplayers/cr7.png" alt="" width="80%" min-width="40%" height="auto">  
+    </div>
+    <div class="player-data">
+      <div class="ability-container">  
+        <div class="abilities">
+          <p ng-mouseover="toggle = !toggle" ng-mouseleave="toggle = !toggle">PAC</p>
+          <span>98</span>
+          <div class="temp" ng-hide="toggle">
+            <h1>
+              can you see me??
+            </h1>
+          </div>
+        </div>
+        <div class="abilities">
+          <p>DRI</p>
+          <span>98</span>
+        </div>
+        <div class="abilities">
+          <p>SHO</p>
+          <span>99</span>
+        </div>
+        <div class="abilities">
+          <p>DEF</p>
+          <span>50</span>
+        </div>
+        <div class="abilities">
+          <p>PAS</p>
+          <span>92</span>
+        </div>
+        <div class="abilities">
+          <p>PHY</p>
+          <span>94</span>
+        </div>
+      </div>
+      <div class="radar-container">
+        <canvas id="radar" class="chart chart-radar"chart-data="data" chart-options="options" chart-labels="labels" chart-colors="red"></canvas> 
+      </div>   
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <div class="player player-info">
+      <h3 id="player-name">#2.LIONEL MESSI</h3>
+      <img id="club-logo" class="players-img" src="app/images/icons/fc_barcelona.png" alt=""> 
+      <img id="country-flag" class="players-img" src="app/images/flags/argentina.png" alt="">
+      <h3>LW 99</h3>   
+    </div>
+    <div class="player player-img-container">
+      <img class="players-img" src="app/images/toplayers/messi4.png" alt="" width="80%" min-width="40%" height="auto">  
+    </div>
+    <div class="player-data">
+      <div class="ability-container">  
+        <div class="abilities">
+          <p>PAC</p>
+          <span>98</span>
+        </div>
+        <div class="abilities">
+          <p>DRI</p>
+          <span>98</span>
+        </div>
+        <div class="abilities">
+          <p>SHO</p>
+          <span>99</span>
+        </div>
+        <div class="abilities">
+          <p>DEF</p>
+          <span>50</span>
+        </div>
+        <div class="abilities">
+          <p>PAS</p>
+          <span>92</span>
+        </div>
+        <div class="abilities">
+          <p>PHY</p>
+          <span>94</span>
+        </div>
+      </div>
+      <div class="radar-container">
+        <canvas id="radar" class="chart chart-radar"chart-data="data" chart-options="options" chart-labels="labels" chart-colors="red"></canvas> 
+      </div>   
+    </div>
+  </div>
+
+</div>  
+  
