@@ -63,6 +63,7 @@ app.post('/api/login', controller.login);
 app.get('/api/signout', controller.signOut);
 app.get('/api/record', controller.getRecords);
 app.get('/api/post', controller.getAllPost);
+app.get('/api/player', controller.getAllPlayer);
 app.put('/api/post/viewcount/:number', controller.addViewCount);
 
 
