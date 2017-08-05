@@ -1,96 +1,49 @@
 <div class="chart-wrapper">
-  <div class="chart-container">
+  <div class="chart-container" ng-repeat="player in players">
     <div class="player player-info">
-      <h1 class="player-name">#1</h1>
-      <h3 class="player-name">CRISTIANO RONALDO</h3>
-      <img id="club-logo" class="players-img" src="app/images/icons/real_madrid.png" alt=""> 
-      <img id="country-flag" class="players-img" src="app/images/flags/portugal_flag.png" alt="">
+      <h1 class="player-name">#{{player.rank}}</h1>
+      <h3 class="player-name">{{player.name}}</h3>
+      <img id="club-logo" class="players-img" ng-src="https://s3-us-west-1.amazonaws.com/fifatalk/player/teamlogo/{{player.images.club}}" alt=""> 
+      <img id="country-flag" class="players-img" ng-src="https://s3-us-west-1.amazonaws.com/fifatalk/player/flag/{{player.images.country}}" alt="">
       <h3>LW 99</h3>   
     </div>
     <div class="player player-img-container">
-      <img class="players-img" src="app/images/toplayers/cr7.png" alt="" width="80%" min-width="40%" height="auto">  
+      <img class="players-img" ng-src="https://s3-us-west-1.amazonaws.com/fifatalk/player/{{player.images.player}}" alt="" width="80%" min-width="40%" height="auto">  
     </div>
     <div class="player-data">
       <div class="ability-container">  
         <div class="abilities">
           <p ng-mouseover="toggle = !toggle" ng-mouseleave="toggle = !toggle">PAC</p>
-          <span>98</span>
+          <span>{{player.data[0][0]}}</span>
           <div class="temp" ng-hide="toggle">
-            <h1>
-              can you see me??
-            </h1>
+            <h1>can you see me??</h1>
           </div>
         </div>
         <div class="abilities">
           <p>DRI</p>
-          <span>98</span>
+          <span>{{player.data[0][0]}}</span>
         </div>
         <div class="abilities">
           <p>SHO</p>
-          <span>99</span>
+          <span>{{player.data[0][0]}}</span> 
         </div>
         <div class="abilities">
           <p>DEF</p>
-          <span>50</span>
+          <span>{{player.data[0][0]}}</span> 
         </div>
         <div class="abilities">
           <p>PAS</p>
-          <span>92</span>
+          <span>{{player.data[0][0]}}</span>      
         </div>
         <div class="abilities">
           <p>PHY</p>
-          <span>94</span>
+          <span>{{player.data[0][0]}}</span>
         </div>
       </div>
       <div class="radar-container">
-        <canvas id="radar" class="chart chart-radar"chart-data="data" chart-options="options" chart-labels="labels" chart-colors="red"></canvas> 
+        <canvas id="radar" class="chart chart-radar"chart-data="player.data" chart-options="options" chart-labels="labels" chart-colors="red"></canvas> 
       </div>   
     </div>
   </div>
-
-  <div class="chart-container">
-    <div class="player player-info">
-      <h1 class="player-name">#2</h1>
-      <h3 class="player-name">LIONEL MESSI</h3>
-      <img id="club-logo" class="players-img" src="app/images/icons/fc_barcelona.png" alt=""> 
-      <img id="country-flag" class="players-img" src="app/images/flags/argentina_flag.png" alt="">
-      <h3>LW 99</h3>   
-    </div>
-    <div class="player player-img-container">
-      <img class="players-img" src="app/images/toplayers/messi.png" alt="" width="80%" min-width="40%" height="auto">  
-    </div>
-    <div class="player-data">
-      <div class="ability-container">  
-        <div class="abilities">
-          <p>PAC</p>
-          <span>98</span>
-        </div>
-        <div class="abilities">
-          <p>DRI</p>
-          <span>98</span>
-        </div>
-        <div class="abilities">
-          <p>SHO</p>
-          <span>99</span>
-        </div>
-        <div class="abilities">
-          <p>DEF</p>
-          <span>50</span>
-        </div>
-        <div class="abilities">
-          <p>PAS</p>
-          <span>92</span>
-        </div>
-        <div class="abilities">
-          <p>PHY</p>
-          <span>94</span>
-        </div>
-      </div>
-      <div class="radar-container">
-        <canvas id="radar" class="chart chart-radar"chart-data="data" chart-options="options" chart-labels="labels" chart-colors="red"></canvas> 
-      </div>   
-    </div>
-  </div>
-
 </div>  
   
