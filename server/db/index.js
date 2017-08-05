@@ -1,14 +1,26 @@
 var mongoose = require('mongoose');
+var Player = require('./models/Player.js');
+var playerData = require('../data/playerData.json');
+
 var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/eaApp';
 
 mongoose.connect(mongoUri);
 
 var db = mongoose.connection;
 
-var User = require('./models/Users.js');  
 
 db.once('open', () => {
   console.log('database connected!');
+});
+
+//insert data only once!!
+
+Player.find().then(function(data) {
+  if (data.length === 0) {
+    Player.insertMany(playerData).then(function(res) {
+      console.log(res);
+    });  
+  }
 });
 
 module.exports = db;
