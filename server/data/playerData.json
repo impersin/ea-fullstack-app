@@ -1,0 +1,29 @@
+
+[
+  {
+  "name": "CRISTIANO RONALDO",
+  "country": "Portugal",
+  "club":"Real Madrid",
+  "rank":"1",
+  "data": [[98,98,99,50,92,94]],
+  "images":
+    {
+      "player":"cr7.png",
+      "country":"portugal_flag.png",
+      "club":"real_madrid.png"
+    } 
+  },
+  {
+  "name": "LIONEL MESSI",
+  "country": "Agentina",
+  "club":"Barcelona",
+  "rank":"2",
+  "data": [[97,99,99,45,98,82]],
+  "images":
+    {
+      "player":"messi.png",
+      "country":"argentina_flag.png",
+      "club":"fc_barcelona.png"
+    }
+  }
+]
