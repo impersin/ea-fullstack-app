@@ -1,7 +1,5 @@
 body{
   width: 100%;
-  /*background-image: url("../images/cr7-main.jpg");
-  background-size: cover;*/
   box-sizing: border-box;
 }
 
@@ -623,6 +621,84 @@ input#chat-input{
 .board-list > a{
   padding: 10px;
   list-style: none;
+}
+
+/*-------------------- players ----------------------- */
+.chart-wrapper{
+  height: 100%;
+  margin-top: 51px; 
+  overflow: auto;
+}
+.chart-container{
+  width:100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  text-align: center;
+  overflow: auto;
+  border: 1px solid blue;
+  background-image: url("../images/playerbg2.png");
+  background-size: cover; 
+} 
+.player-info{
+  background-image: url("../images/player_info_bg.jpg");
+  background-size: cover;
+}
+.player > h3{
+  font-size: 2vw;
+}
+#player-name{
+  margin-top: 10%;
+}
+
+.player-info > img{
+  width: 40%;
+  display: list-item;
+  margin: 0 auto;
+  margin-top: 5%;
+}
+#country-flag{
+  clear: both;
+}
+.player{
+  width:30%;
+  float: left;
+  /* border: 1px  solid red; */
+  /* position: relative; */
+}
+.player-data{
+  width: 38%;
+  float: left;
+  margin-top: 4%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+.ability-container{
+  width: 100%;
+  float: left;
+  background-color: white;
+}
+.abilities{
+  width: 48%;
+  float: left;
+  /* border: 1px solid purple; */
+  margin: 1%;
+  background-color: white;
+}
+.abilities > p {
+  margin: 0px 0 0px;
+  font-weight: bolder;
+  font-size: 1.5vw;
+  background-color: dodgerblue;
+  color: white;
+}
+.abilities > span{
+  font-size: 1vw;
+  font-weight: bolder;
+}
+.radar-container{
+  width: 100%;
+  float: left;
+   background-color: white; 
 }
 
 /*footer*/
