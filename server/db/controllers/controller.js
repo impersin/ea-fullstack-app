@@ -1,5 +1,6 @@
 var user = require('../models/Users.js');
 var post = require('../models/Posts.js');
+var player = require('../models/Player.js');
 var db = require('../index.js');
 var jwt = require('jsonwebtoken-refresh');
 var bcrypt = require('bcrypt');
@@ -92,6 +93,12 @@ exports.getAllPost = function(req, res) {
   post.find().then(function(data) {
     data.reverse();
     res.json(data);
+  });
+};
+
+exports.getAllPlayer = function(req, res) {
+  player.find().then(function(data) {
+    res.status(200).json(data);
   });
 };
 
