@@ -70,6 +70,14 @@ angular.module('appFactory', [])
           return res;
         });
       },
+      getAllPlayer: function() {
+        return $http({
+          method: 'GET',
+          url: 'api/player'
+        }).then(function(res) {
+          return res;
+        });
+      },
       addPost: function(newPost) {
         return $http({
           method: 'POST',
