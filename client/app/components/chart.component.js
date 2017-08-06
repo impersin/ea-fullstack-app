@@ -16,9 +16,6 @@ appModule.config(['ChartJsProvider', function (ChartJsProvider) {
     Factory.getAllPlayer().then(function(res) {
       $scope.players = res.data;
     });
-
-    $scope.labels = ['Pace', 'Dribbling', 'Shooting', 'Defending', 'Passing', 'Physicality'];
-    // $scope.series = ['Series A', 'Series B'];
   }
 });
 
