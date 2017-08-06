@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var postSchema = new Schema({
   postIndex: Number,
   userid: String,
+  avatar: String,
   title: String,
   text: String,
   comments: Array,
@@ -14,7 +15,7 @@ var postSchema = new Schema({
   neutral: Number,
   dissatisfied: Number, 
   viewcount: Number,
-  fileName: String 
+  fileName: String
 });
  
 var Post = mongoose.model('Post', postSchema);
