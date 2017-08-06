@@ -103,7 +103,7 @@ appModule.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     } else { //if there is no token
       $rootScope.auth = false;
       var requestedPath = $location.path();
-      if (requestedPath !== '/home' && requestedPath !== '/about' && requestedPath !== '/news' && requestedPath !== '/news' && requestedPath !== '/matchResults') {
+      if (requestedPath !== '/home' && requestedPath !== '/about' && requestedPath !== '/players') {
         $location.path('/');
       }
     }
