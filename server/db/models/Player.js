@@ -6,7 +6,10 @@ var playerSchema = new Schema({
   name: String,
   country: String,
   club: String,
+  position: String,
   rank: Number,
+  overall: Number,
+  datatype: Object,
   data: Array,
   images: Object
 });
