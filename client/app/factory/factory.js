@@ -6,25 +6,6 @@ angular.module('appFactory', [])
           method: 'GET',
           url: 'api/record'
         }).then(function(res) {
-          var win = 0;
-          var lose = 0;
-          res.data.forEach(function(match) {
-            var score1 = parseInt(match['Final Score'][0]);
-            var score2 = parseInt(match['Final Score'][2]);
-            if (score1 > score2) {
-              match['Final Score'] += ' WON';
-              if (match['Player Name'].toUpperCase() === $cookies.get('userName').toUpperCase()) {
-                win++;
-              }    
-            } else {
-              match['Final Score'] += ' LOST';
-              if (match['Player Name'].toUpperCase() === $cookies.get('userName').toUpperCase()) {
-                lose++;
-              }
-            }
-          }, this);
-          $cookies.put('win', win);
-          $cookies.put('lose', lose);
           return res;
         });
       },
