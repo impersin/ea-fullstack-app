@@ -720,14 +720,47 @@ input#chat-input{
    background-color: white; 
 }
 
-.temp1{
+.chart-side{
   width: 25%;
   height: 100%;
   position: fixed;
   right: 10px;
-
 }
 
+@media (max-width: 885px) {
+  .chart-side{
+    display: none;
+  }
+  .chart-wrapper{
+    width: 100%;
+    height: 100%;
+    margin: 50px 0 0 20px;
+    margin-top: 50px;
+  }
+}
+@media (max-width: 600px) {
+  .player-img-container{
+    display: none;
+  }
+  .radar-container {
+    display: none;
+}
+  .player-data {
+    width: 60%;
+  }
+  #overall > p {
+    font-size: 4.5vw;
+  }
+  .abilities > p {
+    font-size: 3.5vw;
+  }
+  #overall > span {
+    font-size: 5vw;
+  }
+  .abilities > span {
+    font-size: 3vw;
+  }
+}
 
 
 /*footer*/
