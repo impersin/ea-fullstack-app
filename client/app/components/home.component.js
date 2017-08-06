@@ -23,10 +23,6 @@ appModule.component('homeComponent', {
     $scope.switch = false;
     $scope.boardData = [];
     $scope.commentSortedByNewest = true;
-
-    $scope.test = function() {
-      $scope.switch = !$scope.switch;
-    };
   
     $scope.logOut = function() {
       $timeout(function() {
@@ -45,6 +41,7 @@ appModule.component('homeComponent', {
         $scope.commenterList = res.data;
         $scope.boardData = [];
         res.data.forEach(function(post) {
+          // console.log(post);
           $scope.boardData.push(post);
         });
         $scope.boardSort($scope.boardData, 'views');
