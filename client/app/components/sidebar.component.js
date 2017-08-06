@@ -5,10 +5,8 @@ appModule.component('sidebarComponent', {
 
     $scope.header = 'This is sidebar component!! yay';
     $scope.auth = $cookies.get('auth');
-    $scope.toggle = false;
-    $scope.messages = []; 
+    $scope.toggle = false; 
     $scope.message = {
-      userid: $cookies.get('userid'),
       text: ''
     };
     $scope.newPost = {
@@ -17,6 +15,15 @@ appModule.component('sidebarComponent', {
       text: '',
       fileName: ''
     };
+
+    $http({
+      method: 'GET',
+      url: 'api/chat/messages'
+    }).then(function mySuccess(res) {
+      $scope.messages = res.data;
+    }, function myError(res) {
+      console.log(res);
+    });
     
     $scope.toggleForm = function() {
       if (!$cookies.get('auth')) {
@@ -98,6 +105,7 @@ appModule.component('sidebarComponent', {
         $scope.authWarning();  
       } else {
         if (keyEvent.which === 13) {
+          $scope.message.userid = $cookies.get('userid'),
           socket.emit('newMessage', $scope.message);
           $scope.message.text = '';
         }
