@@ -1,14 +1,19 @@
-
 [
   {
   "name": "CRISTIANO RONALDO",
   "country": "Portugal",
   "club":"Real Madrid",
+  "position":"LW",
   "rank":"1",
+  "overall":99,
+  "datatype":{
+    "abilities":["PAC","DRI","SHO","DEF","PAS","PHY"],
+    "radar":["Pace","Dribbling","Shooting","Defending","Passing","Physicality"]
+  },
   "data": [[98,98,99,50,92,94]],
   "images":
     {
-      "player":"cr7.png",
+      "player":"ronaldo.png",
       "country":"portugal_flag.png",
       "club":"real_madrid.png"
     } 
@@ -16,14 +21,172 @@
   {
   "name": "LIONEL MESSI",
   "country": "Agentina",
-  "club":"Barcelona",
+  "club":"FC Barcelona",
+  "position":"RW",
   "rank":"2",
+  "overall":99,
+  "datatype":{
+    "abilities":["PAC","DRI","SHO","DEF","PAS","PHY"],
+    "radar":["Pace","Dribbling","Shooting","Defending","Passing","Physicality"]
+  },
   "data": [[97,99,99,45,98,82]],
   "images":
     {
-      "player":"messi.png",
+      "player":"messi3.png",
       "country":"argentina_flag.png",
       "club":"fc_barcelona.png"
+    }
+  },
+  {
+  "name": "NEYMAR JR",
+  "country": "Brazil",
+  "club":"Paris Saint Germain",
+  "position":"LW",
+  "rank":"3",
+  "overall":98,
+  "datatype":{
+    "abilities":["PAC","DRI","SHO","DEF","PAS","PHY"],
+    "radar":["Pace","Dribbling","Shooting","Defending","Passing","Physicality"]
+  },
+  "data": [[97,99,98,48,97,83]],
+  "images":
+    {
+      "player":"neymarjr.png",
+      "country":"brazil_flag.png",
+      "club":"psg.png"
+    }
+  },
+  {
+  "name": "LUIS SUAREZ",
+  "country": "Uruguay",
+  "club":"FC Barcelona",
+  "position":"ST",
+  "rank":"4",
+  "overall":98,
+  "datatype":{
+    "abilities":["PAC","DRI","SHO","DEF","PAS","PHY"],
+    "radar":["Pace","Dribbling","Shooting","Defending","Passing","Physicality"]
+  },
+  "data": [[93,97,99,60,92,93]],
+  "images":
+    {
+      "player":"suarez.png",
+      "country":"uruguay_flag.png",
+      "club":"fc_barcelona.png"
+    }
+  },
+  {
+  "name": "MANUEL NEUER",
+  "country": "German",
+  "club":"FC Bayern Munich",
+  "position":"GK",
+  "rank":"5",
+  "overall":98,
+  "datatype":{
+    "abilities":["DIV","REF","HAN","SPD","KIC","POS"],
+    "radar":["Diving","Refelexes","Handling","Speed","Kicking","Pos"]
+  },
+  "data": [[93,97,99,60,92,93]],
+  "images":
+    {
+      "player":"neuer.png",
+      "country":"german_flag.png",
+      "club":"fc_bayernmunich.png"
+    }
+  },
+  {
+  "name": "ROBERT LEWANDOWSKI",
+  "country": "Poland",
+  "club":"FC Bayern Munich",
+  "position":"ST",
+  "rank":"6",
+  "overall":98,
+  "datatype":{
+    "abilities":["PAC","DRI","SHO","DEF","PAS","PHY"],
+    "radar":["Pace","Dribbling","Shooting","Defending","Passing","Physicality"]
+  },
+  "data": [[89,98,99,57,93,97]],
+  "images":
+    {
+      "player":"lewandowski.png",
+      "country":"poland_flag.png",
+      "club":"fc_bayernmunich.png"
+    }
+  },
+  {
+  "name": "EDEN HAZARD",
+  "country": "Belgium",
+  "club":"FC Chelsea",
+  "position":"LW",
+  "rank":"7",
+  "overall":98,
+  "datatype":{
+    "abilities":["PAC","DRI","SHO","DEF","PAS","PHY"],
+    "radar":["Pace","Dribbling","Shooting","Defending","Passing","Physicality"]
+  },
+  "data": [[98,99,96,50,96,84]],
+  "images":
+    {
+      "player":"hazard.png",
+      "country":"belgium_flag.png",
+      "club":"fc_chelsea.png"
+    }
+  },
+  {
+  "name": "ZLATAN IBRAHIMOVIĆ",
+  "country": "Sweden",
+  "club":"Manchester United",
+  "position":"ST",
+  "rank":"8",
+  "overall":98,
+  "datatype":{
+    "abilities":["PAC","DRI","SHO","DEF","PAS","PHY"],
+    "radar":["Pace","Dribbling","Shooting","Defending","Passing","Physicality"]
+  },
+  "data": [[82,97,99,52,96,98]],
+  "images":
+    {
+      "player":"ibrahimovic.png",
+      "country":"sweden_flag.png",
+      "club":"man-united.png"
+    }
+  },
+  {
+  "name": "LUKA MODRIĆ",
+  "country": "Croatia",
+  "club":"Real Madrid",
+  "position":"MF",
+  "rank":"9",
+  "overall":96,
+  "datatype":{
+    "abilities":["PAC","DRI","SHO","DEF","PAS","PHY"],
+    "radar":["Pace","Dribbling","Shooting","Defending","Passing","Physicality"]
+  },
+  "data": [[80,97,85,83,96,80]],
+  "images":
+    {
+      "player":"modric.png",
+      "country":"croatia_flag.png",
+      "club":"real_madrid.png"
+    }
+  },
+  {
+  "name": "ANTOINE GRIEZMANN",
+  "country": "France",
+  "club":"Manchester United",
+  "position":"ST",
+  "rank":"10",
+  "overall":95,
+  "datatype":{
+    "abilities":["PAC","DRI","SHO","DEF","PAS","PHY"],
+    "radar":["Pace","Dribbling","Shooting","Defending","Passing","Physicality"]
+  },
+  "data": [[93,96,95,45,92,82]],
+  "images":
+    {
+      "player":"griezmann.png",
+      "country":"france_flag.png",
+      "club":"at_madrid.png"
     }
   }
 ]
