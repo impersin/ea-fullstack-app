@@ -626,18 +626,21 @@ input#chat-input{
 /*-------------------- players ----------------------- */
 .chart-wrapper{
   height: 100%;
-  margin-top: 51px; 
+  margin-top: 50px;
+  padding: 5%;
   overflow: auto;
 }
 .chart-container{
-  width:100%;
+  width: 100%;
+  margin: 0px;
   margin-bottom: 15px;
   padding: 10px;
   text-align: center;
   overflow: auto;
-  border: 1px solid blue;
-  background-image: url("../images/playerbg2.png");
-  background-size: cover; 
+  border: 1px solid #ccc;
+  background-image: url(../images/playerbg2.png);
+  background-size: cover;
+  background-color: white;
 } 
 .player-info{
   background-image: url("../images/player_info_bg.jpg");
@@ -656,14 +659,16 @@ input#chat-input{
   margin: 0 auto;
   margin-top: 5%;
 }
+#player-photo{
+
+}
 #country-flag{
   clear: both;
 }
 .player{
   width:30%;
   float: left;
-  /* border: 1px  solid red; */
-  /* position: relative; */
+  border-bottom-right-radius: 110px;
 }
 .player-data{
   width: 38%;
@@ -684,12 +689,25 @@ input#chat-input{
   margin: 1%;
   background-color: white;
 }
+#overall > p{
+  margin: 0px 0 0px;
+  font-weight: bolder;
+  font-size: 1.5vw;
+  background-color: dodgerblue;
+  color: white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
 .abilities > p {
   margin: 0px 0 0px;
   font-weight: bolder;
   font-size: 1.5vw;
   background-color: dodgerblue;
   color: white;
+}
+#overall > span{
+  font-size: 1vw;
+  font-weight: bolder;
 }
 .abilities > span{
   font-size: 1vw;
