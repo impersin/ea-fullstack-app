@@ -35,6 +35,7 @@ appModule.component('sidebarComponent', {
 
     $scope.addPost = function() {
       var file = $scope.file;
+      $scope.newPost.avatar = $cookies.get('profileImage');
       if (file) {
         $scope.newPost.fileName = file.name;
         var fd = new FormData();
@@ -52,7 +53,11 @@ appModule.component('sidebarComponent', {
       } else {
         Factory.addPost($scope.newPost).then(function(res) {
           if (res.status !== 500) {
-            $window.location.reload();
+            if ($location.path() !== '/home') {
+              $location.path('/home');
+            } else {
+              $window.location.reload();
+            }
           } else {
             $scope.authWarning('session');
             $scope.logOut();
