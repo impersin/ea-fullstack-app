@@ -1,7 +1,7 @@
 appModule.component('profileComponent', {
   templateUrl: 'app/templates/profile.html',
   controllerAs: 'profileController',
-  controller: function($scope, $cookies, Factory, $mdDialog) {
+  controller: function($scope, $cookies, Factory, $mdDialog, $timeout) {
     $scope.user = $cookies.get('userid');
     $scope.auth = $cookies.get('auth');
     $scope.title = 'about page';
@@ -10,11 +10,8 @@ appModule.component('profileComponent', {
     $scope.fieldset = false;
     $scope.win = $cookies.get('win');
     $scope.lose = $cookies.get('lose');
-    if ($cookies.get('profileImage').length === 0) {
-      $scope.profileImageUrl = 'https://s3-us-west-1.amazonaws.com/fifatalk/avatar.jpeg';  
-    } else {
-      $scope.profileImageUrl = 'https://s3-us-west-1.amazonaws.com/fifatalk/' + $cookies.get('profileImage');
-    }
+    $scope.profileImageUrl = 'https://s3-us-west-1.amazonaws.com/fifatalk/' + $cookies.get('profileImage');
+  
     $scope.matchInfo = {
       playerName: '',
       location: '',
@@ -65,7 +62,10 @@ appModule.component('profileComponent', {
           fd.append('file', file);
           Factory.uploadFile(fd).then(function(res) {
             Factory.addProfileImage({userid: $scope.user, fileName: file.name}).then(function(res) {
-              $scope.profileImageUrl = 'https://s3-us-west-1.amazonaws.com/fifatalk/' + res.data;
+              $timeout(function() {
+                $cookies.put('profileImage', res.data);
+                $scope.profileImageUrl = 'https://s3-us-west-1.amazonaws.com/fifatalk/' + res.data;
+              }, 0);
               $scope.profileForm = false;
             });
           });
