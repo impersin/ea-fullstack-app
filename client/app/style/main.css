@@ -760,6 +760,9 @@ input#chat-input{
   .abilities > span {
     font-size: 3vw;
   }
+  .player > h3 {
+    font-size: 3vw;
+  }
 }
 
 
