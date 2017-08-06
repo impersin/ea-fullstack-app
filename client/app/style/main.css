@@ -625,10 +625,11 @@ input#chat-input{
 
 /*-------------------- players ----------------------- */
 .chart-wrapper{
+  width: 70%;
   height: 100%;
+  margin: 50px 0 0 20px;
   margin-top: 50px;
-  padding: 5%;
-  overflow: auto;
+  float: left;
 }
 .chart-container{
   width: 100%;
@@ -718,6 +719,16 @@ input#chat-input{
   float: left;
    background-color: white; 
 }
+
+.temp1{
+  width: 25%;
+  height: 100%;
+  position: fixed;
+  right: 10px;
+
+}
+
+
 
 /*footer*/
 .footer {
