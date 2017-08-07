@@ -22,12 +22,12 @@ exports.signUp = function(req, res) {
   user.find({userid: userid}).then(function(data) {
     if (data.length === 0) {
       bcrypt.hash(password, 10).then(function(hash) {
-        user.insertMany([{firstname: firstName, lastname: lastName, userid: userid, password: hash, email: email, profileImage: profileImage}], function(err, data) {
+        user.insertMany([{firstname: firstName, lastname: lastName, userid: userid, password: hash, email: email, profileImage: 'avatar.jpeg'}], function(err, data) {
           if (err) { throw err; }
           var token = jwt.sign({userid: userid}, process.env.SECRET_KEY, {expiresIn: 3600});
           
           res.json({success: true, userid: userid, firstName: firstName,
-            lastName: lastName, token: token, profileImage: profileImage});
+            lastName: lastName, token: token, profileImage: 'avatar.jpeg'});
         });
 
       }) .catch(bcrypt.MISMATCH_ERROR, handleInvalidPassword);
@@ -116,13 +116,13 @@ exports.addPost = function(req, res) {
   var formatted = dt.format('Y-m-d H:M:S');
   newPost.timeStamps = [formatted, timeStamp.getTime()];
   post.find().sort( { _id: -1 } ).limit(1).then(function(data) {
+    newPost.viewcount = 0;
+    newPost.satisfied = 0;
+    newPost.neutral = 0;
+    newPost.dissatisfied = 0;
     if (data.length === 0) {
       var number = 1;
       newPost.postIndex = number;
-      newPost.viewcount = 0;
-      newPost.satisfied = 0;
-      newPost.neutral = 0;
-      newPost.dissatisfied = 0;
       post.insertMany([newPost], function(err, data) {
         if (err) { throw err; }
         res.json(data);
@@ -130,10 +130,6 @@ exports.addPost = function(req, res) {
     } else {
       var number = data[0].postIndex + 1;
       newPost.postIndex = number;
-      newPost.viewcount = 0;
-      newPost.satisfied = 0;
-      newPost.neutral = 0;
-      newPost.dissatisfied = 0;
       post.insertMany([newPost], function(err, data) {
         if (err) { throw err; }
         res.json(data);
@@ -170,9 +166,10 @@ exports.addViewCount = function(req, res) {
 exports.addProfileImage = function(req, res) {
   var target = req.body.userid;
   var fileName = req.body.fileName;
-  console.log(target, fileName);
   user.update({userid: target}, {profileImage: fileName}).then(function(data) {
-    res.json(fileName);
+    post.update({userid: target}, {avatar: fileName}, {multi: true}).then(function(data) {
+      res.json(fileName);
+    });
   });
 };
 
