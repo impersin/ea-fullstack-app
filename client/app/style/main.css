@@ -218,6 +218,10 @@ button.mobile-form-button {
   overflow:auto;
 }
 
+.avatar-image{
+  border-radius: 50%;
+}
+
 .home-posts::-webkit-scrollbar {
   /* Safari and Chrome  */
     display: none;
