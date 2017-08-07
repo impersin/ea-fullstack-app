@@ -132,6 +132,7 @@ img#order{
 }
 .navbar{
   margin-bottom: 0;
+  transition: top 0.2s ease-in-out;
 }
 #mobileAddButton{
   padding: 6px;
@@ -858,4 +859,7 @@ input#chat-input{
 	padding-bottom: 10px;
 }
 
+.nav-up {
+    top: -50px;
+}
 
