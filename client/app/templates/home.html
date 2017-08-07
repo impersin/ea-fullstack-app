@@ -20,9 +20,8 @@
                     <md-card class="post-card">
                       <md-card-header>
                         <md-card-avatar>
-                           <md-icon class="md-avatar-icon" md-svg-icon="app/images/icons/face_36px.svg"></md-icon>
-                           
-                          <!-- <img ng-src="{{profileImageUrl}}" alt="profile-picture"> -->
+                          <img class="avatar-image" ng-show="post.avatar !== avatar.jpeg" ng-src="https://s3-us-west-1.amazonaws.com/fifatalk/{{post.avatar}}" alt="profile-picture">
+                          <img class="avatar-image" ng-show="post.avatar === avatar.jpeg" ng-src="https://s3-us-west-1.amazonaws.com/fifatalk/avatar.jpeg" alt="profile-picture">    
                         </md-card-avatar>
                         <md-card-header-text>
                           {{post.userid}}<a href="" class="{{post.userid}}" ng-click="toggle($event)"><span class="md-title {{post.userid}}">{{post.title}}</span></a> 
