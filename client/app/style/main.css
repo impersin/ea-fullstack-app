@@ -293,8 +293,8 @@ button.show-more{
   -webkit-box-orient: vertical;
   -webkit-flex-direction: column;
   flex-direction: column;
-  background-color: aliceblue;
-  box-shadow:0 0px 0px 0 rgba(0,0,0,.2),0px 0px 0px 0 rgba(0,0,0,.14),0 0px 1px 1px rgba(0,0,0,.12)
+  background-color:aliceblue;
+  margin: 0px;
 }
 .comment-header{
 padding: 10px 0px 0px 15px;
