@@ -10,12 +10,15 @@ exports.getMessage = function(socket) {
 };
 
 exports.addMessage = function(newMesaage) {
-  message.find().sort( { _id: -1 } ).limit(1).then(function(data) {
+  newMesaage.userid = newMesaage.userid;
+  newMesaage.avatar = newMesaage.avatar;
+  newMesaage.message = newMesaage.text;
+  newMesaage.timeStamps = [];
+  message.find().sort( { _id: -1 } ).limit(1).then
+  (function(data) {
     if (data.length === 0) {
       var number = 1;
       newMesaage.messageIndex = number;
-      newMesaage.userid = newMesaage.userid;
-      newMesaage.message = newMesaage.text;
       newMesaage.timeStamps = [];
       message.insertMany([newMesaage], function(err, data) {
         if (err) { throw err; }
@@ -24,9 +27,6 @@ exports.addMessage = function(newMesaage) {
     } else {
       var number = data[0].messageIndex + 1;
       newMesaage.messageIndex = number;
-      newMesaage.userid = newMesaage.userid;
-      newMesaage.message = newMesaage.text;
-      newMesaage.timeStamps = [];
       message.insertMany([newMesaage], function(err, data) {
         if (err) { throw err; }
         message.find().then(function(data) {
