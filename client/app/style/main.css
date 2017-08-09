@@ -683,7 +683,7 @@ input#chat-input{
   margin-top: 5%;
 }
 #player-photo{
-
+  margin-top: 20px;
 }
 #country-flag{
   clear: both;
@@ -696,7 +696,7 @@ input#chat-input{
 .player-data{
   width: 38%;
   float: left;
-  margin-top: 2%;
+  margin-top: 5%;
   border: 1px solid #ccc;
   border-radius: 8px;
 }
@@ -772,13 +772,19 @@ input#chat-input{
 }
 @media (max-width: 600px) {
   .player-img-container{
-    display: none;
+    /* display: none; */
   }
   .radar-container {
     display: none;
-}
+  }
+  .player {
+    width: 40%;
+    float: left;
+    border-bottom-right-radius: 110px;
+  }
   .player-data {
-    width: 60%;
+    width: 100%;
+    margin: 0 0 0 0;
   }
   #overall > p {
     font-size: 4.5vw;
@@ -795,6 +801,8 @@ input#chat-input{
   .player > h3 {
     font-size: 3vw;
   }
+  #player-photo {
+    margin-top: 20%;
 }
 
 
