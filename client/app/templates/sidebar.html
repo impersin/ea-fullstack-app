@@ -20,27 +20,31 @@
       </form>
     </div>
   </div>
-    <div layout="column" layout-align="center" class="temp chat-container">
-      <div flex="48">
-        <div class="chat-wrapper">
-          <div class="chat-header">
+  <div layout="column" layout-align="center" class="temp chat-container">
+    <div flex="48">
+      <div class="chat-wrapper">
+        <div class="chat-header">
             <h4>chat box</h4>
-          </div>
+        </div>
           <div class="chat-screen" scroll-bottom="messages">
             <div class="message-container" ng-repeat="message in messages">
               <div class="chat-profile">
-                  <img id="chatbox-profile-image" src="https://s3-us-west-1.amazonaws.com/fifatalk/{{message.avatar}}" width="36px" height="36px" alt="">
-                 <a id="chatbox-id" href=""> 
+                <img id="chatbox-profile-image" src="https://s3-us-west-1.amazonaws.com/fifatalk/{{message.avatar}}" width="36px" height="36px" alt="">
+                <a id="chatbox-id" href=""> 
                   <span>{{message.userid}}:</span>
                 </a>
               </div>
-                <div class="talk-bubble tri-right left-top">
-                 <p>{{message.message}}</p>
-              </div> 
+              <div class="talk-bubble tri-right left-top" ng-class="{blueBubble:message.userid === currentUser}" ng-show="message.userid === currentUser">
+                <p>{{message.message}}</p>
+              </div>
+              <div class="talk-bubble tri-right left-top"  ng-show="message.userid !== currentUser">
+                <p>{{message.message}}</p>
+              </div>
+              
             </div>
           </div>
           <input id="chat-input" class="form-control" type="text" ng-model="message.text" ng-keypress="sendMessage($event)" ng-mouseover="changeBackground('over')" ng-mouseleave="changeBackground('leave')" placeholder="Enter message" required>
-        </div>
       </div>
     </div>
+  </div>
 </div>
