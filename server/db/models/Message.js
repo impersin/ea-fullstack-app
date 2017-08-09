@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var messageSchema = new Schema({
   messageIndex: Number,
   userid: String,
+  avatar: String,
   message: String,
   timeStamps: Array, 
 });
