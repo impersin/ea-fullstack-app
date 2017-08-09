@@ -1,7 +1,7 @@
 <div layout="column" class="sidebar">
   <span us-spinner="{radius:30, width:8, length: 16}"></span>
   <h4 id="sidebar-header">Have a question? Ask! and Share your tips!</h4>
-  <button  type="button" class="btn btn-primary btn-block" ng-click="toggleForm()">NEW POST</button>
+  <button  type="button" class="btn btn-primary btn-block" ng-click="toggleForm()">{{postButtonName}}</button>
   <div layout="row" layout-align="center" ng-show="toggle" class="temp">
     <div flex="80">
       <form name="postForm" class="post-form" role="search">
@@ -43,7 +43,7 @@
               
             </div>
           </div>
-          <input id="chat-input" class="form-control" type="text" ng-model="message.text" ng-keypress="sendMessage($event)" ng-mouseover="changeBackground('over')" ng-mouseleave="changeBackground('leave')" placeholder="Enter message" required>
+          <input id="chat-input" class="form-control" type="text" ng-model="message.text" ng-click="sendMessage($event)" ng-keypress="sendMessage($event)" ng-mouseover="changeBackground('over')" ng-mouseleave="changeBackground('leave')" placeholder="Enter message" required>
       </div>
     </div>
   </div>
