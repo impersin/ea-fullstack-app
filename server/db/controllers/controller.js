@@ -168,7 +168,9 @@ exports.addProfileImage = function(req, res) {
   var fileName = req.body.fileName;
   user.update({userid: target}, {profileImage: fileName}).then(function(data) {
     post.update({userid: target}, {avatar: fileName}, {multi: true}).then(function(data) {
-      res.json(fileName);
+      message.update({userid: target}, {avatar: fileName}, {multi: true}).then(function(data) {
+        res.json(fileName);
+      });
     });
   });
 };
