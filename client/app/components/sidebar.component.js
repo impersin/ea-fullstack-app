@@ -5,6 +5,7 @@ appModule.component('sidebarComponent', {
 
     $scope.header = 'This is sidebar component!! yay';
     $scope.auth = $cookies.get('auth');
+    $scope.currentUser = $cookies.get('userid');
     $scope.toggle = false; 
     $scope.message = {
       text: ''
