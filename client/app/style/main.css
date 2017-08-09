@@ -1,10 +1,10 @@
-body{
+ body{
   width: 100%;
   background-image: url("https://s3-us-west-1.amazonaws.com/fifatalk/appImages/background/home_bg1.jpg"); 
   background-size: cover;
   box-sizing: border-box;
   overflow: auto;
-}
+} 
 
 /*landing pase*/
 
@@ -173,6 +173,9 @@ button.mobile-form-button {
 
 #profile{
   padding-bottom: 0px;
+}
+.nav-up {
+  top: -50px;
 }
 
 /* home page */
@@ -406,7 +409,7 @@ td{
 
 .invalid  {
   color: red;
-}*/
+}
 input.ng-valid {
     box-shadow: lightgreen;
 }
@@ -468,7 +471,7 @@ td{
 }
 .profile-upload-container{
   margin: 0px 0px 5px 0px;
-  float: left
+  float: left;
 }
 
 #profile-form1 {
@@ -803,6 +806,7 @@ input#chat-input{
   }
   #player-photo {
     margin-top: 20%;
+  }
 }
 
 
@@ -836,18 +840,18 @@ input#chat-input{
 	margin-top: 15px;
 	color: #7F8C8D;
 }
-.footer ul li a {
+ .footer ul li a {
 	padding: 0 0 5px 0;
 	display: block;
-}
-.footer a {
+} 
+ .footer a {
 	color: #78828D
-}
-.bg-gray {
+} 
+ .bg-gray {
 	background-image: -moz-linear-gradient(center bottom, #BBBBBB 0%, #F0F0F0 100%);
 	box-shadow: 0 1px 0 #B4B3B3;
-}
-.social li {
+} 
+ .social li {
 	background: none repeat scroll 0 0 #B5B5B5;
   border: 2px solid #B5B5B5;
   padding: 8px 4px 0px 0px;
@@ -867,34 +871,29 @@ input#chat-input{
 	-webkit-transition: all 0.5s ease 0s;
 	-ms-transition: all 0.5s ease 0s;
 	-o-transition: all 0.5s ease 0s;
-}
-.social li:hover {
+} 
+ .social li:hover {
 	transform: scale(1.15) rotate(360deg);
 	-webkit-transform: scale(1.1) rotate(360deg);
 	-moz-transform: scale(1.1) rotate(360deg);
 	-ms-transform: scale(1.1) rotate(360deg);
 	-o-transform: scale(1.1) rotate(360deg);
-}
-.social li a {
+} 
+ .social li a {
   color: #EDEFF1;
-}
-.social li:hover {
+} 
+ .social li:hover {
 	border: 2px solid #2c3e50;
 	background: #2c3e50;
-}
-.social li a i {
+} 
+ .social li a i {
 	font-size: 16px;
 	margin: 0 0 0 5px;
 	color: #EDEFF1 !important;
-}
-.footer-bottom {
+} 
+ .footer-bottom {
 	background: #E3E3E3;
 	border-top: 1px solid #DDDDDD;
 	padding-top: 10px;
 	padding-bottom: 10px;
-}
-
-.nav-up {
-    top: -50px;
-}
-
+} 
