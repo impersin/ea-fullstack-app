@@ -6,7 +6,8 @@ appModule.component('sidebarComponent', {
     $scope.header = 'This is sidebar component!! yay';
     $scope.auth = $cookies.get('auth');
     $scope.currentUser = $cookies.get('userid');
-    $scope.toggle = false; 
+    $scope.toggle = false;
+    $scope.postButtonName = 'New Post'; 
     $scope.message = {
       text: ''
     };
@@ -30,6 +31,11 @@ appModule.component('sidebarComponent', {
       if (!$cookies.get('auth')) {
         $scope.authWarning();
       } else if ($cookies.get('auth')) {
+        if ($scope.postButtonName === 'CANCLE') {
+          $scope.postButtonName = 'NEW POST';
+        } else {
+          $scope.postButtonName = 'CANCLE';
+        }
         $scope.toggle = !$scope.toggle;
       }
     };
