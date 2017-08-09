@@ -617,7 +617,7 @@ input#chat-input{
   }
 }
 .board-container{
-  margin: 30px 0px 0px 0px;
+  margin: 10px 0px 0px 0px;
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: white;
