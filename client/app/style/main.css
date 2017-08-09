@@ -535,10 +535,14 @@ form.post-form{
   margin: 5px 10px 0px 5px;
   position: relative;
   height: auto;
-  background-color: dodgerblue;
-  color: white;
+  background-color: lightgray;
+  color: black;
   border-radius: 5px;
   border-top-left-radius: 0px;
+}
+.blueBubble{
+  background-color: dodgerblue;
+  color: white;
 }
 .talk-bubble > p{
   padding: 5px;

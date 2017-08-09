@@ -7,157 +7,154 @@
       <img class="home-header-image2" id="slide" src="https://s3-us-west-1.amazonaws.com/fifatalk/appImages/cr7.png" alt="CR7 IMAGE" width="420px" height="384px">
     </div>
   </div>
-    <div layout="row" class="home-contents">
-          <div flex="40" flex-sm="100" flex-xs="100" flex-offset="15" flex-offset-sm="5" flex-offset-xs="0">
-            <div layout="column"  ng-mouseover="headerToggleOn()" ng-mouseleave="headerToggleOff()">
-              <div flex="100" class="home-posts" ng-show="posts">
-                <div class="home-posts-header">
-                  <h2>Community Q/A</h2>
-                  <label>Search: <input ng-model="searchInput" placeholder="Enter Key Word" id="searchbar"></label>
-                </div>
-                <md-content class="post"  layout="row" ng-repeat="post in posts | filter:searchInput | limitTo: limit as results">
-                  <div flex flex-sm flex-xs flex-gt-xs layout="column">
-                    <md-card class="post-card">
-                      <md-card-header>
-                        <md-card-avatar>
-                          <img class="avatar-image" ng-show="post.avatar !== avatar.jpeg" ng-src="https://s3-us-west-1.amazonaws.com/fifatalk/{{post.avatar}}" alt="profile-picture">
-                          <img class="avatar-image" ng-show="post.avatar === avatar.jpeg" ng-src="https://s3-us-west-1.amazonaws.com/fifatalk/avatar.jpeg" alt="profile-picture">    
-                        </md-card-avatar>
-                        <md-card-header-text>
-                          {{post.userid}}<a href="" class="{{post.userid}}" ng-click="toggle($event)"><span class="md-title {{post.userid}}">{{post.title}}</span></a> 
-                          <span id="{{'viewcount' + post.postIndex}}" class="md-subhead viewcount">viewed: {{post.viewcount}}</span> 
-                        </md-card-header-text>
-                          <md-button class="md-icon-button" ng-show="postToggles['post'+{{post.postIndex}}]" aria-label="close" ng-click="searchInputReset('post'+post.postIndex,post.postIndex)">
-                          <md-icon md-svg-icon="app/images/icons/clear_black.svg"></md-icon>
-                        </md-button>
-                      </md-card-header> 
-                      <div class="post-board temp" id="{{'post' + post.postIndex}}" ng-show="postToggles['post'+post.postIndex]">
-                        <div ng-if="post.fileName">
-                          <img id="post-image" ng-src="https://s3-us-west-1.amazonaws.com/fifatalk/{{post.fileName}}" class="md-card-image" alt="Washed Out">  
-                        </div>
-                        <div class="post-text-box">
-                          <div class="post-text">
-                            <p>{{post.text}}</p>
-                          </div>
-                        </div>
-                      </div>  
-                      <md-card-actions layout="row" layout-align="right">
-                        <md-card-icon-actions>
-                          <md-button class="md-icon-button" aria-label="Favorite" ng-click="toggleComment()">
-                            <md-icon md-svg-icon="app/images/icons/comment.svg"></md-icon>
-                            <span>{{post.comments.length}}</span>
-                          </md-button>
-                          <md-button class="md-icon-button" aria-label="satisfied" ng-click="vote($event)">
-                            <md-icon id="{{'satisfied' + post.postIndex}}" md-svg-icon="app/images/icons/satisfied.svg"></md-icon>
-                            <span id="{{'satisfiedCount' + post.postIndex}}">{{post.satisfied}}</span>
-                          </md-button>
-                          <md-button class="md-icon-button" aria-label="neutral" ng-click="vote($event)">
-                            <md-icon id="{{'neutral' + post.postIndex}}" md-svg-icon="app/images/icons/neutral.svg"></md-icon>
-                            <span id="{{'neutralCount' + post.postIndex}}">{{post.neutral}}</span>
-                          </md-button>
-                          <md-button class="md-icon-button" aria-label="dissatisfied" ng-click="vote($event)">
-                            <md-icon id="{{'dissatisfied' + post.postIndex}}" md-svg-icon="app/images/icons/dissatisfied.svg"></md-icon>
-                            <span id="{{'dissatisfiedCount' + post.postIndex}}">{{post.dissatisfied}}</span>
-                          </md-button>
-                        </md-card-icon-actions>
-                        <md-button class="md-icon-button" aria-label="dissatisfied" ng-click="toggleForm()">
-                            <md-icon id="{{'dissatisfied' + post.postIndex}}" md-svg-icon="app/images/icons/create_black.svg"></md-icon>
-                          </md-button>
-                        <md-button class="md-icon-button" ng-if="currentUser === post.userid" aria-label="Favorite" ng-click="deletePost()">
-                          <md-icon md-svg-icon="app/images/icons/delete_black.svg"></md-icon>
-                        </md-button>
-                      </md-card-actions>
-                      <div layout="row" layout-align="center" id="{{'form' + post.postIndex}}">
-                        <div flex="80" class="temp" ng-show="formToggles['form'+post.postIndex]">
-                          <form name="postForm" class="comment-form" role="search">
-                            <div class="form-group">
-                              <textarea ng-model="newComment.comment" name="text" class="form-control" placeholder="Write a comment..." required rows="4" cols="50" ng-click="setCommentIndex()"> 
-                              </textarea>
-                              <span class="invalid" ng-show="postForm.textBox.$touched && postForm.textBox.$invalid">This can't be empty</span>
-                              <button ng-disabled="postForm.$invalid" type="submit" class="btn btn-primary btn-block" ng-click="sendComment()">submit</button>
-                            </div>
-                          </form>
-                        </div>
-                      </div> 
-                      <span id="comment-time-stamp">{{post.timeStamps[0]}}</span>
-                      <md-card-actions ng-show="commentToggles['comment'+post.postIndex]">
-                        <!-- <md-button id="{{'best'+post.postIndex}}" ng-click="sortCommentBy('soccerball')">Best Comment</md-button>
-                        <md-button ng-click="sortCommentBy('newest')">Newest </md-button>  -->
-                        <form>
-                          <label class="radio-inline">
-                            <input type="radio" name="optradio" ng-checked="true" id="{{'best'+post.postIndex}}" ng-click="sortCommentBy('newest')">Newest
-                          </label>
-                          <label class="radio-inline">
-                            <input type="radio" name="optradio" id="{{'best'+post.postIndex}}" ng-click="sortCommentBy('soccerball')">Best Comment
-                          </label>
-                        </form>
-                      </md-card-actions>                   
-                         <div flex class="temp" ng-show="commentToggles['comment'+post.postIndex]"> 
-                        <md-content class="" id="{{'comment' + post.postIndex}}" layout="row">
-                         <div flex flex-md flex-sm flex-xs flex-gt-xs layout="column"> 
-                            <md-card class="comment-card" ng-repeat="comment in post.comments | orderBy: reverse:true">
-                              <div class="comment-text-box">
-                                <a href=""><span><b>{{comment.commentedBy}}</b></span></a>
-                                <div class="comment-text">
-                                  <div ng-show="!commentSortedByNewest && $index < 3 && comment.soccerball > 0">
-                                    <img id="best-icon" src="app/images/icons/best.png" width="36px" height="36px">
-                                 </div>
-                              <p>{{comment.comment}}</p>
-                                </div>
-                              </div> 
-                            <md-card-actions layout-align="center right"> 
-                              <span class="timestamp">{{comment.timeStamps[0]}}</span>
-                              <md-button class="md-icon-button comment-vote-button" aria-label="dissatisfied" ng-click="commentVote($event,comment.commentIndex)">
-                                <img id="{{'soccerball'+comment.commentIndex}}" src="app/images/soccerball_3_24px.png">
-                              </md-button>
-                              <span id="{{'soccerballCount' + comment.commentIndex}}">{{comment.soccerball}}</span>
-                              <md-button id="redcard" class="md-icon-button comment-vote-button" aria-label="dissatisfied" ng-click="commentVote($event,comment.commentIndex)">
-                                <img id="{{'redcardCount' + comment.commentIndex}}" src="app/images/red_card_24px.png">
-                              </md-button>
-                              <span>{{comment.redcard}}</span>
-                            </md-card-actions>  
-                          </md-card>  
-                        </md-content>
+  <div layout="row" class="home-contents">
+    <div flex="40" flex-sm="100" flex-xs="100" flex-offset="15" flex-offset-sm="5" flex-offset-xs="0">
+      <div layout="column"  ng-mouseover="headerToggleOn()" ng-mouseleave="headerToggleOff()">
+        <div flex="100" class="home-posts" ng-show="posts">
+          <div class="home-posts-header">
+            <h2>Community Q/A</h2>
+            <label>Search: <input ng-model="searchInput" placeholder="Enter Key Word" id="searchbar"></label>
+          </div> 
+          <md-content class="post"  layout="row" ng-repeat="post in posts | filter:searchInput | limitTo: limit as results">
+            <div flex flex-sm flex-xs flex-gt-xs layout="column">
+              <md-card class="post-card">
+                <md-card-header>
+                  <md-card-avatar>
+                    <img class="avatar-image" ng-show="post.avatar !== avatar.jpeg" ng-src="https://s3-us-west-1.amazonaws.com/fifatalk/{{post.avatar}}" alt="profile-picture">
+                    <img class="avatar-image" ng-show="post.avatar === avatar.jpeg" ng-src="https://s3-us-west-1.amazonaws.com/fifatalk/avatar.jpeg" alt="profile-picture">    
+                  </md-card-avatar>
+                  <md-card-header-text>
+                    {{post.userid}}<a href="" class="{{post.userid}}" ng-click="toggle($event)"><span class="md-title {{post.userid}}">{{post.title}}</span></a> 
+                    <span id="{{'viewcount' + post.postIndex}}" class="md-subhead viewcount">viewed: {{post.viewcount}}</span> 
+                  </md-card-header-text>
+                  <md-button class="md-icon-button" ng-show="postToggles['post'+{{post.postIndex}}]" aria-label="close" ng-click="searchInputReset('post'+post.postIndex,post.postIndex)">
+                    <md-icon md-svg-icon="app/images/icons/clear_black.svg"></md-icon>
+                  </md-button>
+                </md-card-header>  
+                 <div class="post-board temp" id="{{'post' + post.postIndex}}" ng-show="postToggles['post'+post.postIndex]">
+                  <div ng-if="post.fileName">
+                    <img id="post-image" ng-src="https://s3-us-west-1.amazonaws.com/fifatalk/{{post.fileName}}" class="md-card-image" alt="Washed Out">  
+                  </div>
+                  <div class="post-text-box">
+                    <div class="post-text">
+                      <p>{{post.text}}</p>
+                    </div>
+                  </div>
+                </div>   
+                <md-card-actions layout="row" layout-align="right">
+                  <md-card-icon-actions>
+                    <md-button class="md-icon-button" aria-label="Favorite" ng-click="toggleComment()">
+                      <md-icon md-svg-icon="app/images/icons/comment.svg"></md-icon>
+                      <span>{{post.comments.length}}</span>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="satisfied" ng-click="vote($event)">
+                      <md-icon id="{{'satisfied' + post.postIndex}}" md-svg-icon="app/images/icons/satisfied.svg"></md-icon>
+                      <span id="{{'satisfiedCount' + post.postIndex}}">{{post.satisfied}}</span>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="neutral" ng-click="vote($event)">
+                      <md-icon id="{{'neutral' + post.postIndex}}" md-svg-icon="app/images/icons/neutral.svg"></md-icon>
+                      <span id="{{'neutralCount' + post.postIndex}}">{{post.neutral}}</span>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="dissatisfied" ng-click="vote($event)">
+                      <md-icon id="{{'dissatisfied' + post.postIndex}}" md-svg-icon="app/images/icons/dissatisfied.svg"></md-icon>
+                      <span id="{{'dissatisfiedCount' + post.postIndex}}">{{post.dissatisfied}}</span>
+                    </md-button>
+                  </md-card-icon-actions>
+                  <md-button class="md-icon-button" aria-label="dissatisfied" ng-click="toggleForm()">
+                      <md-icon id="{{'dissatisfied' + post.postIndex}}" md-svg-icon="app/images/icons/create_black.svg"></md-icon>
+                    </md-button>
+                  <md-button class="md-icon-button" ng-if="currentUser === post.userid" aria-label="Favorite" ng-click="deletePost()">
+                    <md-icon md-svg-icon="app/images/icons/delete_black.svg"></md-icon>
+                  </md-button>
+                </md-card-actions> 
+                <div layout="row" layout-align="center" id="{{'form' + post.postIndex}}">
+                  <div flex="80" class="temp" ng-show="formToggles['form'+post.postIndex]">
+                    <form name="postForm" class="comment-form" role="search">
+                      <div class="form-group">
+                        <textarea ng-model="newComment.comment" name="text" class="form-control" placeholder="Write a comment..." required rows="4" cols="50" ng-click="setCommentIndex()"> 
+                        </textarea>
+                        <span class="invalid" ng-show="postForm.textBox.$touched && postForm.textBox.$invalid">This can't be empty</span>
+                        <button ng-disabled="postForm.$invalid" type="submit" class="btn btn-primary btn-block" ng-click="sendComment()">submit</button>
                       </div>
-                    </div>   
-                    </md-card>
-                  </div>  
-                </md-content> 
-              </div>
+                    </form>
+                  </div>
+                </div>  
+                <span id="comment-time-stamp">{{post.timeStamps[0]}}</span>
+                 <md-card-actions ng-show="commentToggles['comment'+post.postIndex]">
+                  <form>
+                    <label class="radio-inline">
+                      <input type="radio" name="optradio" ng-checked="true" id="{{'best'+post.postIndex}}" ng-click="sortCommentBy('newest')">Newest
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="optradio" id="{{'best'+post.postIndex}}" ng-click="sortCommentBy('soccerball')">Best Comment
+                    </label>
+                  </form>
+                </md-card-actions>                    
+                <div flex class="temp" ng-show="commentToggles['comment'+post.postIndex]"> 
+                  <md-content class="" id="{{'comment' + post.postIndex}}" layout="row">
+                    <div flex flex-md flex-sm flex-xs flex-gt-xs layout="column"> 
+                      <md-card class="comment-card" ng-repeat="comment in post.comments | orderBy: reverse:true">
+                        <div class="comment-text-box">
+                          <a href=""><span><b>{{comment.commentedBy}}</b></span></a>
+                          <div class="comment-text">
+                            <div ng-show="!commentSortedByNewest && $index < 3 && comment.soccerball > 0">
+                              <img id="best-icon" src="app/images/icons/best.png" width="36px" height="36px">
+                            </div>
+                            <p>{{comment.comment}}</p>
+                          </div>
+                        </div> 
+                        <md-card-actions layout-align="center right"> 
+                          <span class="timestamp">{{comment.timeStamps[0]}}</span>
+                          <md-button class="md-icon-button comment-vote-button" aria-label="dissatisfied" ng-click="commentVote($event,comment.commentIndex)">
+                            <img id="{{'soccerball'+comment.commentIndex}}" src="app/images/soccerball_3_24px.png">
+                          </md-button>
+                          <span id="{{'soccerballCount' + comment.commentIndex}}">{{comment.soccerball}}</span>
+                          <md-button id="redcard" class="md-icon-button comment-vote-button" aria-label="dissatisfied" ng-click="commentVote($event,comment.commentIndex)">
+                            <img id="{{'redcardCount' + comment.commentIndex}}" src="app/images/red_card_24px.png">
+                          </md-button>
+                          <span>{{comment.redcard}}</span>
+                        </md-card-actions>  
+                      </md-card>
+                    </div>  
+                  </md-content>
+                </div> 
+              </md-card>
+            </div>    
+          </md-content> 
+        </div>
                 <button class="btn btn-link show-more" ng-hide="results.length === items.length" ng-click="addToLimit($event)">show more...</button> 
-            </div>
-          </div>    
-        <div hide-xs flex="25" flex-sm="30"  flex-offset="5" flex-offset-sm="5" class="sidebar-wrapper">
-          <sidebar-component></sidebar-component>   
-            <div class="board-container">
-              <Table>
-                <thead>
-                  <tr>
-                    <th>
-                      <a href="" ng-click="boardSort('views')">
-                        <span><b>Views</b></span>
-                      </a>
-                    </th>
-                    <th>
-                      <a href="" ng-click="boardSort('popular')">
-                        <span><b>Popular</b></span>
-                      </a>
-                    </th>
-                    <th>
-                      <a href="" ng-click="boardSort('comments')">
-                        <span><b>Commentss</b></span>
-                      </a></th>
-                    </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="post in boardData track by $index" ng-if="$index <= boardLimit">
-                    <td class="board-list-number">{{$index + 1}}</td>
-                    <td class="board-list-title"> <a href="" id={{post.title}} ng-click="searchPost(post.postIndex)">{{post.title}}</a></td>
-                  </tr>    
-                </tbody>
-              </Table>
-            </div>
-        </div> 
       </div>
-  </div>
+    </div>    
+    <div hide-xs flex="25" flex-sm="30"  flex-offset="5" flex-offset-sm="5" class="sidebar-wrapper">
+      <sidebar-component></sidebar-component>   
+      <div class="board-container">
+        <Table>
+          <thead>
+            <tr>
+              <th>
+                <a href="" ng-click="boardSort('views')">
+                  <span><b>Views</b></span>
+                </a>
+              </th>
+              <th>
+                <a href="" ng-click="boardSort('popular')">
+                  <span><b>Popular</b></span>
+                </a>
+              </th>
+              <th>
+                <a href="" ng-click="boardSort('comments')">
+                  <span><b>Commentss</b></span>
+                </a></th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="post in boardData track by $index" ng-if="$index <= boardLimit">
+              <td class="board-list-number">{{$index + 1}}</td>
+              <td class="board-list-title"> <a href="" id={{post.title}} ng-click="searchPost(post.postIndex)">{{post.title}}</a></td>
+            </tr>    
+          </tbody>
+        </Table>
+      </div>
+    </div>  
+  </div>    
 </div>
