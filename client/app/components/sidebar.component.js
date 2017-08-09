@@ -111,6 +111,7 @@ appModule.component('sidebarComponent', {
       } else {
         if (keyEvent.which === 13) {
           $scope.message.userid = $cookies.get('userid'),
+          $scope.message.avatar = $cookies.get('profileImage');
           socket.emit('newMessage', $scope.message);
           $scope.message.text = '';
         }
