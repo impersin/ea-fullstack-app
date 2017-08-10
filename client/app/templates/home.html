@@ -60,9 +60,9 @@
                       <span id="{{'dissatisfiedCount' + post.postIndex}}">{{post.dissatisfied}}</span>
                     </md-button>
                   </md-card-icon-actions>
-                  <md-button class="md-icon-button" aria-label="dissatisfied" ng-click="toggleForm()">
-                      <md-icon id="{{'dissatisfied' + post.postIndex}}" md-svg-icon="app/images/icons/create_black.svg"></md-icon>
-                    </md-button>
+                  <!-- <md-button class="md-icon-button" ng-if="currentUser === post.userid" aria-label="Favorite" ng-click="editPost()">
+                    Edit
+                  </md-button> -->
                   <md-button class="md-icon-button" ng-if="currentUser === post.userid" aria-label="Favorite" ng-click="deletePost()">
                     <md-icon md-svg-icon="app/images/icons/delete_black.svg"></md-icon>
                   </md-button>
@@ -122,7 +122,7 @@
             </div>    
           </md-content> 
         </div>
-                <button class="btn btn-link show-more" ng-hide="results.length === items.length" ng-click="addToLimit($event)">show more...</button> 
+        <button class="btn btn-link show-more" ng-hide="results.length === items.length" ng-click="addToLimit($event)">show more...</button> 
       </div>
     </div>    
     <div hide-xs flex="25" flex-sm="30"  flex-offset="5" flex-offset-sm="5" class="sidebar-wrapper">

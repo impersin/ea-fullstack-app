@@ -97,10 +97,12 @@ appModule.component('homeComponent', {
         var myEl = angular.element( document.querySelector('#' + id) ); 
       }
       if (!$scope.commentToggles[id]) {
-        // myEl.removeClass('hide');
+        // myEl.removeClass('hide')
+        $scope.toggleForm(this);
         $scope.commentToggles[id] = true;
       } else {
         // myEl.addClass('hide');
+        $scope.toggleForm(this);
         $scope.commentToggles[id] = false; 
       }
     };
@@ -111,15 +113,15 @@ appModule.component('homeComponent', {
       $scope.newComment.commentIndex = myEl.childNodes[1].children.length + 1; 
     };
 
-    $scope.toggleForm = function() {
+    $scope.toggleForm = function(target) {
       $scope.newComment.commentedBy = $cookies.get('userid');
       //Set comment postIndex when user click textarea form
-      $scope.newComment.postIndex = this.post.postIndex;
-      $scope.newComment.title = this.post.title;
+      $scope.newComment.postIndex = target.post.postIndex;
+      $scope.newComment.title = target.post.title;
       if (!$cookies.get('auth')) {
         $scope.authWarning('auth');
       } else if ($cookies.get('auth')) {
-        var id = 'form' + this.post.postIndex;
+        var id = 'form' + target.post.postIndex;
         var myEl = angular.element( document.querySelector('#' + id) );
         if (!$scope.formToggles[id]) {
           // myEl.removeClass('hide');
