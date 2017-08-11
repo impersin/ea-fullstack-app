@@ -38,10 +38,11 @@ appModule.component('homeComponent', {
     $scope.getAllPosts = function() {
       Factory.getAllPosts().then(function(res) {
         $scope.posts = res.data;
-        $scope.commenterList = res.data;
+        $scope.commenterList = [];
         $scope.boardData = [];
         res.data.forEach(function(post) {
           // console.log(post);
+          $scope.commenterList.push(post);
           $scope.boardData.push(post);
         });
         $scope.boardSort($scope.boardData, 'views');
