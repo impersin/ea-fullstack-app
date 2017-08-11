@@ -347,6 +347,7 @@ appModule.component('homeComponent', {
       $scope.searchInput = '';
       $scope.postToggles[target] = false;
       $scope.commentToggles['comment' + postIndex] = false;
+      $scope.toggleForm(this);
     };
 
     $scope.addToLimit = function($event) {
