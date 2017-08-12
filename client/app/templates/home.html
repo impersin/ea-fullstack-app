@@ -1,7 +1,7 @@
 <div class="home-wrapper" ng-cloak>
   <div hide-xs layout="row" class="home-header">
     <div flex="40" flex-offset="20">
-      <img class="home-header-image1 fadein" id="slide2" src="../app/images/fifa18_logo.png" alt="CR7 IMAGE" width="600px" height="406px">
+      <img class="home-header-image1 fadein" id="slide2" src="images/fifa18_logo.png" alt="CR7 IMAGE" width="600px" height="406px">
     </div>
     <div hide-sm show-gt-sm flex="40">
       <img class="home-header-image2" id="slide" src="https://s3-us-west-1.amazonaws.com/fifatalk/appImages/cr7.png" alt="CR7 IMAGE" width="420px" height="384px">
@@ -28,7 +28,7 @@
                     <span id="{{'viewcount' + post.postIndex}}" class="md-subhead viewcount">viewed: {{post.viewcount}}</span> 
                   </md-card-header-text>
                   <md-button class="md-icon-button" ng-show="postToggles['post'+{{post.postIndex}}]" aria-label="close" ng-click="searchInputReset('post'+post.postIndex,post.postIndex)">
-                    <md-icon md-svg-icon="app/images/icons/clear_black.svg"></md-icon>
+                    <md-icon md-svg-icon="images/icons/clear_black.svg"></md-icon>
                   </md-button>
                 </md-card-header>  
                  <div class="post-board temp" id="{{'post' + post.postIndex}}" ng-show="postToggles['post'+post.postIndex]">
@@ -44,19 +44,19 @@
                 <md-card-actions layout="row" layout-align="right">
                   <md-card-icon-actions>
                     <md-button class="md-icon-button" aria-label="Favorite" ng-click="toggleComment()">
-                      <md-icon md-svg-icon="app/images/icons/comment.svg"></md-icon>
+                      <md-icon md-svg-icon="images/icons/comment.svg"></md-icon>
                       <span>{{post.comments.length}}</span>
                     </md-button>
                     <md-button class="md-icon-button" aria-label="satisfied" ng-click="vote($event)">
-                      <md-icon id="{{'satisfied' + post.postIndex}}" md-svg-icon="app/images/icons/satisfied.svg"></md-icon>
+                      <md-icon id="{{'satisfied' + post.postIndex}}" md-svg-icon="images/icons/satisfied.svg"></md-icon>
                       <span id="{{'satisfiedCount' + post.postIndex}}">{{post.satisfied}}</span>
                     </md-button>
                     <md-button class="md-icon-button" aria-label="neutral" ng-click="vote($event)">
-                      <md-icon id="{{'neutral' + post.postIndex}}" md-svg-icon="app/images/icons/neutral.svg"></md-icon>
+                      <md-icon id="{{'neutral' + post.postIndex}}" md-svg-icon="images/icons/neutral.svg"></md-icon>
                       <span id="{{'neutralCount' + post.postIndex}}">{{post.neutral}}</span>
                     </md-button>
                     <md-button class="md-icon-button" aria-label="dissatisfied" ng-click="vote($event)">
-                      <md-icon id="{{'dissatisfied' + post.postIndex}}" md-svg-icon="app/images/icons/dissatisfied.svg"></md-icon>
+                      <md-icon id="{{'dissatisfied' + post.postIndex}}" md-svg-icon="images/icons/dissatisfied.svg"></md-icon>
                       <span id="{{'dissatisfiedCount' + post.postIndex}}">{{post.dissatisfied}}</span>
                     </md-button>
                   </md-card-icon-actions>
@@ -64,11 +64,11 @@
                     Edit
                   </md-button> -->
                   <md-button class="md-icon-button" ng-if="currentUser === post.userid" aria-label="Favorite" ng-click="deletePost()">
-                    <md-icon md-svg-icon="app/images/icons/delete_black.svg"></md-icon>
+                    <md-icon md-svg-icon="images/icons/delete_black.svg"></md-icon>
                   </md-button>
                 </md-card-actions> 
                 <div layout="row" layout-align="center" id="{{'form' + post.postIndex}}">
-                  <div flex="80" class="temp" ng-show="formToggles['form'+post.postIndex]">
+                  <div flex="80" ng-show="formToggles['form'+post.postIndex]">
                     <form name="postForm" class="comment-form" role="search">
                       <div class="form-group">
                         <textarea ng-model="newComment.comment" name="text" class="form-control" placeholder="Write a comment..." required rows="4" cols="50" ng-click="setCommentIndex()"> 
@@ -98,7 +98,7 @@
                           <a href=""><span><b>{{comment.commentedBy}}</b></span></a>
                           <div class="comment-text">
                             <div ng-show="!commentSortedByNewest && $index < 3 && comment.soccerball > 0">
-                              <img id="best-icon" src="app/images/icons/best.png" width="36px" height="36px">
+                              <img id="best-icon" src="images/icons/best.png" width="36px" height="36px">
                             </div>
                             <p>{{comment.comment}}</p>
                           </div>
@@ -106,11 +106,11 @@
                         <md-card-actions layout-align="center right"> 
                           <span class="timestamp">{{comment.timeStamps[0]}}</span>
                           <md-button class="md-icon-button comment-vote-button" aria-label="dissatisfied" ng-click="commentVote($event,comment.commentIndex)">
-                            <img id="{{'soccerball'+comment.commentIndex}}" src="app/images/soccerball_3_24px.png">
+                            <img id="{{'soccerball'+comment.commentIndex}}" src="images/soccerball_3_24px.png">
                           </md-button>
                           <span id="{{'soccerballCount' + comment.commentIndex}}">{{comment.soccerball}}</span>
                           <md-button id="redcard" class="md-icon-button comment-vote-button" aria-label="dissatisfied" ng-click="commentVote($event,comment.commentIndex)">
-                            <img id="{{'redcardCount' + comment.commentIndex}}" src="app/images/red_card_24px.png">
+                            <img id="{{'redcardCount' + comment.commentIndex}}" src="images/red_card_24px.png">
                           </md-button>
                           <span>{{comment.redcard}}</span>
                         </md-card-actions>  
