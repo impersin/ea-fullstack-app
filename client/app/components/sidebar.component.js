@@ -1,5 +1,5 @@
 appModule.component('sidebarComponent', {
-  templateUrl: 'app/templates/sidebar.html',
+  templateUrl: 'templates/sidebar.html',
   controllerAs: 'sidebarController',
   controller: function($scope, $rootScope, $cookies, $http, $mdDialog, Factory, $window, socket, $anchorScroll, $location, $timeout) {
 

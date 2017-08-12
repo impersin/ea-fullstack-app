@@ -1,5 +1,5 @@
 appModule.component('footerComponent', {
-  templateUrl: 'app/templates/footer.html',
+  templateUrl: 'templates/footer.html',
   controllerAs: 'footerController',
   controller: function($scope, $http, $location) {
     $scope.title = 'This is footer component!! yay';

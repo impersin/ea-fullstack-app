@@ -1,5 +1,5 @@
 appModule.component('postComponent', {
-  templateUrl: 'app/templates/post.html',
+  templateUrl: 'templates/post.html',
   controllerAs: 'postController',
   controller: function($scope, Factory, $http) {
     $scope.title = 'This is my first Angular 1.5 component!! yay';

@@ -1,5 +1,5 @@
  appModule.component('popupComponent', {
-   templateUrl: 'app/templates/popup.html',
+   templateUrl: 'templates/popup.html',
    controllerAs: 'popupController',
    controller: function($scope, $http, $mdDialog) {
      $scope.openFromLeft = function() {

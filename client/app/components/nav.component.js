@@ -1,5 +1,5 @@
 appModule.component('navComponent', {
-  templateUrl: 'app/templates/navBar.html',
+  templateUrl: 'templates/navBar.html',
   controllerAs: 'navController',
   controller: function($scope, $route, $window, $rootScope, Factory, $location, $mdDialog, $cookies) {
 

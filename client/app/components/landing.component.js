@@ -1,5 +1,5 @@
 appModule.component('landingComponent', {
-  templateUrl: 'app/templates/landing.html',
+  templateUrl: 'templates/landing.html',
   controllerAs: 'landingController',
   controller: function($scope, $http) {
     $scope.videoUrl = 'https://www.youtube.com/watch?v=QV7PK8AVEKA?';

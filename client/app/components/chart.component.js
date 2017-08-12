@@ -9,7 +9,7 @@ appModule.config(['ChartJsProvider', function (ChartJsProvider) {
     showLines: true
   });
 }]).component('chartComponent', {
-  templateUrl: 'app/templates/chart.html',
+  templateUrl: 'templates/chart.html',
   controllerAs: 'chartController',
   controller: function($scope, $http, $location, $timeout, Factory) {
     $scope.toggle = true;

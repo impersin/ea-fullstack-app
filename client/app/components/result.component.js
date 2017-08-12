@@ -1,5 +1,5 @@
 appModule.component('resultComponent', {
-  templateUrl: 'app/templates/result.html',
+  templateUrl: 'templates/result.html',
   controllerAs: 'matchResultController',
   controller: function($scope, Factory) {
     $scope.title = 'This is main contents';

@@ -1,5 +1,5 @@
 appModule.component('profileComponent', {
-  templateUrl: 'app/templates/profile.html',
+  templateUrl: 'templates/profile.html',
   controllerAs: 'profileController',
   controller: function($scope, $cookies, Factory, $mdDialog, $timeout) {
     $scope.user = $cookies.get('userid');
