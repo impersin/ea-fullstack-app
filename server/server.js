@@ -17,6 +17,15 @@ var isDeveloping = process.env.NODE_ENV !== 'production';
 var jwt = require('jsonwebtoken-refresh');
 require('dotenv').config();
 
+var sassMiddleWare = require('node-sass-middleware');
+var livereload = require('livereload');
+var livereloadServer = livereload.createServer({
+  exts: ['scss', 'html']
+});
+let pth = path.join(__dirname, '../client', '**/*');
+livereloadServer.watch(pth);
+
+
 if (!isDeveloping) {
   AWS.config.update({
     accessKeyId: process.env.S3_KEY, 
@@ -25,11 +34,18 @@ if (!isDeveloping) {
   });
 }
 
+app.use(sassMiddleWare({
+  src: path.join(__dirname, '../client/src/sass'),
+  dest: path.join(__dirname, '../client/app'),
+  debug: true,
+  outputStyle: 'expanded'
+})
+);
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(multipartyMiddleware);
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '/../client')));
+app.use(express.static(path.join(__dirname, '/../client/app')));
 app.use('/secure-api', secureRoutes);
 
 app.get('/', function(req, res) {
