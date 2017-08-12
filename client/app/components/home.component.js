@@ -1,5 +1,5 @@
 appModule.component('homeComponent', {
-  templateUrl: 'app/templates/home.html',
+  templateUrl: 'templates/home.html',
   controllerAs: 'headerController',
   controller: function($scope, $rootScope, $cookies, $http, $mdDialog, Factory, $window, $location, $anchorScroll, $timeout) {
     $scope.title = 'This is my first Angular 1.5 component!! yay';
@@ -108,6 +108,27 @@ appModule.component('homeComponent', {
       }
     };
 
+    
+    $scope.toggleForm = function(target) {
+      $scope.newComment.commentedBy = $cookies.get('userid');
+      //Set comment postIndex when user click textarea form
+      $scope.newComment.postIndex = target.post.postIndex;
+      $scope.newComment.title = target.post.title;
+      // if (!$cookies.get('auth')) {
+        //   $scope.authWarning('auth');
+        // } else if ($cookies.get('auth')) {
+      var id = 'form' + target.post.postIndex;
+      var myEl = angular.element( document.querySelector('#' + id) );
+      if (!$scope.formToggles[id]) {
+            // myEl.removeClass('hide');
+        $scope.formToggles[id] = true; 
+      } else {
+            // myEl.addClass('hide');
+        $scope.formToggles[id] = false; 
+      }
+          // }
+    };
+        
     $scope.setCommentIndex = function() {
       //being invoked when user click textarea
       if (!$cookies.get('auth')) {
@@ -118,26 +139,6 @@ appModule.component('homeComponent', {
       }
     };
 
-    $scope.toggleForm = function(target) {
-      $scope.newComment.commentedBy = $cookies.get('userid');
-      //Set comment postIndex when user click textarea form
-      $scope.newComment.postIndex = target.post.postIndex;
-      $scope.newComment.title = target.post.title;
-      // if (!$cookies.get('auth')) {
-      //   $scope.authWarning('auth');
-      // } else if ($cookies.get('auth')) {
-      var id = 'form' + target.post.postIndex;
-      var myEl = angular.element( document.querySelector('#' + id) );
-      if (!$scope.formToggles[id]) {
-          // myEl.removeClass('hide');
-        $scope.formToggles[id] = true; 
-      } else {
-          // myEl.addClass('hide');
-        $scope.formToggles[id] = false; 
-      }
-      // }
-    };
-    
     $scope.authWarning = function(type) {
       if (type === 'auth') {
         $mdDialog.show(
@@ -348,7 +349,7 @@ appModule.component('homeComponent', {
       $scope.searchInput = '';
       $scope.postToggles[target] = false;
       $scope.commentToggles['comment' + postIndex] = false;
-      $scope.toggleForm(this);
+      $scope.formToggles['form' + postIndex] = false;
     };
 
     $scope.addToLimit = function($event) {
