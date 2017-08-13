@@ -38,7 +38,7 @@ app.use(sassMiddleWare({
   src: path.join(__dirname, '../client/src/sass'),
   dest: path.join(__dirname, '../client/app'),
   debug: true,
-  outputStyle: 'expanded'
+  outputStyle: 'compressed'
 })
 );
 app.use(bodyParser.urlencoded({extended: false}));
