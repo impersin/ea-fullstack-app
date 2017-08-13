@@ -2,7 +2,7 @@
 
 
 <img src="https://s3-us-west-1.amazonaws.com/fifatalk/appImages/FIFATALK_cover.png" width="" height="">
-<a href="https://fifa-talk.herokuapp.com" target="_blank">playgauntlet.herokuapp.com<a/>
+<a href="https://fifa-talk.herokuapp.com" target="_blank">Go to Fifatalk<a/>
 
 ## Team
 
