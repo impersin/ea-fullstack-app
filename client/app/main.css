@@ -437,7 +437,7 @@ md-content .md-headline {
 }
 
 .home-wrapper .home-contents .home-posts .home-posts-header {
-  padding-top: 15px;
+  padding-top: 20px;
   text-align: center;
 }
 
@@ -669,6 +669,7 @@ md-content .md-headline {
   padding-bottom: 30px;
   border-bottom: 1px solid #CCCCCC;
   border-top: 1px solid #DDDDDD;
+  background-color: white;
 }
 
 .footer a {
