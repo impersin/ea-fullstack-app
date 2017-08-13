@@ -1,0 +1,56 @@
+@import '_variables';
+
+//home start
+
+.home-wrapper{
+  background-color: white;
+  background-image: url("https://s3-us-west-1.amazonaws.com/fifatalk/appImages/background/home_bg1.jpg"); 
+  background-size: cover;
+  
+  .home-header{
+    padding-top:50px;
+
+    .home-header-image1{
+      padding-top: 20px;
+    }
+    .home-header-image2 {
+      position: relative;
+      left: -350px;
+      -webkit-animation: slide 1s forwards;
+      -webkit-animation-delay: 0s;
+      animation: slide 0.5s forwards;
+      animation-delay: 1s;
+    }
+  }
+  .home-contents{
+    height: 100%;
+    padding-top: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-y: scroll;
+
+    .home-posts{
+      overflow:auto;
+
+      .home-posts-header{
+        padding-top:25px;
+        text-align: center;
+      }
+    }
+    .home-posts::-webkit-scrollbar {
+      /* Safari and Chrome  */
+        display: none;
+    }
+    .home-contents::-webkit-scrollbar {
+      /* Safari and Chrome  */
+        display: none;
+    }
+  }
+
+  .fadein{
+    animation: fadein 5s;
+    -webkit-animation: fadein 4s; /* Safari and Chrome */
+  } 
+}
+
+//home end

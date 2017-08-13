@@ -1,0 +1,34 @@
+@import '_variables';
+
+//navbar start
+.navBar{
+  margin-bottom: 0;
+  transition: top 0.2s ease-in-out;
+
+  .navBar-header{
+    .navbar-brand{
+      padding-top:0px;
+    }
+    #mobileAddButton{
+      padding: 6px;
+    }
+  }
+  .nav{
+    #profile{
+      padding-bottom: 0px;
+    }
+  }
+}
+.nav-up {
+  top: -50px;
+}
+
+@media (min-width: 600px) {
+  #mobileAddbutton{
+    display: none;
+  }
+  .mobile-form{
+    display: none;
+  }
+}
+//nav end
