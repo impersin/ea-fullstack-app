@@ -166,9 +166,9 @@ exports.addViewCount = function(req, res) {
 exports.addProfileImage = function(req, res) {
   var target = req.body.userid;
   var fileName = req.body.fileName;
-  user.update({userid: target}, {profileImage: fileName}).then(function(data) {
-    post.update({userid: target}, {avatar: fileName}, {multi: true}).then(function(data) {
-      message.update({userid: target}, {avatar: fileName}, {multi: true}).then(function(data) {
+  user.update({userid: target}, {$set: {profileImage: fileName}}).then(function(data) {
+    post.update({userid: target}, {$set: {avatar: fileName}}, {multi: true}).then(function(data) {
+      message.update({userid: target}, {$set: {avatar: fileName}}, {multi: true}).then(function(data) {
         res.json(fileName);
       });
     });
